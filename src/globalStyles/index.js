@@ -1,10 +1,9 @@
 import { createGlobalStyle, css } from 'styled-components';
-import applyToAll from './applyToAll';
 import colors from './colors';
 import extra from './extra';
 import mediaQueries from './mediaQueries';
 import themedColors from './themedColors';
-import staticCssVars from './staticCssVars';
+import font, { lineHeights } from './font';
 import '@fontsource/nunito/900.css';
 import '@fontsource/nunito/800.css';
 import '@fontsource/nunito/700.css';
@@ -15,19 +14,22 @@ import '@fontsource/nunito/300.css';
 const GlobalStyles = createGlobalStyle(
   ({ theme }) => css`
     * {
-      ${applyToAll}
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     :root {
       ${colors}
       ${themedColors(theme)}
-      ${staticCssVars}
+      ${lineHeights}
     }
 
     html {
       ${mediaQueries}
     }
 
+    ${font}
     ${extra}
   `
 );

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 //* INITIAL STATE
 const initialState = {
   darkTheme: true,
-  manualMode: true,
+  manualMode: false,
 };
 
 //* SLICE

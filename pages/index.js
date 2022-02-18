@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { ModeSwitcher, UploadFilesButton } from '../src/components';
+import {
+  CumulativePlantillas,
+  ModeSwitcher,
+  UploadFilesButton,
+} from '../src/components';
 
 export default function Home() {
   return (
@@ -14,6 +18,7 @@ export default function Home() {
       <p className="light">Arrastra y suelta</p>
 
       <ModeSwitcher />
+      <CumulativePlantillas />
     </StyledHome>
   );
 }

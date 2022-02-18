@@ -5,7 +5,11 @@ export default function ModeSwitcher() {
   const { manualMode, toggleManualMode } = useSettings();
 
   return (
-    <StyledModeSwitcher active={manualMode} onClick={() => toggleManualMode()}>
+    <StyledModeSwitcher
+      active={manualMode}
+      onClick={() => toggleManualMode()}
+      title="Modo manual"
+    >
       <Circle active={manualMode} />
     </StyledModeSwitcher>
   );
@@ -23,6 +27,7 @@ const StyledModeSwitcher = styled.div(
     bottom: 25px;
     left: 25px;
     cursor: pointer;
+    z-index: 1;
   `
 );
 

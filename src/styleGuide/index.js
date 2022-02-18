@@ -11,7 +11,7 @@ const darkColors = {
 };
 
 const lightColors = {
-  _100: '#FFFFFF',
+  _100: '#2E292A',
   _200: '#5B5255',
   _300: '#887C7F',
   _400: '#B1A9AB',

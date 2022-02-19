@@ -1,13 +1,19 @@
 import styled, { css } from 'styled-components';
 import useSettings from '../../hooks/useSettings';
+import { closeOptions } from '../Organisms/CumulativePlantillas';
 
 export default function ModeSwitcher() {
   const { manualMode, toggleManualMode } = useSettings();
 
+  function toggleMode() {
+    closeOptions();
+    toggleManualMode();
+  }
+
   return (
     <StyledModeSwitcher
       active={manualMode}
-      onClick={() => toggleManualMode()}
+      onClick={() => toggleMode()}
       title="Modo manual"
     >
       <Circle active={manualMode} />

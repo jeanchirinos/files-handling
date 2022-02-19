@@ -17,8 +17,8 @@ const useSettings = () => {
   function toggleTheme() {
     dispatch(updateDarkTheme());
   }
-  function toggleManualMode() {
-    dispatch(updateManualMode());
+  function toggleManualMode(manualState) {
+    dispatch(updateManualMode(manualState));
   }
 
   // EXPORT

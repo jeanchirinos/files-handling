@@ -1,5 +1,3 @@
-import Head from 'next/head';
-import Link from 'next/link';
 import styled from 'styled-components';
 import {
   CumulativePlantillas,
@@ -10,9 +8,6 @@ import {
 export default function Home() {
   return (
     <StyledHome>
-      {/* <Link href="/emails">
-        <a>Go to Emails</a>
-      </Link> */}
       <UploadFilesButton />
       <p className="light">o</p>
       <p className="light">Arrastra y suelta</p>

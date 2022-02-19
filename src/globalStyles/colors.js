@@ -31,4 +31,14 @@ export default css`
   --light_700: ${light._700};
   --light_800: ${light._800};
   --light_900: ${light._900};
+
+  --red_100: #fbd7dd;
+  --red_200: #f6aeba;
+  --red_300: #f28698;
+  --red_400: #ed5d75;
+  --red: #d77575;
+  --red_600: #c84141;
+  --red_700: #9a2d2d;
+  --red_800: #671e1e;
+  --red_900: #330f0f;
 `;

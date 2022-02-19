@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 //* INITIAL STATE
 const initialState = {
-  cumulativePlantillasHasItems: true,
+  cumulativePlantillas: [],
+  emails: [],
+  priority: 'order',
 };
 
 //* SLICE
@@ -10,19 +12,40 @@ const plantillasSlice = createSlice({
   name: 'plantillasSlice',
   initialState,
   reducers: {
-    updateCumulativePlantillasHasItems: (state, action) => {
-      state.cumulativePlantillasHasItems = action.payload;
+    updateCumulativePlantillas: (state, action) => {
+      state.cumulativePlantillas = action.payload;
+    },
+    deleteFromCumulativePlantillas: (state, action) => {
+      const indexSelected = state.cumulativePlantillas.findIndex(
+        (item) => item.name === action.payload.name
+      );
+
+      state.cumulativePlantillas.splice(indexSelected, 1);
+    },
+    updateEmails: (state, action) => {
+      state.emails = action.payload;
+    },
+    updatePriority: (state, action) => {
+      state.priority = action.payload;
     },
   },
 });
 
 //* EXPORTS
 //? States
-export const selectCumulativePlantillasHasItems = ({ plantillas }) =>
-  plantillas.cumulativePlantillasHasItems;
+export const selectCumulativePlantillas = ({ plantillas }) =>
+  plantillas.cumulativePlantillas;
+
+export const selectEmails = ({ plantillas }) => plantillas.emails;
+export const selectPriority = ({ plantillas }) => plantillas.priority;
 
 //? Actions
-export const { updateCumulativePlantillasHasItems } = plantillasSlice.actions;
+export const {
+  updateCumulativePlantillas,
+  updateEmails,
+  deleteFromCumulativePlantillas,
+  updatePriority,
+} = plantillasSlice.actions;
 
 //? Default
 export default plantillasSlice.reducer;

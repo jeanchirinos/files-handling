@@ -6,8 +6,9 @@
     ".eslintrc.json": true,
     ".gitignore": true,
     "next.config.js": true,
-    "package.json": false,
+    "package.json": true,
     "README.md": true,
     "yarn.lock": true,
+    "jsconfig.json": true,
   }
 }

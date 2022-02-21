@@ -11,10 +11,10 @@ const settingsSlice = createSlice({
   name: 'settingsSlice',
   initialState,
   reducers: {
-    updateDarkTheme: (state) => {
+    toggleDarkTheme: (state) => {
       state.darkTheme = !state.darkTheme;
     },
-    updateManualMode: (state) => {
+    toggleManualMode: (state) => {
       state.manualMode = !state.manualMode;
     },
   },
@@ -22,11 +22,11 @@ const settingsSlice = createSlice({
 
 //* EXPORTS
 //? States
-export const selectDarkTheme = ({ settings }) => settings.darkTheme;
-export const selectManualMode = ({ settings }) => settings.manualMode;
+export const darkTheme = ({ settings }) => settings.darkTheme;
+export const manualMode = ({ settings }) => settings.manualMode;
 
 //? Actions
-export const { updateDarkTheme, updateManualMode } = settingsSlice.actions;
+export const { toggleDarkTheme, toggleManualMode } = settingsSlice.actions;
 
 //? Default
 export default settingsSlice.reducer;

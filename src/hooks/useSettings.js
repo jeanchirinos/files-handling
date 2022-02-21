@@ -1,33 +1,32 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  selectDarkTheme,
-  selectManualMode,
-  updateDarkTheme,
-  updateManualMode,
+  darkTheme,
+  manualMode,
+  toggleDarkTheme,
+  toggleManualMode,
 } from '../features/settingsSlice';
 
-const useSettings = () => {
+export default function useSettings() {
   const dispatch = useDispatch();
 
   // STATES
-  const darkTheme = useSelector(selectDarkTheme);
-  const manualMode = useSelector(selectManualMode);
+  const _darkTheme = useSelector(darkTheme);
+  const _manualMode = useSelector(manualMode);
 
   // ACTIONS
-  function toggleTheme() {
-    dispatch(updateDarkTheme());
+  function __toggleDarkTheme() {
+    dispatch(toggleDarkTheme());
   }
-  function toggleManualMode(manualState) {
-    dispatch(updateManualMode(manualState));
+
+  function __toggleManualMode() {
+    dispatch(toggleManualMode());
   }
 
   // EXPORT
   return {
-    darkTheme,
-    manualMode,
-    toggleTheme,
-    toggleManualMode,
+    _darkTheme,
+    _manualMode,
+    __toggleDarkTheme,
+    __toggleManualMode,
   };
-};
-
-export default useSettings;
+}

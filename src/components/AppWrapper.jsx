@@ -1,14 +1,14 @@
 import { ThemeProvider } from 'styled-components';
-import { dark, light } from '../styleGuide';
+import { dark, light } from '../styleGuide/themedColors';
 import GlobalStyles from '../globalStyles';
-import useSettings from '../hooks/useSettings';
+import useSettings from '@/hooks/useSettings';
 import CustomHead from '../components/CustomHead';
 
 const Wrapper = ({ children }) => {
-  const { darkTheme } = useSettings();
+  const { _darkTheme } = useSettings();
 
   return (
-    <ThemeProvider theme={darkTheme ? dark : light}>
+    <ThemeProvider theme={_darkTheme ? dark : light}>
       <GlobalStyles />
       <CustomHead />
       {children}

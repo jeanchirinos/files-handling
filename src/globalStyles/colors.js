@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { dark, light } from '../styleGuide';
+import { dark, light } from '../styleGuide/themedColors';
 
 export default css`
   --primary-color_100: #f8e2ea;

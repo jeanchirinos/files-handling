@@ -3,7 +3,7 @@ import store from '../src/app/store';
 import AppWrapper from '../src/components/AppWrapper';
 import { SettingsButton, TemporalThemeSwitcher } from '../src/components';
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <AppWrapper>
@@ -14,5 +14,3 @@ function MyApp({ Component, pageProps }) {
     </Provider>
   );
 }
-
-export default MyApp;

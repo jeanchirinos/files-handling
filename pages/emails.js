@@ -3,7 +3,7 @@ import usePlantillas from '../src/hooks/usePlantillas';
 import { useState, Fragment } from 'react';
 
 export default function Emails() {
-  const { emails, priority } = usePlantillas();
+  const { _emails, _priority } = usePlantillas();
 
   const [emailIndex, setEmailIndex] = useState(0);
 
@@ -17,14 +17,14 @@ export default function Emails() {
       </Link>
 
       <>
-        {priority === 'order' && (
+        {_priority === 'order' && (
           <div>
             <span style={{ color: 'var(--primary-color)' }}>Orden</span>
             <span>Cantidad</span>
           </div>
         )}
 
-        {priority === 'quantity' && (
+        {_priority === 'quantity' && (
           <div>
             <span>Orden</span>
             <span style={{ color: 'var(--primary-color)' }}>Cantidad</span>
@@ -32,7 +32,7 @@ export default function Emails() {
         )}
       </>
 
-      {emails.map((email, index) => (
+      {_emails.map((email, index) => (
         <div
           key={index}
           style={{ backgroundColor: 'red', border: '1px solid black' }}
@@ -48,7 +48,7 @@ export default function Emails() {
 
       <br />
 
-      {emails[emailIndex]?.map((plantilla, index) => (
+      {_emails[emailIndex]?.map((plantilla, index) => (
         <span
           key={index}
           title={plantilla.size}
@@ -59,7 +59,7 @@ export default function Emails() {
       ))}
 
       <br />
-      {emails[emailIndex]?.map((plantilla, index) => (
+      {_emails[emailIndex]?.map((plantilla, index) => (
         <Fragment key={index}>
           {plantilla.NSTDNumber && (
             <span

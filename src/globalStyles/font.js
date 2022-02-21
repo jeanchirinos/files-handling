@@ -9,12 +9,12 @@ export const lineHeights = css`
 `;
 
 export default css`
+  /* HEADINGS */
   h1,
   h2,
   h3,
   h4 {
     line-height: var(--lh_1);
-    color: var(--oppositeTheme_500);
   }
 
   h1 {
@@ -37,16 +37,6 @@ export default css`
     font-size: var(--fs_4);
   }
 
-  /* DEFAULT -> Normal - Regular - No colored */
-
-  p {
-    font-size: var(--fs_6);
-    line-height: var(--lh_3);
-    font-weight: 400;
-    color: var(--oppositeTheme_500);
-    display: inline-block;
-  }
-
   /* FONT SIZE */
 
   p.big {
@@ -60,16 +50,11 @@ export default css`
   }
 
   /* FONT WEIGHT */
-  p.semibold {
+  p.bold {
     font-weight: 700;
   }
 
   p.light {
     font-weight: 300;
-  }
-
-  /* FONT COLOR */
-  p.colored {
-    color: inherit;
   }
 `;

@@ -1,16 +1,12 @@
 import { useRouter } from 'next/router';
-import usePlantillas from '../../hooks/usePlantillas';
-import useSettings from '../../hooks/useSettings';
+import usePlantillas from '@/hooks/usePlantillas';
+import useSettings from '@/hooks/useSettings';
 
-export default function UploadFilesButton() {
+export default function UploadFilesLogic() {
   const router = useRouter();
-  const {
-    setEmails,
-    cumulativePlantillas,
-    setCumulativePlantillas,
-    setPriority,
-  } = usePlantillas();
-  const { manualMode, toggleManualMode } = useSettings();
+  const { _plantillasStack, __setPlantillasStack, __setEmails, __setPriority } =
+    usePlantillas();
+  const { _manualMode, __toggleManualMode } = useSettings();
 
   function openFileExplorer() {
     document.getElementById('inputFile').click();
@@ -57,20 +53,50 @@ export default function UploadFilesButton() {
       plantilla[0] + plantilla[1] + plantilla[2];
 
     if (correctCharacters.includes(threeFirstCharactersOfPlantilla)) {
-      return plantilla;
-    } else {
-      for (let i = 0; i < plantilla.length; i++) {
-        const threeCharacters =
-          plantilla[i] + plantilla[i + 1] + plantilla[i + 2];
+      return plantilla.substring(0, 11);
+    }
 
-        if (correctCharacters.includes(threeCharacters)) {
-          const correctNameOfPlantilla = plantilla.substring(i);
+    for (let i = 0; i < plantilla.length; i++) {
+      const threeCharacters =
+        plantilla[i] + plantilla[i + 1] + plantilla[i + 2];
 
-          return correctNameOfPlantilla;
-        }
+      if (correctCharacters.includes(threeCharacters)) {
+        const correctNameOfPlantilla = plantilla.substring(i, 12);
+
+        return correctNameOfPlantilla;
       }
     }
   };
+
+  function uploadFiles(e) {
+    const selectedFiles = Array.from(e.target.files);
+
+    const validations = validationsToUpload(selectedFiles);
+    if (!validations) return;
+
+    const allFiles = selectedFiles.map((file) => {
+      const fileName = renamePlantillaIfIncorrect(file.name);
+
+      const fileSizeInMb = parseFloat(
+        (file.size * 0.000000953674316).toFixed(2)
+      );
+
+      let NSTDNumber;
+      if (fileName[0] !== 'B' && fileName[10] !== 'A') {
+        NSTDNumber = fileName.substring(3, 11);
+      }
+
+      return {
+        name: fileName,
+        size: fileSizeInMb,
+        NSTDNumber,
+      };
+    });
+
+    _manualMode && __setPlantillasStack([..._plantillasStack, ...allFiles]);
+
+    !_manualMode && groupEmails(allFiles);
+  }
 
   function groupEmails(allFiles) {
     // emailsWQP = emailsWithQuantityPriority
@@ -85,8 +111,8 @@ export default function UploadFilesButton() {
     let acumulator2 = 0;
 
     const removeElementFromAuxArray = (file) => {
-      const elementToRemove = auxAllFiles.indexOf(file);
-      auxAllFiles.splice(elementToRemove, 1);
+      const indexToRemove = auxAllFiles.indexOf(file);
+      auxAllFiles.splice(indexToRemove, 1);
     };
 
     const addItem = (file, priority) => {
@@ -101,6 +127,7 @@ export default function UploadFilesButton() {
       }
     };
 
+    // emailsWithQuantityPriority
     allFiles.forEach((file) => {
       if (!auxAllFiles.includes(file)) return;
 
@@ -123,6 +150,7 @@ export default function UploadFilesButton() {
       removeElementFromAuxArray(file);
     });
 
+    // emailsWithOrderPriority
     allFiles.forEach((file) => {
       if (acumulator2 + file.size < 25) {
         addItem(file, 'order');
@@ -134,78 +162,19 @@ export default function UploadFilesButton() {
       }
     });
 
-    let emailsWithPriority = [];
-
     if (emailsWOP.length <= emailsWQP.length) {
-      emailsWithPriority = emailsWOP;
-      setPriority('order');
+      __setEmails(emailsWOP);
+      __setPriority('order');
     } else {
-      emailsWithPriority = emailsWQP;
-      setPriority('quantity');
+      __setEmails(emailsWQP);
+      __setPriority('quantity');
     }
 
-    setEmails(emailsWithPriority);
-
-    if (manualMode) {
-      toggleManualMode();
-      setCumulativePlantillas([]);
-    }
+    _manualMode && __toggleManualMode();
+    _plantillasStack.length && __setPlantillasStack([]);
 
     router.push('/emails');
   }
 
-  function uploadFiles(e) {
-    const selectedFiles = Array.from(e.target.files);
-
-    const validations = validationsToUpload(selectedFiles);
-    if (!validations) return;
-
-    const allFiles = selectedFiles.map((file) => {
-      const fileNameCorrected = renamePlantillaIfIncorrect(file.name);
-
-      const fileName = fileNameCorrected.substring(0, 11);
-
-      const fileSizeInMb = parseFloat(
-        (file.size * 0.000000953674316).toFixed(2)
-      );
-
-      let NSTDNumber;
-      if (fileName[10] !== 'A' && fileName[0] !== 'B') {
-        NSTDNumber = fileName.slice(3, 11);
-      }
-
-      return {
-        name: fileName,
-        size: fileSizeInMb,
-        NSTDNumber,
-      };
-    });
-
-    if (manualMode) {
-      setCumulativePlantillas([...cumulativePlantillas, ...allFiles]);
-    } else {
-      groupEmails(allFiles);
-    }
-  }
-  return (
-    <>
-      <button onClick={() => openFileExplorer()}>
-        <p className="colored">Sube tus archivos</p>
-      </button>
-
-      <input
-        type="file"
-        id="inputFile"
-        hidden
-        multiple
-        onChange={(e) => uploadFiles(e)}
-      />
-
-      <button
-        id="activator"
-        hidden
-        onClick={() => groupEmails(cumulativePlantillas)}
-      ></button>
-    </>
-  );
+  return { openFileExplorer, uploadFiles, groupEmails };
 }

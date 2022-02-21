@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import {
-  CumulativePlantillas,
-  ModeSwitcher,
   UploadFilesButton,
-} from '../src/components';
+  ModeSwitcher,
+  PlantillasStack,
+} from '../src/components/Home';
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       <p className="light">Arrastra y suelta</p>
 
       <ModeSwitcher />
-      <CumulativePlantillas />
+      <PlantillasStack />
     </StyledHome>
   );
 }

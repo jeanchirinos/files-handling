@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 //* INITIAL STATE
 const initialState = {
-  cumulativePlantillas: [],
+  plantillasStack: [],
   emails: [],
   priority: 'order',
 };
@@ -12,40 +12,35 @@ const plantillasSlice = createSlice({
   name: 'plantillasSlice',
   initialState,
   reducers: {
-    updateCumulativePlantillas: (state, action) => {
-      state.cumulativePlantillas = action.payload;
+    setPlantillasStack: (state, { payload }) => {
+      state.plantillasStack = payload;
     },
-    deleteFromCumulativePlantillas: (state, action) => {
-      const indexSelected = state.cumulativePlantillas.findIndex(
-        (item) => item.name === action.payload.name
+    deleteFromStack: (state, { payload }) => {
+      const indexToDelete = state.plantillasStack.findIndex(
+        (item) => item.name === payload.name
       );
 
-      state.cumulativePlantillas.splice(indexSelected, 1);
+      state.plantillasStack.splice(indexToDelete, 1);
     },
-    updateEmails: (state, action) => {
-      state.emails = action.payload;
+    setEmails: (state, { payload }) => {
+      state.emails = payload;
     },
-    updatePriority: (state, action) => {
-      state.priority = action.payload;
+    setPriority: (state, { payload }) => {
+      state.priority = payload;
     },
   },
 });
 
 //* EXPORTS
 //? States
-export const selectCumulativePlantillas = ({ plantillas }) =>
-  plantillas.cumulativePlantillas;
 
-export const selectEmails = ({ plantillas }) => plantillas.emails;
-export const selectPriority = ({ plantillas }) => plantillas.priority;
+export const plantillasStack = ({ plantillas }) => plantillas.plantillasStack;
+export const emails = ({ plantillas }) => plantillas.emails;
+export const priority = ({ plantillas }) => plantillas.priority;
 
 //? Actions
-export const {
-  updateCumulativePlantillas,
-  updateEmails,
-  deleteFromCumulativePlantillas,
-  updatePriority,
-} = plantillasSlice.actions;
+export const { setPlantillasStack, setEmails, deleteFromStack, setPriority } =
+  plantillasSlice.actions;
 
 //? Default
 export default plantillasSlice.reducer;

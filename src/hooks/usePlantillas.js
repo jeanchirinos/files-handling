@@ -1,48 +1,48 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  selectCumulativePlantillas,
-  updateCumulativePlantillas,
-  selectEmails,
-  selectPriority,
-  updateEmails,
-  updatePriority,
-  deleteFromCumulativePlantillas,
+  plantillasStack,
+  setPlantillasStack,
+  emails,
+  priority,
+  setEmails,
+  setPriority,
+  deleteFromStack,
 } from '../features/plantillasSlice';
 
 const useSettings = () => {
   const dispatch = useDispatch();
 
   // STATES
-  const cumulativePlantillas = useSelector(selectCumulativePlantillas);
-  const emails = useSelector(selectEmails);
-  const priority = useSelector(selectPriority);
+  const _plantillasStack = useSelector(plantillasStack);
+  const _emails = useSelector(emails);
+  const _priority = useSelector(priority);
 
   // ACTIONS
-  function setCumulativePlantillas(arrayOfPlantillas) {
-    dispatch(updateCumulativePlantillas(arrayOfPlantillas));
+  function __setPlantillasStack(payload) {
+    dispatch(setPlantillasStack(payload));
   }
 
-  function setEmails(arrayOfEmails) {
-    dispatch(updateEmails(arrayOfEmails));
+  function __setEmails(payload) {
+    dispatch(setEmails(payload));
   }
 
-  function removeItemFromCumulativePlantillas(item) {
-    dispatch(deleteFromCumulativePlantillas(item));
+  function __deleteFromStack(payload) {
+    dispatch(deleteFromStack(payload));
   }
 
-  function setPriority(newPriority) {
-    dispatch(updatePriority(newPriority));
+  function __setPriority(payload) {
+    dispatch(setPriority(payload));
   }
 
   // EXPORT
   return {
-    cumulativePlantillas,
-    emails,
-    priority,
-    setCumulativePlantillas,
-    setEmails,
-    setPriority,
-    removeItemFromCumulativePlantillas,
+    _plantillasStack,
+    _emails,
+    _priority,
+    __setPlantillasStack,
+    __setEmails,
+    __setPriority,
+    __deleteFromStack,
   };
 };
 

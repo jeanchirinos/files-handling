@@ -1,7 +1,8 @@
 import { Provider } from 'react-redux';
 import store from '../src/app/store';
-import AppWrapper from '../src/components/AppWrapper';
-import { SettingsButton, TemporalThemeSwitcher } from '../src/components';
+import AppWrapper from '@/General/AppWrapper';
+import SettingsButton from '@/Fixed/SettingsButton';
+import TemporalThemeSwitcher from '@/Fixed/TemporalThemeSwitcher';
 
 export default function MyApp({ Component, pageProps }) {
   return (

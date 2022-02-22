@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import {
-  UploadFilesButton,
-  ModeSwitcher,
-  PlantillasStack,
-} from '../src/components/Home';
+import { GlobalPage } from '@/General/AppWrapper';
+import { closeContextMenu } from '@/Home/functions';
+import UploadFilesButton from '@/Home/UploadFilesButton';
+import ModeSwitcher from '@/Home/ModeSwitcher';
+import PlantillasStack from '@/Home/PlantillasStack';
 
 export default function Home() {
   return (
-    <StyledHome>
+    <StyledHome onClick={() => closeContextMenu()}>
       <UploadFilesButton />
       <p className="light">o</p>
       <p className="light">Arrastra y suelta</p>
@@ -18,7 +18,7 @@ export default function Home() {
   );
 }
 
-const StyledHome = styled.section`
+const StyledHome = styled(GlobalPage)`
   display: flex;
   flex-direction: column;
   justify-content: center;

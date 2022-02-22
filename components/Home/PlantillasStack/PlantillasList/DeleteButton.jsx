@@ -2,14 +2,11 @@ import styled from 'styled-components';
 import usePlantillas from '@/hooks/usePlantillas';
 import { AiOutlineDelete } from 'react-icons/ai';
 
-export default function DeleteButton({ plantilla }) {
+export default function DeleteButton({ name }) {
   const { __deleteFromStack } = usePlantillas();
 
   return (
-    <StyledDeleteButton
-      id={plantilla.name}
-      onClick={() => __deleteFromStack(plantilla)}
-    />
+    <StyledDeleteButton id={name} onClick={() => __deleteFromStack(name)} />
   );
 }
 

@@ -2,13 +2,12 @@ import styled, { css } from 'styled-components';
 import PlantillasList from './PlantillasList';
 import NextPageButton from './NextPageButton';
 import useSettings from '@/hooks/useSettings';
-import { closeOptions } from '../functions';
 
 export default function PlantillasStack() {
   const { _manualMode } = useSettings();
 
   return (
-    <StyledPlantillasStack active={_manualMode} onClick={() => closeOptions()}>
+    <StyledPlantillasStack active={_manualMode}>
       <PlantillasList />
       <NextPageButton />
     </StyledPlantillasStack>

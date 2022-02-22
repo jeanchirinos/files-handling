@@ -2,6 +2,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/Home/*": [
+        "components/Home/*"
+      ],
+      "@/Emails/*": [
+        "components/Emails/*"
+      ],
+      "@/General/*": [
+        "components/General/*"
+      ],
+      "@/Fixed/*": [
+        "components/Fixed/*"
+      ],
       "@/hooks/*": [
         "src/hooks/*"
       ]

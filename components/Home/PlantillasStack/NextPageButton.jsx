@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { AiOutlineArrowRight } from 'react-icons/ai';
-import UploadFilesLogic from '../../Home/UploadFilesButton/UploadFilesLogic';
+import UploadFilesLogic from '@/Home/UploadFilesButton/UploadFilesLogic';
 import usePlantillas from '@/hooks/usePlantillas';
 
 export default function NexPageButton() {

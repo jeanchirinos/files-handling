@@ -9,8 +9,8 @@ export default function PlantillasList() {
     <>
       {_plantillasStack.map((plantilla, index) => (
         <div key={index} style={{ position: 'relative' }}>
-          <Plantilla plantilla={plantilla} />
-          <DeleteButton plantilla={plantilla} />
+          <Plantilla name={plantilla.name} />
+          <DeleteButton name={plantilla.name} />
         </div>
       ))}
     </>

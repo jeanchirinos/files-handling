@@ -1,19 +1,13 @@
 import styled, { css } from 'styled-components';
 import useSettings from '@/hooks/useSettings';
-import { closeOptions } from './functions';
 
 export default function ModeSwitcher() {
   const { _manualMode, __toggleManualMode } = useSettings();
 
-  function handleMode() {
-    closeOptions();
-    __toggleManualMode();
-  }
-
   return (
     <StyledModeSwitcher
       active={_manualMode}
-      onClick={() => handleMode()}
+      onClick={() => __toggleManualMode()}
       title="Modo manual"
     />
   );

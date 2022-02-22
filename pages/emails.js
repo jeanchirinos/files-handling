@@ -1,6 +1,8 @@
+import styled from 'styled-components';
 import Link from 'next/link';
-import usePlantillas from '../src/hooks/usePlantillas';
+import usePlantillas from '@/hooks/usePlantillas';
 import { useState, Fragment } from 'react';
+import { GlobalPage } from '@/General/AppWrapper';
 
 export default function Emails() {
   const { _emails, _priority } = usePlantillas();
@@ -8,7 +10,7 @@ export default function Emails() {
   const [emailIndex, setEmailIndex] = useState(0);
 
   return (
-    <>
+    <StyledEmails>
       <h1>Emails</h1>
       <Link href="/">
         <a>
@@ -71,6 +73,8 @@ export default function Emails() {
           )}
         </Fragment>
       ))}
-    </>
+    </StyledEmails>
   );
 }
+
+const StyledEmails = styled(GlobalPage)``;

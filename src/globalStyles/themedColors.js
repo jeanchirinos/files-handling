@@ -20,6 +20,9 @@ const themedColors = (theme) => css`
   --oppositeTheme_700: ${theme.opposite._700};
   --oppositeTheme_800: ${theme.opposite._800};
   --oppositeTheme_900: ${theme.opposite._900};
+
+  --emailTemplate: ${theme.emailTemplate};
+  --scrollBarThumb_color: ${theme.scrollbar_thumb};
 `;
 
 export default themedColors;

@@ -5,6 +5,7 @@ const initialState = {
   plantillasStack: [],
   emails: [],
   priority: 'order',
+  currentEmailIndex: 0,
 };
 
 //* SLICE
@@ -28,6 +29,9 @@ const plantillasSlice = createSlice({
     setPriority: (state, { payload }) => {
       state.priority = payload;
     },
+    setCurrentEmailIndex: (state, { payload }) => {
+      state.currentEmailIndex = payload;
+    },
   },
 });
 
@@ -37,10 +41,17 @@ const plantillasSlice = createSlice({
 export const plantillasStack = ({ plantillas }) => plantillas.plantillasStack;
 export const emails = ({ plantillas }) => plantillas.emails;
 export const priority = ({ plantillas }) => plantillas.priority;
+export const currentEmailIndex = ({ plantillas }) =>
+  plantillas.currentEmailIndex;
 
 //? Actions
-export const { setPlantillasStack, setEmails, deleteFromStack, setPriority } =
-  plantillasSlice.actions;
+export const {
+  setPlantillasStack,
+  setEmails,
+  deleteFromStack,
+  setPriority,
+  setCurrentEmailIndex,
+} = plantillasSlice.actions;
 
 //? Default
 export default plantillasSlice.reducer;

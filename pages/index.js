@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GlobalPage } from '@/General/AppWrapper';
+import { GlobalPage } from '@/General/ComponentWrapper';
 import { closeContextMenu } from '@/Home/functions';
 import UploadFilesButton from '@/Home/UploadFilesButton';
 import ModeSwitcher from '@/Home/ModeSwitcher';
@@ -24,4 +24,7 @@ const StyledHome = styled(GlobalPage)`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  max-height: -webkit-fill-available;
+  overflow-y: hidden;
+  position: relative;
 `;

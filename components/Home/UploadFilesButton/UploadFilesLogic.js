@@ -8,10 +8,12 @@ export default function UploadFilesLogic() {
     usePlantillas();
   const { _manualMode, __toggleManualMode } = useSettings();
 
+  //
   function openFileExplorer() {
     document.getElementById('inputFile').click();
   }
 
+  //
   const validationsToUpload = (selectedFiles) => {
     if (!selectedFiles.length) {
       console.log('No se ha seleccionado ningun archivo');
@@ -60,12 +62,17 @@ export default function UploadFilesLogic() {
       const threeCharacters =
         plantilla[i] + plantilla[i + 1] + plantilla[i + 2];
 
+      console.log(threeCharacters);
+
       if (correctCharacters.includes(threeCharacters)) {
-        const correctNameOfPlantilla = plantilla.substring(i, 12);
+        const correctNameOfPlantilla = plantilla.substring(i, i + 11);
 
         return correctNameOfPlantilla;
       }
     }
+
+    //TODO - Si no se logra corregir el nombre de la plantilla, se debe parar el proceso de subida de archivos y mostrar un mensaje de error.
+    return plantilla.substring(0, 11);
   };
 
   function uploadFiles(e) {
@@ -76,7 +83,6 @@ export default function UploadFilesLogic() {
 
     const allFiles = selectedFiles.map((file) => {
       const fileName = renamePlantillaIfIncorrect(file.name);
-
       const fileSizeInMb = parseFloat(
         (file.size * 0.000000953674316).toFixed(2)
       );
@@ -98,6 +104,7 @@ export default function UploadFilesLogic() {
     !_manualMode && groupEmails(allFiles);
   }
 
+  //
   function groupEmails(allFiles) {
     // emailsWQP = emailsWithQuantityPriority
     const emailsWQP = [[]];

@@ -11,7 +11,7 @@ export const fontSize = {
 };
 
 export const lineHeight = {
-  _1: '140%',
-  _2: '180%',
-  _3: '200%',
+  _1: '130%',
+  _2: '150%',
+  _3: '170%',
 };

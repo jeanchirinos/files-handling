@@ -6,7 +6,7 @@ export default function Plantilla({ name }) {
     closeContextMenu();
 
     const plantillaSelected = document.getElementById(name);
-    plantillaSelected.classList.toggle('selected');
+    plantillaSelected?.classList.toggle('selected');
   }
 
   return (

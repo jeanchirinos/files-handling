@@ -2,7 +2,12 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import usePlantillas from '@/hooks/usePlantillas';
 import { useState, Fragment } from 'react';
-import { GlobalPage } from '@/General/AppWrapper';
+import { GlobalPage } from '@/General/ComponentWrapper';
+import EmailsSection from '@/Emails/EmailsSection';
+import NSTDSection from '@/Emails/NSTDSection';
+import EmailTemplate from '@/Emails/EmailTemplate';
+import mediaQueries from '../src/styleGuide/breakpoints';
+import HomeButton from '@/Emails/HomeButton';
 
 export default function Emails() {
   const { _emails, _priority } = usePlantillas();
@@ -11,7 +16,7 @@ export default function Emails() {
 
   return (
     <StyledEmails>
-      <h1>Emails</h1>
+      {/* <h1>Emails</h1>
       <Link href="/">
         <a>
           <p>Go home</p>
@@ -72,9 +77,50 @@ export default function Emails() {
             </span>
           )}
         </Fragment>
-      ))}
+      ))} */}
+
+      <HomeButton />
+      <EmailsSection />
+      {/* EmailTemplate */}
+      {/* <div>
+        <div
+          style={{
+            display: 'inline-block',
+            height: '100px',
+            width: '70%',
+            backgroundColor: 'red',
+          }}
+        ></div>
+        <div
+          style={{
+            display: 'inline-block',
+            height: '100px',
+            width: '30%',
+            backgroundColor: 'blue',
+          }}
+        ></div>
+      </div> */}
+      {/* NSTDSection */}
+      <EmailTemplate />
+      <NSTDSection />
     </StyledEmails>
   );
 }
 
-const StyledEmails = styled(GlobalPage)``;
+const StyledEmails = styled(GlobalPage)`
+  /* background-color: skyblue; */
+  padding: 8rem var(--padding) 0 var(--padding);
+  display: grid;
+  /* width: 100%; */
+  /* height: 100vh; */
+
+  ${mediaQueries.xs} {
+    grid: auto / 75% 25%;
+    grid-row-gap: 5rem;
+  }
+
+  ${mediaQueries.md} {
+    grid: auto / 25% 55% 20%;
+    grid-row-gap: 0;
+  }
+`;

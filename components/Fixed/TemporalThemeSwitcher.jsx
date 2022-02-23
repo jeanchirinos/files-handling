@@ -5,7 +5,7 @@ const TemporalThemeSwitcher = () => {
 
   return (
     <button
-      style={{ position: 'absolute', top: '25px', right: '50px' }}
+      style={{ position: 'absolute', top: '25px', right: '50px', zIndex: '9' }}
       onClick={() => __toggleDarkTheme()}
     >
       <p className="colored">Change !</p>

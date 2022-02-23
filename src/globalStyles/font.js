@@ -39,22 +39,21 @@ export default css`
 
   /* FONT SIZE */
 
-  p.big {
+  .big {
     font-size: var(--fs_5);
     line-height: var(--lh_2);
   }
-
-  p.small {
+  .small {
     font-size: var(--fs_7);
     line-height: var(--lh_3);
   }
 
   /* FONT WEIGHT */
-  p.bold {
+  .bold {
     font-weight: 700;
   }
 
-  p.light {
+  .light {
     font-weight: 300;
   }
 `;

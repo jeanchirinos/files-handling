@@ -15,7 +15,7 @@ export default function NexPageButton() {
           onClick={() => groupEmails(_plantillasStack)}
         />
       ) : (
-        <StyledNextPageButton />
+        <StyledNextPageButton title="Añade un archivo!" />
       )}
     </>
   );

@@ -4,18 +4,18 @@ import GlobalStyles from '../../src/globalStyles';
 import useSettings from '@/hooks/useSettings';
 import CustomHead from '@/General/CustomHead';
 
-export default function AppWrapper({ children }) {
+export default function ComponentWrapper({ children }) {
   const { _darkTheme } = useSettings();
 
   return (
     <ThemeProvider theme={_darkTheme ? dark : light}>
       <GlobalStyles />
       <CustomHead />
-      <>{children}</>
+      {children}
     </ThemeProvider>
   );
 }
 
-export const GlobalPage = styled.div.attrs({
+export const GlobalPage = styled.main.attrs({
   // onClick: () => console.log('testing'),
 })``;

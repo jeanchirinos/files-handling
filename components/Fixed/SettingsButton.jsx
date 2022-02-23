@@ -8,8 +8,9 @@ export default function SettingsButton() {
 const StyledSettingsButton = styled(AiOutlineSetting)`
   position: absolute;
   font-size: 1.5rem;
-  color: var(--oppositeTheme_500);
+  color: var(--oppositeTheme_400);
   top: 25px;
-  right: 25px;
+  right: var(--padding);
   cursor: pointer;
+  z-index: 9;
 `;

@@ -18,17 +18,17 @@ export default css`
 
   /* SM */
   ${mediaQueries.sm} {
-    --padding: 1.5rem;
+    --padding: 1rem;
   }
 
   /* MD */
   ${mediaQueries.md} {
-    --padding: 2.5rem;
+    --padding: 2rem;
   }
 
   /* LG */
   ${mediaQueries.lg} {
-    --padding: 5.5rem;
+    --padding: 3rem;
     --fs_1: ${fontSize._1};
     --fs_2: ${fontSize._2};
     --fs_3: ${fontSize._3};
@@ -40,6 +40,6 @@ export default css`
 
   /* XL */
   ${mediaQueries.xl} {
-    --padding: 9.5rem;
+    --padding: 4rem;
   }
 `;

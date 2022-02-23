@@ -41,4 +41,14 @@ export default css`
   --red_700: #9a2d2d;
   --red_800: #671e1e;
   --red_900: #330f0f;
+
+  --green_100: #e3f7f0;
+  --green_200: #c8efe2;
+  --green_300: #ace7d3;
+  --green_400: #90dfc5;
+  --green: #75d7b6;
+  --green_600: #41c89b;
+  --green_700: #2d9a76;
+  --green_800: #1e674e;
+  --green_900: #0f3327;
 `;

@@ -21,7 +21,7 @@ const StyledPlantillasStack = styled.div(
     min-height: 5rem;
     padding: 0.5rem 5rem 0.5rem 6.5rem;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    background-color: var(--theme_600);
+    background-color: var(--theme_400);
     position: absolute;
     bottom: 0;
     transform: ${active ? 'translateY(0%)' : 'translateY(100%)'};

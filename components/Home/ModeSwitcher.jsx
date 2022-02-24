@@ -18,7 +18,7 @@ const StyledModeSwitcher = styled.div(
     width: 48px;
     height: 28px;
     border-radius: 16px;
-    background-color: ${active ? 'var(--primary-color)' : 'var(--light_100)'};
+    background-color: ${active ? 'var(--primary-color)' : 'var(--light_800)'};
     display: flex;
     align-items: center;
     position: absolute;

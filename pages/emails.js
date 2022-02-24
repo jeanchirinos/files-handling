@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import usePlantillas from '@/hooks/usePlantillas';
+import useEmails from '@/hooks/useEmails';
 import { useState, Fragment } from 'react';
 import { GlobalPage } from '@/General/ComponentWrapper';
 import EmailsSection from '@/Emails/EmailsSection';
@@ -10,7 +10,7 @@ import mediaQueries from '../src/styleGuide/breakpoints';
 import HomeButton from '@/Emails/HomeButton';
 
 export default function Emails() {
-  const { _emails, _priority } = usePlantillas();
+  const { _emails, _priority } = useEmails();
 
   const [emailIndex, setEmailIndex] = useState(0);
 

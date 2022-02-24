@@ -1,8 +1,8 @@
-import usePlantillas from '@/hooks/usePlantillas';
+import useEmails from '@/hooks/useEmails';
 import styled, { css } from 'styled-components';
 
 export default function PriorityIndicator() {
-  const { _priority } = usePlantillas();
+  const { _priority } = useEmails();
 
   return (
     <Wrapper>
@@ -40,8 +40,8 @@ const StyledPriorityIndicator = styled.span(
   ({ active }) => css`
     padding: 0.3rem 0.8rem;
     background-color: ${active && 'var(--green)'};
-    border: 1px solid ${active ? 'var(--green)' : 'var(--light_300)'};
-    color: ${active ? 'var(--light_900)' : 'var(--light_300)'};
+    border: 1px solid ${active ? 'var(--green)' : 'var(--light_700)'};
+    color: ${active ? 'var(--light_100)' : 'var(--light_700)'};
     cursor: help;
   `
 );

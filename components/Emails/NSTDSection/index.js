@@ -1,25 +1,24 @@
 import styled from 'styled-components';
-import { Fragment } from 'react';
-import usePlantillas from '@/hooks/usePlantillas';
+import useEmails from '@/hooks/useEmails';
 import Plantilla from './Plantilla';
 import mediaQueries from 'src/styleGuide/breakpoints';
 
 export default function NSTDSection() {
-  const { _emails, _currentEmailIndex } = usePlantillas();
+  const { _currentPlantillas } = useEmails();
   return (
     <StyledNSTDSection>
       <p className="big bold">💻 NSTD</p>
       <div>
-        {_emails[_currentEmailIndex]?.map((plantilla, index) => (
-          <Fragment key={index}>
-            {plantilla.NSTDNumber && (
+        {_currentPlantillas?.map(
+          (plantilla, index) =>
+            plantilla.NSTDNumber && (
               <Plantilla
+                key={index}
                 NSTDNumber={plantilla.NSTDNumber}
                 size={plantilla.size}
               />
-            )}
-          </Fragment>
-        ))}
+            )
+        )}
       </div>
     </StyledNSTDSection>
   );
@@ -30,7 +29,6 @@ const StyledNSTDSection = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  /* background-color: red; */
 
   ${mediaQueries.md} {
     grid-column-start: 3;

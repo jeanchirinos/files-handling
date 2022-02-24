@@ -9,7 +9,7 @@ export default function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <ComponentWrapper>
         <SettingsButton />
-        {/* <TemporalThemeSwitcher /> */}
+        <TemporalThemeSwitcher />
         <Component {...pageProps} />
       </ComponentWrapper>
     </Provider>

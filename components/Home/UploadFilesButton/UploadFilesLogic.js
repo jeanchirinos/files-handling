@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
-import usePlantillas from '@/hooks/usePlantillas';
 import useSettings from '@/hooks/useSettings';
+import usePlantillas from '@/hooks/usePlantillas';
+import useEmails from '@/hooks/useEmails';
 
 export default function UploadFilesLogic() {
   const router = useRouter();
-  const { _plantillasStack, __setPlantillasStack, __setEmails, __setPriority } =
-    usePlantillas();
   const { _manualMode, __toggleManualMode } = useSettings();
+  const { _plantillasStack, __setPlantillasStack } = usePlantillas();
+  const { __setEmails, __setPriority } = useEmails();
 
   //
   function openFileExplorer() {
@@ -30,6 +31,7 @@ export default function UploadFilesLogic() {
 
     if (!isAPdf) {
       console.log('El archivo seleccionado no es un pdf');
+      return;
     }
 
     const fileWeightIsCorrect = selectedFiles.every((file) => {

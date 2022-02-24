@@ -1,87 +1,100 @@
-import mediaQueries from 'src/styleGuide/breakpoints';
 import styled from 'styled-components';
+import mediaQueries from 'src/styleGuide/breakpoints';
+import InputGroup from './InputGroup';
+import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useEmails from '@/hooks/useEmails';
 
 export default function EmailTemplate() {
+  const { _to, _cc, _subjectType } = useEmailTemplate();
+  const { _currentPlantillas } = useEmails();
+
   return (
-    <StyledEmailTemplate>
+    <StyledEmailTemplate className="small">
       <div>
-        <div className="inputs">
-          <div className="input">
-            <p className="bold">Para </p>
-            <input type="text" value="hola" readOnly />
-          </div>
-          <div className="input">
-            <p className="bold">CC </p>
-            <input type="text" value="hola" readOnly />
-          </div>
-          <div className="input">
-            <p className="bold">Asunto </p>
-            <input type="text" value="hola" readOnly />
-          </div>
+        <div className="inputsGroup">
+          <InputGroup label="Para" value={`${_to.name} ${_to.lastName}`} />
+          <InputGroup label="CC" value={_cc} />
+          <InputGroup
+            label="Asunto"
+            value={`Plantillas de ${_subjectType} a digitar: [plantillas]`}
+          />
         </div>
-        <div className="info"></div>
+        <div className="content">
+          <p>{_to.name},</p>
+          <p>
+            te reasigno las siguientes plantillas{' '}
+            <span className="bold">{_subjectType}</span> para su digitación:
+          </p>
+          <br />
+          <div className="plantillasList">
+            {_currentPlantillas?.map((plantilla, index) => (
+              <p className="light" key={index}>
+                {plantilla.name}
+              </p>
+            ))}
+          </div>
+          <br />
+          <br />
+          <br />
+          <p>Saludos,</p>
+          <p>Alfredo Chirinos</p>
+        </div>
       </div>
     </StyledEmailTemplate>
   );
 }
 
 const StyledEmailTemplate = styled.section`
-  /* background-color: blue; */
-  /* height: calc(100%); */
   display: flex;
   justify-content: center;
   align-items: center;
 
   ${mediaQueries.xs} {
-    padding: 0 0.5rem;
+    padding: 0 0.3rem;
   }
 
   ${mediaQueries.md} {
-    padding: 0 3rem;
+    padding: 0 2.5rem;
     grid-column-start: 2;
   }
 
   > div {
     width: 100%;
-    min-height: 100%;
-    /* TODO min-height this and height fit content */
-    height: 50vh;
-    /* height: 100%; */
+    height: fit-content;
+    max-height: 50vh;
     border-radius: 12px;
-    background-color: var(--emailTemplate);
-    box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background-color: var(--emailTemplate);
+    box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px;
   }
 
-  .inputs {
+  .inputsGroup {
     display: flex;
-    gap: 0.8rem;
     flex-direction: column;
-  }
-
-  .input {
-    display: flex;
     gap: 0.8rem;
-
-    p {
-      width: 54px;
-    }
-    input {
-      background-color: var(--light_700);
-      flex-grow: 1;
-      border-radius: 8px;
-      border: none;
-    }
   }
 
-  .info {
-    /* width: 100%; */
-    background-color: var(--light_700);
-    /* background-color: var(--light_900); */
+  .content {
+    padding: 1rem 0.8rem;
+    border-radius: 12px;
     flex-grow: 1;
-    border-radius: 10px;
+    background-color: var(--light_100);
+    overflow-y: auto;
+    color: var(--dark);
+  }
+
+  .plantillasList {
+    cursor: pointer;
+    width: fit-content;
+    /* transition: font-size 0.3s; */
+    transition: color 0.2s;
+
+    :hover {
+      color: var(--primary-color);
+      /* font-size: 1.2em; */
+    }
   }
 `;

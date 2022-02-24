@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export default function Plantilla({ NSTDNumber, size }) {
-  return <StyledPlantilla title={size}>{NSTDNumber}</StyledPlantilla>;
+export default function Plantilla({ NSTDNumber }) {
+  return <StyledPlantilla>{NSTDNumber}</StyledPlantilla>;
 }
 
 const StyledPlantilla = styled.p`

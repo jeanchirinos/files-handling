@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import usePlantillas from '@/hooks/usePlantillas';
+import useEmails from '@/hooks/useEmails';
 import EmailsList from './EmailsList';
 import PriorityIndicator from './PriorityIndicator';
 import mediaQueries from 'src/styleGuide/breakpoints';
+
 export default function EmailsSection() {
-  const { _emails } = usePlantillas();
+  const { _emails } = useEmails();
 
   return (
     <StyledEmailsSection>
@@ -21,7 +22,6 @@ const StyledEmailsSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  /* padding: 0 1rem; */
 
   > header {
     display: flex;
@@ -35,6 +35,5 @@ const StyledEmailsSection = styled.section`
 
   ${mediaQueries.md} {
     grid-column-start: 1;
-    /* grid-column: span 1; */
   }
 `;

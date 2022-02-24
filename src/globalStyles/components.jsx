@@ -4,7 +4,7 @@ export const Button = styled.button(
   ({ inverted }) => css`
     padding: 0.5rem 1.5rem;
     background-color: var(--primary-color);
-    color: var(--light_700);
+    color: var(--light);
     border-radius: 2rem;
     border: 0.5px solid var(--primary-color);
     cursor: pointer;
@@ -26,7 +26,7 @@ export const Button = styled.button(
 
       :hover {
         background-color: var(--primary-color);
-        color: var(--light_700);
+        color: var(--light);
       }
     `}
   `

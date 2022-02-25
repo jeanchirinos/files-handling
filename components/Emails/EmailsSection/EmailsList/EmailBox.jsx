@@ -9,7 +9,11 @@ export default function EmailBox({
 }) {
   const { __setCurrentPlantillas } = useEmails();
 
+  const totalWeight = email.reduce((acc, curr) => acc + curr.size, 0);
+
   function establishPlantillas() {
+    if (currentEmailIndex === index) return;
+
     setCurrentEmailIndex(index);
     __setCurrentPlantillas(index);
   }
@@ -18,6 +22,7 @@ export default function EmailBox({
     <StyledEmailBox
       active={currentEmailIndex === index}
       onClick={() => establishPlantillas()}
+      title={`Peso: ${totalWeight} mb - Cantidad: ${email.length}`}
     >
       <header>{index + 1}</header>
       <div>
@@ -36,12 +41,12 @@ const StyledEmailBox = styled.div(
     border-radius: 5px;
     display: flex;
     background-color: ${active && 'var(--primary-color)'};
-    cursor: ${!active && 'pointer'};
-    pointer-events: ${active && 'none'};
+    cursor: ${active ? 'default' : 'pointer'};
+    /* pointer-events: ${active && 'none'}; */
     transition: transform 0.3s;
 
     :hover {
-      transform: scale(1.05);
+      transform: ${!active && 'scale(1.05)'};
     }
 
     > header {

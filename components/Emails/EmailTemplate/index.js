@@ -1,43 +1,58 @@
 import styled from 'styled-components';
 import mediaQueries from 'src/styleGuide/breakpoints';
-import InputGroup from './InputGroup';
 import useEmailTemplate from '@/hooks/useEmailTemplate';
 import useEmails from '@/hooks/useEmails';
+import { Fragment, useState } from 'react';
+import { copyElement } from '../functions';
+import InputsGroup from './InputsGroup';
 
 export default function EmailTemplate() {
-  const { _to, _cc, _subjectType } = useEmailTemplate();
+  const { _to, _subjectType } = useEmailTemplate();
   const { _currentPlantillas } = useEmails();
+
+  const [subjectTypeIndex, setSubjectTypeIndex] = useState(0);
+
+  const arrayOfCurrentPlantillas = _currentPlantillas?.map(
+    (plantilla) => plantilla.name
+  );
 
   return (
     <StyledEmailTemplate className="small">
       <div>
-        <div className="inputsGroup">
-          <InputGroup label="Para" value={`${_to.name} ${_to.lastName}`} />
-          <InputGroup label="CC" value={_cc} />
-          <InputGroup
-            label="Asunto"
-            value={`Plantillas de ${_subjectType} a digitar: [plantillas]`}
-          />
-        </div>
-        <div className="content">
-          <p>{_to.name},</p>
-          <p>
-            te reasigno las siguientes plantillas{' '}
-            <span className="bold">{_subjectType}</span> para su digitación:
-          </p>
+        <InputsGroup
+          subjectTypeIndex={subjectTypeIndex}
+          setSubjectTypeIndex={setSubjectTypeIndex}
+          arrayOfCurrentPlantillas={arrayOfCurrentPlantillas}
+        />
+        <div
+          id="emailTemplateContent"
+          className="content"
+          onClick={(e) => copyElement(e)}
+        >
+          <span>{_to.name},</span>
           <br />
-          <div className="plantillasList">
-            {_currentPlantillas?.map((plantilla, index) => (
-              <p className="light" key={index}>
-                {plantilla.name}
-              </p>
+          <span>
+            te reasigno las siguientes plantillas{' '}
+            <span className="bold">{_subjectType[subjectTypeIndex]}</span> para
+            su digitación:
+          </span>
+          <div
+            className="plantillasList bold"
+            title={`Cantidad: ${arrayOfCurrentPlantillas.length}`}
+          >
+            {arrayOfCurrentPlantillas?.map((plantilla, index) => (
+              <Fragment key={index}>
+                <br />
+                <span>{plantilla}</span>
+              </Fragment>
             ))}
           </div>
           <br />
           <br />
           <br />
-          <p>Saludos,</p>
-          <p>Alfredo Chirinos</p>
+          <span>Saludos,</span>
+          <br />
+          <span>Alfredo Chirinos</span>
         </div>
       </div>
     </StyledEmailTemplate>
@@ -48,6 +63,7 @@ const StyledEmailTemplate = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   ${mediaQueries.xs} {
     padding: 0 0.3rem;
@@ -61,7 +77,7 @@ const StyledEmailTemplate = styled.section`
   > div {
     width: 100%;
     height: fit-content;
-    max-height: 50vh;
+    max-height: 75vh;
     border-radius: 12px;
     padding: 1rem;
     display: flex;
@@ -71,12 +87,6 @@ const StyledEmailTemplate = styled.section`
     box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px;
   }
 
-  .inputsGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
   .content {
     padding: 1rem 0.8rem;
     border-radius: 12px;
@@ -84,17 +94,30 @@ const StyledEmailTemplate = styled.section`
     background-color: var(--light_100);
     overflow-y: auto;
     color: var(--dark);
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+
+    span {
+      pointer-events: none;
+    }
+
+    :hover,
+    :focus {
+      box-shadow: 0px 0px 5px 2px var(--primary-color);
+    }
   }
 
   .plantillasList {
     cursor: pointer;
     width: fit-content;
-    /* transition: font-size 0.3s; */
     transition: color 0.2s;
+
+    span {
+      pointer-events: none;
+    }
 
     :hover {
       color: var(--primary-color);
-      /* font-size: 1.2em; */
     }
   }
 `;

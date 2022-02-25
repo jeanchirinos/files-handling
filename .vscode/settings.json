@@ -11,5 +11,6 @@
     "yarn.lock": true,
     "jsconfig.json": true,
     "pages/api": true,
+    ".env.local": true,
   }
 }

@@ -2,7 +2,7 @@ import useEmails from '@/hooks/useEmails';
 import Link from 'next/link';
 import { AiFillHome } from 'react-icons/ai';
 import { Button } from 'src/globalStyles/components';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export default function HomeButton() {
   const { __setCurrentPlantillas } = useEmails();

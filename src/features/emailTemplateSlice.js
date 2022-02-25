@@ -2,9 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 //* INITIAL STATE
 const initialState = {
-  to: { name: 'Name', lastName: 'Last Name' },
-  cc: 'Cc',
-  subjectType: 'Content to change',
+  to: { name: 'Teresa', lastName: 'Aznaran' },
+  cc: [
+    { name: 'Employee', lastName: '1', email: 'EMPLOYEE1@onp.gob.pe' },
+    { name: 'Employee', lastName: '2', email: 'EMPLOYEE2@onp.gob.pe' },
+    { name: 'Employee', lastName: '3', email: 'EMPLOYEE3@onp.gob.pe' },
+  ],
+  subjectType: ['de campo', 'de campo PRESENCIAL', 'de OAD'],
 };
 
 //* SLICE

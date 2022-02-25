@@ -10,10 +10,10 @@ export default function NSTDSection() {
       <p className="big bold">💻 NSTD</p>
       <div>
         {_currentPlantillas?.map(
-          (plantilla, index) =>
+          (plantilla) =>
             plantilla.NSTDNumber && (
               <Plantilla
-                key={index}
+                key={plantilla.name}
                 NSTDNumber={plantilla.NSTDNumber}
                 size={plantilla.size}
               />

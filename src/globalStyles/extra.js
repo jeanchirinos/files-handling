@@ -11,6 +11,13 @@ export default css`
     overflow-x: hidden;
   }
 
+  input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
   ::selection {
     background-color: var(--primary-color);
     color: var(--light_100);

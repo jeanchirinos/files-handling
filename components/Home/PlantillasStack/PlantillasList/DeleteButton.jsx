@@ -12,8 +12,8 @@ export default function DeleteButton({ name }) {
 
 const StyledDeleteButton = styled(AiOutlineDelete)`
   border-radius: 4px;
-  background-color: var(--theme_400);
-  color: var(--theme_100);
+  background-color: var(--light_700);
+  color: var(--theme_300);
   font-size: 1.2rem;
   position: absolute;
   bottom: -10px;
@@ -28,6 +28,6 @@ const StyledDeleteButton = styled(AiOutlineDelete)`
 
   :hover {
     background-color: var(--red_400);
-    color: var(--light_600);
+    color: var(--light_100);
   }
 `;

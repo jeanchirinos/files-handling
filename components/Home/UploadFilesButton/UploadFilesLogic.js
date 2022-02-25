@@ -2,12 +2,13 @@ import { useRouter } from 'next/router';
 import useSettings from '@/hooks/useSettings';
 import usePlantillas from '@/hooks/usePlantillas';
 import useEmails from '@/hooks/useEmails';
+import { alertUser } from '../functions';
 
 export default function UploadFilesLogic() {
   const router = useRouter();
   const { _manualMode, __toggleManualMode } = useSettings();
   const { _plantillasStack, __setPlantillasStack } = usePlantillas();
-  const { __setEmails, __setPriority } = useEmails();
+  const { __setEmails, __setPriority, __setCurrentPlantillas } = useEmails();
 
   //
   function openFileExplorer() {
@@ -17,7 +18,7 @@ export default function UploadFilesLogic() {
   //
   const validationsToUpload = (selectedFiles) => {
     if (!selectedFiles.length) {
-      console.log('No se ha seleccionado ningun archivo');
+      // console.log('No se ha seleccionado ningun archivo');
       return;
     }
 
@@ -30,7 +31,7 @@ export default function UploadFilesLogic() {
     });
 
     if (!isAPdf) {
-      console.log('El archivo seleccionado no es un pdf');
+      alertUser('El archivo seleccionado no es un pdf');
       return;
     }
 
@@ -39,11 +40,11 @@ export default function UploadFilesLogic() {
         (file.size * 0.000000953674316).toFixed(2)
       );
 
-      return fileSizeInMb < 25;
+      return fileSizeInMb < 24.9;
     });
 
     if (!fileWeightIsCorrect) {
-      console.log('El peso del archivo seleccionado es mayor a 25MB');
+      alertUser('El peso de uno de los archivos es mayor a 25MB');
       return;
     }
 
@@ -64,8 +65,6 @@ export default function UploadFilesLogic() {
       const threeCharacters =
         plantilla[i] + plantilla[i + 1] + plantilla[i + 2];
 
-      console.log(threeCharacters);
-
       if (correctCharacters.includes(threeCharacters)) {
         const correctNameOfPlantilla = plantilla.substring(i, i + 11);
 
@@ -73,8 +72,12 @@ export default function UploadFilesLogic() {
       }
     }
 
-    //TODO - Si no se logra corregir el nombre de la plantilla, se debe parar el proceso de subida de archivos y mostrar un mensaje de error.
-    return plantilla.substring(0, 11);
+    alertUser(
+      `Se excluyó el siguiente archivo, ya que el nombre no es correcto : ${plantilla.slice(
+        0,
+        -4
+      )}`
+    );
   };
 
   function uploadFiles(e) {
@@ -83,8 +86,13 @@ export default function UploadFilesLogic() {
     const validations = validationsToUpload(selectedFiles);
     if (!validations) return;
 
-    const allFiles = selectedFiles.map((file) => {
+    const filteredFiles = selectedFiles.filter((file) =>
+      renamePlantillaIfIncorrect(file.name)
+    );
+
+    const allFiles = filteredFiles.map((file) => {
       const fileName = renamePlantillaIfIncorrect(file.name);
+
       const fileSizeInMb = parseFloat(
         (file.size * 0.000000953674316).toFixed(2)
       );
@@ -100,6 +108,8 @@ export default function UploadFilesLogic() {
         NSTDNumber,
       };
     });
+
+    if (!allFiles.length) return;
 
     _manualMode && __setPlantillasStack([..._plantillasStack, ...allFiles]);
 
@@ -140,11 +150,11 @@ export default function UploadFilesLogic() {
     allFiles.forEach((file) => {
       if (!auxAllFiles.includes(file)) return;
 
-      if (acumulator + file.size < 25) {
+      if (acumulator + file.size < 24.9) {
         addItem(file, 'quantity');
       } else {
         auxAllFiles.forEach((file) => {
-          if (file.size + acumulator < 25) {
+          if (file.size + acumulator < 24.9) {
             addItem(file, 'quantity');
             removeElementFromAuxArray(file);
           }
@@ -161,7 +171,7 @@ export default function UploadFilesLogic() {
 
     // emailsWithOrderPriority
     allFiles.forEach((file) => {
-      if (acumulator2 + file.size < 25) {
+      if (acumulator2 + file.size < 24.9) {
         addItem(file, 'order');
       } else {
         currentIndex2++;
@@ -181,6 +191,8 @@ export default function UploadFilesLogic() {
 
     _manualMode && __toggleManualMode();
     _plantillasStack.length && __setPlantillasStack([]);
+
+    __setCurrentPlantillas(0);
 
     router.push('/emails');
   }

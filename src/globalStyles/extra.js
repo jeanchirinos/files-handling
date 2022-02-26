@@ -18,6 +18,21 @@ export default css`
     line-height: inherit;
   }
 
+  .toast {
+    padding: 0 0.8rem;
+    max-width: 650px;
+    color: var(--light_100);
+    cursor: pointer;
+  }
+
+  .toast.success {
+    background-color: var(--green);
+  }
+
+  .toast.error {
+    background-color: var(--red_400);
+  }
+
   ::selection {
     background-color: var(--primary-color);
     color: var(--light_100);

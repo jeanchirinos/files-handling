@@ -1,3 +1,4 @@
+import ToastContent from '@/General/ToastContent';
 import toast from 'react-hot-toast';
 
 export function closeContextMenu() {
@@ -6,18 +7,12 @@ export function closeContextMenu() {
 }
 
 export function alertUser(errorMessage) {
-  toast.error(`${errorMessage}`, {
+  toast.error((t) => <ToastContent id={t.id}>{errorMessage}</ToastContent>, {
     duration: 30000,
-    id: errorMessage,
-    style: {
-      padding: '1rem',
-      color: 'white',
-      backgroundColor: '#d77575',
-      maxWidth: '100%',
-    },
+    className: 'toast error',
     iconTheme: {
-      primary: 'white',
-      secondary: '#d77575',
+      primary: '#FCFBFB',
+      secondary: '#ed5d75',
     },
   });
 }

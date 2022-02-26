@@ -10,12 +10,10 @@ export default function UploadFilesLogic() {
   const { _plantillasStack, __setPlantillasStack } = usePlantillas();
   const { __setEmails, __setPriority, __setCurrentPlantillas } = useEmails();
 
-  //
   function openFileExplorer() {
     document.getElementById('inputFile').click();
   }
 
-  //
   const validationsToUpload = (selectedFiles) => {
     if (!selectedFiles.length) {
       // console.log('No se ha seleccionado ningun archivo');
@@ -72,12 +70,16 @@ export default function UploadFilesLogic() {
       }
     }
 
-    alertUser(
-      `Se excluyó el siguiente archivo, ya que el nombre no es correcto : ${plantilla.slice(
-        0,
-        -4
-      )}`
+    const fileWithoutExtension = plantilla.slice(0, -4);
+    const alertContent = (
+      <>
+        <span>
+          Se excluyó el siguiente archivo, ya que el nombre no es correcto :{' '}
+        </span>
+        <strong>{fileWithoutExtension}</strong>
+      </>
     );
+    alertUser(alertContent);
   };
 
   function uploadFiles(e) {

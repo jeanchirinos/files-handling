@@ -38,7 +38,7 @@ export default function EmailTemplate() {
           </span>
           <div
             className="plantillasList bold"
-            title={`Cantidad: ${arrayOfCurrentPlantillas.length}`}
+            title={`Cantidad: ${arrayOfCurrentPlantillas?.length}`}
           >
             {arrayOfCurrentPlantillas?.map((plantilla, index) => (
               <Fragment key={index}>

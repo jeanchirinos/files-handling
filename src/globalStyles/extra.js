@@ -7,11 +7,12 @@ export default css`
     color: var(--oppositeTheme_500);
     font-size: var(--fs_6);
     line-height: var(--lh_3);
-    font-weight: 400;
+    font-weight: var(--fw_regular);
     overflow-x: hidden;
   }
 
-  input {
+  input,
+  button {
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;

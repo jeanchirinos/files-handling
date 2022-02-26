@@ -9,16 +9,11 @@ export default function NSTDSection() {
     <StyledNSTDSection>
       <p className="big bold">💻 NSTD</p>
       <div>
-        {_currentPlantillas?.map(
-          (plantilla) =>
-            plantilla.NSTDNumber && (
-              <Plantilla
-                key={plantilla.name}
-                NSTDNumber={plantilla.NSTDNumber}
-                size={plantilla.size}
-              />
-            )
-        )}
+        {_currentPlantillas
+          ?.filter((plantilla) => plantilla.NSTDNumber)
+          .map((plantilla) => (
+            <Plantilla key={plantilla.name} NSTDNumber={plantilla.NSTDNumber} />
+          ))}
       </div>
     </StyledNSTDSection>
   );
@@ -29,6 +24,10 @@ const StyledNSTDSection = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+
+  ${mediaQueries.xs} {
+    grid-column-start: 2;
+  }
 
   ${mediaQueries.md} {
     grid-column-start: 3;

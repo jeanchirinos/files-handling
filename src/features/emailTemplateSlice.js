@@ -8,7 +8,11 @@ const initialState = {
     { name: 'Employee', lastName: '2', email: 'EMPLOYEE2@onp.gob.pe' },
     { name: 'Employee', lastName: '3', email: 'EMPLOYEE3@onp.gob.pe' },
   ],
-  subjectType: ['de campo', 'de campo PRESENCIAL', 'de OAD'],
+  subjectType: {
+    values: ['de campo', 'de campo PRESENCIAL', 'de OAD'],
+    index: 0,
+    selectedValue: 'de campo',
+  },
 };
 
 //* SLICE
@@ -16,8 +20,14 @@ const emailTemplateSlice = createSlice({
   name: 'emailTemplateSlice',
   initialState,
   reducers: {
-    setSubjectType: (state, { payload }) => {
-      state.subjectType = payload;
+    changeSubjectType: (state) => {
+      const index =
+        state.subjectType.index === state.subjectType.values.length - 1
+          ? 0
+          : state.subjectType.index + 1;
+
+      state.subjectType.index = index;
+      state.subjectType.selectedValue = state.subjectType.values[index];
     },
   },
 });
@@ -29,7 +39,7 @@ export const cc = ({ emailTemplate }) => emailTemplate.cc;
 export const subjectType = ({ emailTemplate }) => emailTemplate.subjectType;
 
 //? Actions
-export const { setSubjectType } = emailTemplateSlice.actions;
+export const { changeSubjectType } = emailTemplateSlice.actions;
 
 //? Default
 export default emailTemplateSlice.reducer;

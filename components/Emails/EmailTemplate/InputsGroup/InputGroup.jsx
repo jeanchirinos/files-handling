@@ -1,19 +1,15 @@
+import useEmailTemplate from '@/hooks/useEmailTemplate';
 import styled from 'styled-components';
 import { copyElement } from '../../functions';
 
-export default function InputGroup({
-  label,
-  value,
-  copyValue,
-  changeSubjectType,
-}) {
+export default function InputGroup({ label, value, copyValue }) {
+  const { __changeSubjectType } = useEmailTemplate();
+
   const selectedLabel =
     label === 'Asunto' ? (
-      <StyledLabel className="bold" onClick={() => changeSubjectType()}>
-        {label}
-      </StyledLabel>
+      <StyledLabel onClick={() => __changeSubjectType()}>{label}</StyledLabel>
     ) : (
-      <label className="bold">{label}</label>
+      <label>{label}</label>
     );
 
   return (
@@ -34,7 +30,8 @@ const StyledInputGroup = styled.div`
   align-items: center;
 
   label {
-    width: 64px;
+    width: 4rem;
+    font-weight: var(--fw_bold);
   }
 
   input {

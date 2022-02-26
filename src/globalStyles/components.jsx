@@ -8,10 +8,6 @@ export const Button = styled.button(
     border-radius: 2rem;
     border: 0.5px solid var(--primary-color);
     cursor: pointer;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
     transition: background-color 0.3s;
 
     :hover {

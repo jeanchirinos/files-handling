@@ -27,7 +27,7 @@ const StyledEmails = styled(GlobalPage)`
   }
 
   ${mediaQueries.md} {
-    grid: auto / 25% 55% 20%;
+    grid: auto / 25% 50% 25%;
     grid-row-gap: 0;
   }
 `;

@@ -23,17 +23,17 @@ const StyledEmailsSection = styled.section`
   flex-direction: column;
   gap: 2rem;
 
-  > header {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
   ${mediaQueries.xs} {
-    grid-column: span 2;
+    grid-column: 1 / span 2;
   }
 
   ${mediaQueries.md} {
-    grid-column-start: 1;
+    grid-column: 1 / span 1;
+  }
+
+  > header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 `;

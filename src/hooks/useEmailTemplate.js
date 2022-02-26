@@ -3,7 +3,7 @@ import {
   to,
   cc,
   subjectType,
-  setSubjectType,
+  changeSubjectType,
 } from '../features/emailTemplateSlice';
 
 export default function useEmailTemplate() {
@@ -13,7 +13,7 @@ export default function useEmailTemplate() {
     _to: useSelector(to),
     _cc: useSelector(cc),
     _subjectType: useSelector(subjectType),
-    __setSubjectType: (payload) => dispatch(setSubjectType(payload)),
+    __changeSubjectType: () => dispatch(changeSubjectType()),
   };
 
   return emailTemplateHook;

@@ -5,14 +5,8 @@ import { Button } from 'src/globalStyles/components';
 import styled from 'styled-components';
 
 export default function HomeButton() {
-  const { __setCurrentPlantillas } = useEmails();
-
-  function establishPlantillas2() {
-    __setCurrentPlantillas(0);
-  }
-
   return (
-    <StyledHomeButton onClick={() => establishPlantillas2()}>
+    <StyledHomeButton>
       <Link href="/">
         <a>
           <Button inverted>

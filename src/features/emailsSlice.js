@@ -4,7 +4,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   emails: [],
   priority: 'order',
+  currentEmailIndex: 0,
   currentPlantillas: [],
+  arrayOfPlantillas: [],
 };
 
 //* SLICE
@@ -18,8 +20,12 @@ const emailsSlice = createSlice({
     setPriority: (state, { payload }) => {
       state.priority = payload;
     },
-    setCurrentPlantillas: (state, { payload }) => {
+    setCurrentEmailIndex: (state, { payload }) => {
+      state.currentEmailIndex = payload;
       state.currentPlantillas = state.emails[payload]?.map((email) => email);
+      state.arrayOfPlantillas = state.currentPlantillas?.map(
+        (plantilla) => plantilla.name
+      );
     },
   },
 });
@@ -28,10 +34,12 @@ const emailsSlice = createSlice({
 //? States
 export const emails = ({ emails }) => emails.emails;
 export const priority = ({ emails }) => emails.priority;
+export const currentEmailIndex = ({ emails }) => emails.currentEmailIndex;
 export const currentPlantillas = ({ emails }) => emails.currentPlantillas;
+export const arrayOfPlantillas = ({ emails }) => emails.arrayOfPlantillas;
 
 //? Actions
-export const { setEmails, setPriority, setCurrentPlantillas } =
+export const { setEmails, setPriority, setCurrentEmailIndex } =
   emailsSlice.actions;
 
 //? Default

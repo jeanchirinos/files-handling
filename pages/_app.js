@@ -10,7 +10,7 @@ export default function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <ComponentWrapper>
         {/* <SettingsButton /> */}
-        {/* <TemporalThemeSwitcher /> */}
+        <TemporalThemeSwitcher />
         <Toaster position="bottom-center" />
         <Component {...pageProps} />
       </ComponentWrapper>

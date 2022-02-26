@@ -4,17 +4,15 @@ import { useState, useEffect } from 'react';
 import { db } from '../../../../src/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useEmails from '@/hooks/useEmails';
 
-export default function InputsGroup({
-  subjectTypeIndex,
-  setSubjectTypeIndex,
-  arrayOfCurrentPlantillas,
-}) {
+export default function InputsGroup() {
   const { _to, _subjectType } = useEmailTemplate();
+  const { _arrayOfPlantillas } = useEmails();
   const [employees, setEmployees] = useState([]);
 
   const plantillasInSubject = new Intl.ListFormat('es').format(
-    arrayOfCurrentPlantillas
+    _arrayOfPlantillas
   );
 
   useEffect(() => {
@@ -29,28 +27,27 @@ export default function InputsGroup({
     setEmployees(fbEmployees);
   }
 
-  function changeSubjectType() {
-    const index =
-      subjectTypeIndex === _subjectType.length - 1 ? 0 : subjectTypeIndex + 1;
-    setSubjectTypeIndex(index);
-  }
-
   const toValue = `${_to.name} ${_to.lastName}`;
-  const ccValue = employees.map((e) => `${e.name} ${e.lastName}`).join('; ');
-  const ccCopyValue = employees
-    .map((e) => `${e.name} ${e.lastName} <${e.email}>`)
-    .join('; ');
-  const subjectValue = `Plantillas de ${_subjectType[subjectTypeIndex]} a digitar: ${plantillasInSubject}`;
+  const getCcValue = (type) => {
+    return employees
+      .map((e) => {
+        const employeeEmail = type === 'copyValue' ? ` <${e.email}>` : '';
+
+        return `${e.name} ${e.lastName}${employeeEmail}`;
+      })
+      .join('; ');
+  };
+  const subjectValue = `Plantillas de ${_subjectType.selectedValue} a digitar: ${plantillasInSubject}`;
 
   return (
     <StyledInputsGroup>
       <InputGroup label="Para" value={toValue} />
-      <InputGroup label="CC" value={ccValue} copyValue={ccCopyValue} />
       <InputGroup
-        label="Asunto"
-        changeSubjectType={changeSubjectType}
-        value={subjectValue}
+        label="CC"
+        value={getCcValue()}
+        copyValue={getCcValue('copyValue')}
       />
+      <InputGroup label="Asunto" value={subjectValue} />
     </StyledInputsGroup>
   );
 }

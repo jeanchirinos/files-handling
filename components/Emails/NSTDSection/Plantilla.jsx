@@ -20,10 +20,12 @@ export default function Plantilla({ NSTDNumber }) {
 const StyledPlantilla = styled.p(
   ({ isCopied }) => css`
     cursor: pointer;
+
     :hover {
       color: var(--primary-color);
       text-decoration: none;
     }
+
     ${isCopied &&
     css`
       text-decoration: line-through;

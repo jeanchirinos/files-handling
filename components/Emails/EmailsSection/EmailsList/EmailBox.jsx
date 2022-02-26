@@ -1,27 +1,21 @@
 import useEmails from '@/hooks/useEmails';
 import styled, { css } from 'styled-components';
 
-export default function EmailBox({
-  index,
-  email,
-  currentEmailIndex,
-  setCurrentEmailIndex,
-}) {
-  const { __setCurrentPlantillas } = useEmails();
+export default function EmailBox({ index, email }) {
+  const { _currentEmailIndex, __setCurrentEmailIndex } = useEmails();
 
   const totalWeight = email.reduce((acc, curr) => acc + curr.size, 0);
 
-  function establishPlantillas() {
-    if (currentEmailIndex === index) return;
+  function changePlantillasBox() {
+    if (_currentEmailIndex === index) return;
 
-    setCurrentEmailIndex(index);
-    __setCurrentPlantillas(index);
+    __setCurrentEmailIndex(index);
   }
 
   return (
     <StyledEmailBox
-      active={currentEmailIndex === index}
-      onClick={() => establishPlantillas()}
+      active={_currentEmailIndex === index}
+      onClick={() => changePlantillasBox()}
       title={`Peso: ${totalWeight} mb - Cantidad: ${email.length}`}
     >
       <header>{index + 1}</header>
@@ -42,7 +36,6 @@ const StyledEmailBox = styled.div(
     display: flex;
     background-color: ${active && 'var(--primary-color)'};
     cursor: ${active ? 'default' : 'pointer'};
-    /* pointer-events: ${active && 'none'}; */
     transition: transform 0.3s;
 
     :hover {
@@ -65,7 +58,6 @@ const StyledEmailBox = styled.div(
       gap: 0.5rem;
       flex-wrap: wrap;
       color: ${active && 'var(--light_100)'};
-      /* max-width: fit-content; */
     }
   `
 );

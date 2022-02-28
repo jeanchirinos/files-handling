@@ -79,7 +79,7 @@ export default function UploadFilesLogic() {
       }
     }
 
-    alertUser('el nombre no es correcto', file.name);
+    alertUser('el nombre no es correcto', plantilla);
   };
 
   function uploadFiles(e) {

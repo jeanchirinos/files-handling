@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import useSettings from '@/hooks/useSettings';
 import usePlantillas from '@/hooks/usePlantillas';
 import useEmails from '@/hooks/useEmails';
+import useEmailTemplate from '@/hooks/useEmailTemplate';
 import { alertUser } from '../functions';
 
 export default function UploadFilesLogic() {
@@ -9,6 +10,7 @@ export default function UploadFilesLogic() {
   const { _manualMode, __toggleManualMode } = useSettings();
   const { _plantillasStack, __setPlantillasStack } = usePlantillas();
   const { __setEmails, __setPriority, __setCurrentEmailIndex } = useEmails();
+  const { __changeSubjectType } = useEmailTemplate();
 
   function openFileExplorer() {
     document.getElementById('inputFile').click();
@@ -83,7 +85,8 @@ export default function UploadFilesLogic() {
   };
 
   function uploadFiles(e) {
-    const selectedFiles = Array.from(e.target.files);
+    const files = e.target.files || e.dataTransfer.files;
+    const selectedFiles = Array.from(files);
 
     const validations = validationsToUpload(selectedFiles);
     if (!validations) return;
@@ -195,6 +198,7 @@ export default function UploadFilesLogic() {
     _plantillasStack.length && __setPlantillasStack([]);
 
     __setCurrentEmailIndex(0);
+    __changeSubjectType(0);
 
     router.push('/emails');
   }

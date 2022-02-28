@@ -20,6 +20,7 @@ export default function InputGroup({ label, value, copyValue }) {
         value={value}
         readOnly
         onClick={(e) => copyElement(e, copyValue)}
+        title={value}
       />
     </StyledInputGroup>
   );

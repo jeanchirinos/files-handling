@@ -33,11 +33,17 @@ const emailTemplateSlice = createSlice({
   name: 'emailTemplateSlice',
   initialState,
   reducers: {
-    changeSubjectType: (state) => {
+    changeSubjectType: (state, { payload }) => {
       const { subjectType } = state;
       const { index, values } = subjectType;
 
-      const newIndex = index === values.length - 1 ? 0 : index + 1;
+      let newIndex;
+
+      if (payload === 0) {
+        newIndex = payload;
+      } else {
+        newIndex = index === values.length - 1 ? 0 : index + 1;
+      }
 
       state.subjectType.index = newIndex;
       state.subjectType.selectedValue = values[newIndex];

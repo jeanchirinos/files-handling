@@ -13,7 +13,7 @@ export default function useEmailTemplate() {
     _leader: useSelector(leader),
     _employees: useSelector(employees),
     _subjectType: useSelector(subjectType),
-    __changeSubjectType: () => dispatch(changeSubjectType()),
+    __changeSubjectType: (payload) => dispatch(changeSubjectType(payload)),
   };
 
   return emailTemplateHook;

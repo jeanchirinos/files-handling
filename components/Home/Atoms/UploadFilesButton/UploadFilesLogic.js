@@ -3,7 +3,7 @@ import useSettings from '@/hooks/useSettings';
 import usePlantillas from '@/hooks/usePlantillas';
 import useEmails from '@/hooks/useEmails';
 import useEmailTemplate from '@/hooks/useEmailTemplate';
-import { alertUser } from '../functions';
+import { alertUser } from '../../functions';
 
 export default function UploadFilesLogic() {
   const router = useRouter();

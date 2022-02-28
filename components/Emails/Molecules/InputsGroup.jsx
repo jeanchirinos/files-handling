@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import InputGroup from './InputGroup';
+import InputGroup from '../Atoms/InputGroup';
 import useEmailTemplate from '@/hooks/useEmailTemplate';
 import useEmails from '@/hooks/useEmails';
 

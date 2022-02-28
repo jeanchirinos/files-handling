@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
-import { GlobalPage } from '@/General/ComponentWrapper';
-import { closeContextMenu } from '@/Home/functions';
-import UploadFilesButton from '@/Home/UploadFilesButton';
-import ModeSwitcher from '@/Home/ModeSwitcher';
-import PlantillasStack from '@/Home/PlantillasStack';
 import { useState } from 'react';
-import UploadFilesLogic from '@/Home/UploadFilesButton/UploadFilesLogic';
+import { closeContextMenu } from '@/Home/functions';
+import { GlobalPage } from '@/General/ComponentWrapper';
+import UploadFilesLogic from '@/Home/Atoms/UploadFilesButton/UploadFilesLogic';
+// Components
+import UploadFilesButton from '@/Home/Atoms/UploadFilesButton';
+import ModeSwitcher from '@/Home/Atoms/ModeSwitcher';
+import PlantillasStack from '@/Home/Organisms/PlantillasStack';
 
 export default function Home() {
   const [isDragginOver, setIsDragginOver] = useState(false);
@@ -31,8 +32,8 @@ export default function Home() {
       onDrop={(e) => handleDrop(e)}
     >
       <UploadFilesButton />
-      <p className="light">o</p>
-      <p className="light">Arrastra y suelta</p>
+      <p>o</p>
+      <p>Arrastra y suelta</p>
       <h3> Suelta para subir los archivos</h3>
 
       <ModeSwitcher />
@@ -49,25 +50,27 @@ const StyledHome = styled(GlobalPage)(
     align-items: center;
     height: 100vh;
     max-height: -webkit-fill-available;
+    font-weight: var(--fw_light);
     overflow-y: hidden;
     position: relative;
     transition: background-color 0.3s;
+
+    h3 {
+      display: none;
+    }
 
     ${isDraggingOver &&
     css`
       background-color: var(--primary-color);
       * {
         pointer-events: none;
-      }
-
-      *:not(h3) {
         display: none;
       }
-    `}
 
-    h3 {
-      color: var(--light_100);
-      display: ${isDraggingOver ? 'block' : 'none'};
-    }
+      h3 {
+        display: block;
+        color: var(--light_100);
+      }
+    `}
   `
 );

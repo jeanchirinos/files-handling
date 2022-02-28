@@ -27,11 +27,9 @@ const emailsSlice = createSlice({
       const currentPlantillas = state.emails[payload]?.map((email) => email);
 
       state.plantillasToNSTD = currentPlantillas
-        .filter((plantilla) => plantilla.NSTDNumber)
-        .map((plantilla) => plantilla.NSTDNumber);
-      state.arrayOfPlantillas = currentPlantillas.map(
-        (plantilla) => plantilla.name
-      );
+        .filter((p) => p.NSTDNumber)
+        .map((p) => p.NSTDNumber);
+      state.arrayOfPlantillas = currentPlantillas.map((p) => p.name);
     },
   },
 });

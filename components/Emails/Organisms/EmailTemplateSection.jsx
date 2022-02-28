@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import mediaQueries from 'src/styleGuide/breakpoints';
-import InputsGroup from './InputsGroup';
-import Message from './Message';
+import InputsGroup from '../Molecules/InputsGroup';
+import Message from '../Molecules/Message';
 import { getWorkers } from 'src/features/emailTemplateSlice';
 import useEmailTemplate from '@/hooks/useEmailTemplate';
 import { useDispatch } from 'react-redux';
@@ -30,7 +30,7 @@ export default function EmailTemplate() {
   );
 }
 
-const StyledEmailTemplate = styled.section`
+export const StyledEmailTemplate = styled.section`
   height: fit-content;
   max-height: 75vh;
   border-radius: 12px;

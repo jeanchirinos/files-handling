@@ -1,6 +1,6 @@
 import useEmailTemplate from '@/hooks/useEmailTemplate';
 import styled from 'styled-components';
-import { copyElement } from '../../functions';
+import { copyElement } from '../functions';
 
 export default function InputGroup({ label, value, copyValue }) {
   const { __changeSubjectType } = useEmailTemplate();

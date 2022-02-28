@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 import useEmails from '@/hooks/useEmails';
-import Plantilla from './Plantilla';
+import PlantillaToNSTD from '../Atoms/PlantillaToNSTD';
 import mediaQueries from 'src/styleGuide/breakpoints';
 
 export default function NSTDSection() {
   const { _plantillasToNSTD } = useEmails();
 
+  const plantillas = _plantillasToNSTD.map((p) => (
+    <PlantillaToNSTD key={p} name={p} />
+  ));
+
   return (
     <StyledNSTDSection>
       <p className="big bold">💻 NSTD</p>
-      <div>
-        {_plantillasToNSTD.map((plantilla) => (
-          <Plantilla key={plantilla} NSTDNumber={plantilla} />
-        ))}
-      </div>
+      <div>{plantillas}</div>
     </StyledNSTDSection>
   );
 }

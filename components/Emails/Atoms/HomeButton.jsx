@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 import Link from 'next/link';
 import { AiFillHome } from 'react-icons/ai';
 import { Button } from 'src/globalStyles/components';
-import styled from 'styled-components';
 
 export default function HomeButton() {
   return (

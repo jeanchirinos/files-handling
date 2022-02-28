@@ -1,7 +1,7 @@
 import useEmailTemplate from '@/hooks/useEmailTemplate';
 import styled from 'styled-components';
-import { copyElement } from '../../functions';
-import PlantillasList from './PlantillasList';
+import { copyElement } from '../functions';
+import PlantillasList from '../Atoms/PlantillasList';
 
 export default function Message() {
   const { _leader, _subjectType } = useEmailTemplate();

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import useEmails from '@/hooks/useEmails';
-import EmailsList from './EmailsList';
-import PriorityIndicator from './PriorityIndicator';
 import mediaQueries from 'src/styleGuide/breakpoints';
+import useEmails from '@/hooks/useEmails';
+import EmailsList from '../Molecules/EmailBoxes';
+import PriorityIndicator from '../Atoms/PriorityIndicator';
 
 export default function EmailsSection() {
   const { _emails } = useEmails();
@@ -10,7 +10,7 @@ export default function EmailsSection() {
   return (
     <StyledEmailsSection>
       <header>
-        <p className="big bold">✉️ {_emails.length} correos</p>
+        <p className="big bold">✉️ {_emails.length} correo(s)</p>
         <PriorityIndicator />
       </header>
       <EmailsList />
@@ -18,7 +18,7 @@ export default function EmailsSection() {
   );
 }
 
-const StyledEmailsSection = styled.section`
+export const StyledEmailsSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;

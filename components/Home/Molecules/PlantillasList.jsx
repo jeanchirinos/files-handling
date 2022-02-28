@@ -1,6 +1,6 @@
 import usePlantillas from '@/hooks/usePlantillas';
-import Plantilla from './Plantilla';
-import DeleteButton from './DeleteButton';
+import Plantilla from '../Atoms/Plantilla';
+import DeleteButton from '../Atoms/DeleteButton';
 
 export default function PlantillasList() {
   const { _plantillasStack } = usePlantillas();

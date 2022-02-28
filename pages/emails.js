@@ -1,17 +1,18 @@
 import styled from 'styled-components';
-import { GlobalPage } from '@/General/ComponentWrapper';
-import EmailsSection from '@/Emails/EmailsSection';
-import NSTDSection from '@/Emails/NSTDSection';
-import EmailTemplate from '@/Emails/EmailTemplate';
 import mediaQueries from '../src/styleGuide/breakpoints';
-import HomeButton from '@/Emails/HomeButton';
+import { GlobalPage } from '@/General/ComponentWrapper';
+// Components
+import HomeButton from '@/Emails/Atoms/HomeButton';
+import EmailsSection from '@/Emails/Organisms/EmailsSection';
+import EmailTemplateSection from '@/Emails/Organisms/EmailTemplateSection';
+import NSTDSection from '@/Emails/Organisms/NSTDSection';
 
 export default function Emails() {
   return (
     <StyledEmails>
       <HomeButton />
       <EmailsSection />
-      <EmailTemplate />
+      <EmailTemplateSection />
       <NSTDSection />
     </StyledEmails>
   );

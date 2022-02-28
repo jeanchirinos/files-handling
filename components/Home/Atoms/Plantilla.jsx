@@ -1,4 +1,4 @@
-import { closeContextMenu } from '../../functions';
+import { closeContextMenu } from '../functions';
 
 export default function Plantilla({ name }) {
   function toggleDeleteButton(e) {

@@ -2,22 +2,22 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { copyElement } from '../functions';
 
-export default function Plantilla({ NSTDNumber }) {
-  const [copied, setCopied] = useState(false);
+export default function PlantillaToNSTD({ name }) {
+  const [isCopied, setIsCopied] = useState(false);
 
   function markAsCopied(e) {
-    setCopied(true);
+    setIsCopied(true);
     copyElement(e);
   }
 
   return (
-    <StyledPlantilla isCopied={copied} onClick={(e) => markAsCopied(e)}>
-      {NSTDNumber}
-    </StyledPlantilla>
+    <StyledPlantillaToNSTD isCopied={isCopied} onClick={(e) => markAsCopied(e)}>
+      {name}
+    </StyledPlantillaToNSTD>
   );
 }
 
-const StyledPlantilla = styled.p(
+const StyledPlantillaToNSTD = styled.p(
   ({ isCopied }) => css`
     cursor: pointer;
 

@@ -4,16 +4,15 @@ import Plantilla from './Plantilla';
 import mediaQueries from 'src/styleGuide/breakpoints';
 
 export default function NSTDSection() {
-  const { _currentPlantillas } = useEmails();
+  const { _plantillasToNSTD } = useEmails();
+
   return (
     <StyledNSTDSection>
       <p className="big bold">💻 NSTD</p>
       <div>
-        {_currentPlantillas
-          ?.filter((plantilla) => plantilla.NSTDNumber)
-          .map((plantilla) => (
-            <Plantilla key={plantilla.name} NSTDNumber={plantilla.NSTDNumber} />
-          ))}
+        {_plantillasToNSTD.map((plantilla) => (
+          <Plantilla key={plantilla} NSTDNumber={plantilla} />
+        ))}
       </div>
     </StyledNSTDSection>
   );

@@ -9,7 +9,7 @@ const TemporalThemeSwitcher = () => {
       style={{
         position: 'absolute',
         top: '25px',
-        right: '20px',
+        right: 'calc(var(--padding) + 50px)',
         zIndex: '9',
         fontSize: '1.2rem',
         cursor: 'pointer',

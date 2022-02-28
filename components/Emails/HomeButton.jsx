@@ -1,4 +1,3 @@
-import useEmails from '@/hooks/useEmails';
 import Link from 'next/link';
 import { AiFillHome } from 'react-icons/ai';
 import { Button } from 'src/globalStyles/components';

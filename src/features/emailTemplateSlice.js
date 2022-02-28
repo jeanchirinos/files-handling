@@ -1,13 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { db } from '../../src/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 //* INITIAL STATE
 const initialState = {
-  to: { name: 'Teresa', lastName: 'Aznaran' },
-  cc: [
-    { name: 'Employee', lastName: '1', email: 'EMPLOYEE1@onp.gob.pe' },
-    { name: 'Employee', lastName: '2', email: 'EMPLOYEE2@onp.gob.pe' },
-    { name: 'Employee', lastName: '3', email: 'EMPLOYEE3@onp.gob.pe' },
-  ],
+  workers: {
+    leader: undefined,
+    employees: undefined,
+  },
   subjectType: {
     values: ['de campo', 'de campo PRESENCIAL', 'de OAD'],
     index: 0,
@@ -15,27 +15,46 @@ const initialState = {
   },
 };
 
+export const getWorkers = createAsyncThunk('getWorkers', async () => {
+  if (!localStorage.workers) {
+    const querySnapshot = await getDocs(collection(db, 'employees'));
+    const firebaseData = querySnapshot.docs.map((doc) => doc.data());
+
+    localStorage.workers = JSON.stringify(firebaseData);
+
+    return firebaseData;
+  }
+
+  return JSON.parse(localStorage.workers);
+});
+
 //* SLICE
 const emailTemplateSlice = createSlice({
   name: 'emailTemplateSlice',
   initialState,
   reducers: {
     changeSubjectType: (state) => {
-      const index =
-        state.subjectType.index === state.subjectType.values.length - 1
-          ? 0
-          : state.subjectType.index + 1;
+      const { subjectType } = state;
+      const { index, values } = subjectType;
 
-      state.subjectType.index = index;
-      state.subjectType.selectedValue = state.subjectType.values[index];
+      const newIndex = index === values.length - 1 ? 0 : index + 1;
+
+      state.subjectType.index = newIndex;
+      state.subjectType.selectedValue = values[newIndex];
+    },
+  },
+  extraReducers: {
+    [getWorkers.fulfilled]: (state, { payload }) => {
+      state.leader = payload.find((worker) => worker.isLeader);
+      state.employees = payload.filter((worker) => !worker.isLeader);
     },
   },
 });
 
 //* EXPORTS
 //? States
-export const to = ({ emailTemplate }) => emailTemplate.to;
-export const cc = ({ emailTemplate }) => emailTemplate.cc;
+export const leader = ({ emailTemplate }) => emailTemplate.leader;
+export const employees = ({ emailTemplate }) => emailTemplate.employees;
 export const subjectType = ({ emailTemplate }) => emailTemplate.subjectType;
 
 //? Actions

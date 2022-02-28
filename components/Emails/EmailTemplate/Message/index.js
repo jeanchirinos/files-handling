@@ -4,11 +4,11 @@ import { copyElement } from '../../functions';
 import PlantillasList from './PlantillasList';
 
 export default function Message() {
-  const { _to, _subjectType } = useEmailTemplate();
+  const { _leader, _subjectType } = useEmailTemplate();
 
   return (
     <StyledMessage onClick={(e) => copyElement(e)}>
-      <span>{_to.name},</span>
+      <span>{_leader.name},</span>
       <br />
       <span>
         te reasigno las siguientes plantillas{' '}

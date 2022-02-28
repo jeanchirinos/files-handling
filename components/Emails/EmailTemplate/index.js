@@ -2,13 +2,31 @@ import styled from 'styled-components';
 import mediaQueries from 'src/styleGuide/breakpoints';
 import InputsGroup from './InputsGroup';
 import Message from './Message';
+import { getWorkers } from 'src/features/emailTemplateSlice';
+import useEmailTemplate from '@/hooks/useEmailTemplate';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 export default function EmailTemplate() {
+  const dispatch = useDispatch();
+
+  const { _leader, _employees } = useEmailTemplate();
+
+  useEffect(() => {
+    dispatch(getWorkers());
+  }, [dispatch]);
+
   return (
-    <StyledEmailTemplate className="small">
-      <InputsGroup />
-      <Message />
-    </StyledEmailTemplate>
+    <>
+      {!_leader || !_employees ? (
+        <></>
+      ) : (
+        <StyledEmailTemplate className="small">
+          <InputsGroup />
+          <Message />
+        </StyledEmailTemplate>
+      )}
+    </>
   );
 }
 

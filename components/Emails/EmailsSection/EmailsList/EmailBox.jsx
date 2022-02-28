@@ -16,7 +16,7 @@ export default function EmailBox({ index, email }) {
     <StyledEmailBox
       active={_currentEmailIndex === index}
       onClick={() => changePlantillasBox()}
-      title={`Peso: ${totalWeight} mb - Cantidad: ${email.length}`}
+      title={`Peso: ${totalWeight.toFixed(2)} mb - Cantidad: ${email.length}`}
     >
       <header>{index + 1}</header>
       <div>

@@ -28,13 +28,12 @@ export default function Home() {
       onClick={() => closeContextMenu()}
       onDragOver={(e) => handleDragOver(e)}
       onDragLeave={() => setIsDragginOver(false)}
-      // onDrop={(e) => uploadFiles(e)}
       onDrop={(e) => handleDrop(e)}
     >
       <UploadFilesButton />
       <p className="light">o</p>
       <p className="light">Arrastra y suelta</p>
-      <h3 className=""> Suelta para subir los archivos</h3>
+      <h3> Suelta para subir los archivos</h3>
 
       <ModeSwitcher />
       <PlantillasStack />
@@ -67,6 +66,7 @@ const StyledHome = styled(GlobalPage)(
     `}
 
     h3 {
+      color: var(--light_100);
       display: ${isDraggingOver ? 'block' : 'none'};
     }
   `

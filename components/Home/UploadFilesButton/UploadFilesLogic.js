@@ -27,11 +27,15 @@ export default function UploadFilesLogic() {
         file.name.length - 4,
         file.name.length
       );
+
+      if (fileExtension.toUpperCase() !== '.PDF') {
+        alertUser('no es un pdf', file.name);
+      }
+
       return fileExtension.toUpperCase() === '.PDF';
     });
 
     if (!isAPdf) {
-      alertUser('El archivo seleccionado no es un pdf');
       return;
     }
 
@@ -40,11 +44,14 @@ export default function UploadFilesLogic() {
         (file.size * 0.000000953674316).toFixed(2)
       );
 
+      if (fileSizeInMb >= 24.9) {
+        alertUser('el peso excede el límite', file.name);
+      }
+
       return fileSizeInMb < 24.9;
     });
 
     if (!fileWeightIsCorrect) {
-      alertUser('El peso de uno de los archivos es mayor a 25MB');
       return;
     }
 
@@ -72,16 +79,7 @@ export default function UploadFilesLogic() {
       }
     }
 
-    const fileWithoutExtension = plantilla.slice(0, -4);
-    const alertContent = (
-      <>
-        <span>
-          Se excluyó el siguiente archivo, ya que el nombre no es correcto :{' '}
-        </span>
-        <strong>{fileWithoutExtension}</strong>
-      </>
-    );
-    alertUser(alertContent);
+    alertUser('el nombre no es correcto', file.name);
   };
 
   function uploadFiles(e) {

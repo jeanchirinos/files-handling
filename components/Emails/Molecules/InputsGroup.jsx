@@ -1,33 +1,37 @@
 import styled from 'styled-components';
-import InputGroup from '../Atoms/InputGroup';
-import useEmailTemplate from '@/hooks/useEmailTemplate';
 import useEmails from '@/hooks/useEmails';
+import useEmailTemplate from '@/hooks/useEmailTemplate';
+import InputGroup from '../Atoms/InputGroup';
 
 export default function InputsGroup() {
-  const { _leader, _employees, _subjectType } = useEmailTemplate();
-  const { _arrayOfPlantillas } = useEmails();
-
-  const plantillasInSubject = new Intl.ListFormat('es').format(
-    _arrayOfPlantillas
-  );
+  const { _leader, _employees, _subjectType, _area } = useEmailTemplate();
+  const { _plantillasArray } = useEmails();
 
   const toValue = `${_leader.name} ${_leader.lastName}`;
   const ccValue = (type) => {
     const employeesList = _employees
       .map((employee) => {
-        const { name, lastName, email } = employee;
+        const { name, lastName, email, city } = employee;
+
+        const employeeCity = city ? ` - ${city}` : '';
 
         if (type === 'copyValue') {
-          return `${name} ${lastName} <${email}>`;
+          return `${name} ${lastName}${employeeCity} <${email}>`;
         } else {
-          return `${name} ${lastName}`;
+          return `${name} ${lastName}${employeeCity}`;
         }
       })
       .join('; ');
 
     return employeesList;
   };
-  const subjectValue = `Plantillas de ${_subjectType.selectedValue} a digitar: ${plantillasInSubject}`;
+  const plantillasInSubject = new Intl.ListFormat('es').format(
+    _plantillasArray
+  );
+  const subjectValue =
+    _area === 'digitacion'
+      ? `Plantillas de ${_subjectType.selectedValue} a digitar: ${plantillasInSubject}`
+      : _subjectType.selectedValue;
 
   return (
     <StyledInputsGroup>

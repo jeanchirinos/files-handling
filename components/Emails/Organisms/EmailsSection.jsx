@@ -7,10 +7,16 @@ import PriorityIndicator from '../Atoms/PriorityIndicator';
 export default function EmailsSection() {
   const { _emails } = useEmails();
 
+  const header = () => {
+    const afterNumber = _emails.length === 1 ? 'correo' : 'correos';
+
+    return `✉️ ${_emails.length} ${afterNumber}`;
+  };
+
   return (
     <StyledEmailsSection>
       <header>
-        <p className="big bold">✉️ {_emails.length} correo(s)</p>
+        <p className="big bold">{header()}</p>
         <PriorityIndicator />
       </header>
       <EmailsList />

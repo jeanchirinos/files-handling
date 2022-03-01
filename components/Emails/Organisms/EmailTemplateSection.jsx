@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import mediaQueries from 'src/styleGuide/breakpoints';
 import InputsGroup from '../Molecules/InputsGroup';
 import Message from '../Molecules/Message';
-import { getWorkers } from 'src/features/emailTemplateSlice';
+import {
+  getObservadasWorkers,
+  getWorkers,
+} from 'src/features/emailTemplateSlice';
 import useEmailTemplate from '@/hooks/useEmailTemplate';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -14,6 +17,7 @@ export default function EmailTemplate() {
 
   useEffect(() => {
     dispatch(getWorkers());
+    dispatch(getObservadasWorkers());
   }, [dispatch]);
 
   return (

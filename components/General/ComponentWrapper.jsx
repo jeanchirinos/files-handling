@@ -1,4 +1,4 @@
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { dark, light } from '../../src/styleGuide/themedColors';
 import GlobalStyles from '../../src/globalStyles';
 import useSettings from '@/hooks/useSettings';
@@ -15,7 +15,3 @@ export default function ComponentWrapper({ children }) {
     </ThemeProvider>
   );
 }
-
-export const GlobalPage = styled.main.attrs({
-  // onClick: () => console.log('testing'),
-})``;

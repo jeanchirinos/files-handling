@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { copyElement } from '../functions';
 
 export default function InputGroup({ label, value, copyValue }) {
-  const { __changeSubjectType } = useEmailTemplate();
+  const { __changeSubjectType, _area, _workers_observadas, __changeWorkers } =
+    useEmailTemplate();
 
   const selectedLabel =
     label === 'Asunto' ? (
@@ -12,9 +13,25 @@ export default function InputGroup({ label, value, copyValue }) {
       <label>{label}</label>
     );
 
+  const selectorButton = () => {
+    if (_area === 'observadas' && label === 'Para') {
+      return (
+        <select onChange={(e) => __changeWorkers(e.target.value)}>
+          {_workers_observadas.map(({ leader }) => (
+            <option key={leader.email} value={leader.email}>
+              {leader.name} {leader.lastName}
+              {leader.city && ` - ${leader.city}`}
+            </option>
+          ))}
+        </select>
+      );
+    }
+  };
+
   return (
     <StyledInputGroup>
       {selectedLabel}
+      {}
       <input
         type="text"
         value={value}
@@ -22,6 +39,7 @@ export default function InputGroup({ label, value, copyValue }) {
         onClick={(e) => copyElement(e, copyValue)}
         title={value}
       />
+      {selectorButton()}
     </StyledInputGroup>
   );
 }

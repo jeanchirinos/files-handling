@@ -25,6 +25,7 @@ export default function PriorityIndicator() {
 }
 
 const Wrapper = styled.div`
+  user-select: none;
   > span:first-child {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -39,9 +40,21 @@ const Wrapper = styled.div`
 const StyledPriorityIndicator = styled.span(
   ({ active }) => css`
     padding: 0.3rem 0.8rem;
-    background-color: ${active && 'var(--green)'};
-    border: 1px solid ${active ? 'var(--green)' : 'var(--light_700)'};
-    color: ${active ? 'var(--light_100)' : 'var(--light_700)'};
+    border-width: 1px;
+    border-style: solid;
     cursor: help;
+
+    ${active &&
+    css`
+      background-color: var(--green);
+      border-color: var(--green);
+      color: var(--light_100);
+    `}
+
+    ${!active &&
+    css`
+      border-color: var(--light_700);
+      color: var(--light_700);
+    `}
   `
 );

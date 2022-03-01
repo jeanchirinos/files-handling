@@ -15,7 +15,7 @@ const plantillasSlice = createSlice({
     },
     deleteFromStack: (state, { payload }) => {
       const indexToDelete = state.plantillasStack.findIndex(
-        (item) => item.name === payload
+        (p) => p.name === payload
       );
 
       state.plantillasStack.splice(indexToDelete, 1);
@@ -25,7 +25,6 @@ const plantillasSlice = createSlice({
 
 //* EXPORTS
 //? States
-
 export const plantillasStack = ({ plantillas }) => plantillas.plantillasStack;
 
 //? Actions

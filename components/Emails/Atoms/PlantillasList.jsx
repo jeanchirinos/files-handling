@@ -3,17 +3,20 @@ import { Fragment } from 'react';
 import styled from 'styled-components';
 
 export default function PlantillasList() {
-  const { _arrayOfPlantillas } = useEmails();
+  const { _plantillasArray } = useEmails();
+
+  // data
+  const title = `Cantidad: ${_plantillasArray?.length}`;
+
+  const plantillas = _plantillasArray?.map((p) => (
+    <Fragment key={p}>
+      <span>{p}</span>
+      <br />
+    </Fragment>
+  ));
 
   return (
-    <StyledPlantillasList title={`Cantidad: ${_arrayOfPlantillas?.length}`}>
-      {_arrayOfPlantillas?.map((plantilla, index) => (
-        <Fragment key={index}>
-          <span>{plantilla}</span>
-          <br />
-        </Fragment>
-      ))}
-    </StyledPlantillasList>
+    <StyledPlantillasList title={title}>{plantillas}</StyledPlantillasList>
   );
 }
 

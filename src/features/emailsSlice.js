@@ -5,9 +5,8 @@ const initialState = {
   emails: [],
   priority: 'order',
   currentEmailIndex: 0,
-  plantillasToNSTD: [],
-  arrayOfPlantillas: [],
-  arrayOfPlantillasToNSTD: [],
+  plantillasArray: [],
+  plantillasToNSTDArray: [],
 };
 
 //* SLICE
@@ -24,12 +23,12 @@ const emailsSlice = createSlice({
     setCurrentEmailIndex: (state, { payload }) => {
       state.currentEmailIndex = payload;
 
-      const currentPlantillas = state.emails[payload]?.map((email) => email);
+      const currentEmail = state.emails[payload]?.map((e) => e);
 
-      state.plantillasToNSTD = currentPlantillas
+      state.plantillasArray = currentEmail.map((p) => p.name);
+      state.plantillasToNSTDArray = currentEmail
         .filter((p) => p.NSTDNumber)
         .map((p) => p.NSTDNumber);
-      state.arrayOfPlantillas = currentPlantillas.map((p) => p.name);
     },
   },
 });
@@ -39,8 +38,9 @@ const emailsSlice = createSlice({
 export const emails = ({ emails }) => emails.emails;
 export const priority = ({ emails }) => emails.priority;
 export const currentEmailIndex = ({ emails }) => emails.currentEmailIndex;
-export const plantillasToNSTD = ({ emails }) => emails.plantillasToNSTD;
-export const arrayOfPlantillas = ({ emails }) => emails.arrayOfPlantillas;
+export const plantillasToNSTDArray = ({ emails }) =>
+  emails.plantillasToNSTDArray;
+export const plantillasArray = ({ emails }) => emails.plantillasArray;
 
 //? Actions
 export const { setEmails, setPriority, setCurrentEmailIndex } =

@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { closeContextMenu } from '@/Home/functions';
-import { GlobalPage } from '@/General/ComponentWrapper';
 import UploadFilesLogic from '@/Home/Atoms/UploadFilesButton/UploadFilesLogic';
 // Components
 import UploadFilesButton from '@/Home/Atoms/UploadFilesButton';
@@ -42,7 +41,7 @@ export default function Home() {
   );
 }
 
-const StyledHome = styled(GlobalPage)(
+const StyledHome = styled.main(
   ({ isDraggingOver }) => css`
     display: flex;
     flex-direction: column;

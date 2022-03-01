@@ -1,19 +1,28 @@
-import useEmailTemplate from '@/hooks/useEmailTemplate';
 import styled from 'styled-components';
 import { copyElement } from '../functions';
+import useEmailTemplate from '@/hooks/useEmailTemplate';
 import PlantillasList from '../Atoms/PlantillasList';
+import useSettings from '@/hooks/useSettings';
 
 export default function Message() {
   const { _leader, _subjectType } = useEmailTemplate();
+  const { _area } = useSettings();
 
   return (
     <StyledMessage onClick={(e) => copyElement(e)}>
       <span>{_leader.name},</span>
       <br />
-      <span>
-        te reasigno las siguientes plantillas{' '}
-        <strong>{_subjectType.selectedValue}</strong> para su digitación:
-      </span>
+      {_area === 'digitacion' ? (
+        <span>
+          te reasigno las siguientes plantillas{' '}
+          <strong>{_subjectType.selectedValue}</strong> para su digitación:
+        </span>
+      ) : (
+        <span>
+          te transfiero la(s) siguiente(s) plantilla(s) según lo indicado
+        </span>
+      )}
+
       <br />
       <PlantillasList />
       <br />

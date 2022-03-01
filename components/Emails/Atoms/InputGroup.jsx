@@ -31,7 +31,6 @@ export default function InputGroup({ label, value, copyValue }) {
   return (
     <StyledInputGroup>
       {selectedLabel}
-      {}
       <input
         type="text"
         value={value}

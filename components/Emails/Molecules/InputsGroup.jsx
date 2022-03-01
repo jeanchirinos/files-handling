@@ -7,7 +7,15 @@ export default function InputsGroup() {
   const { _leader, _employees, _subjectType, _area } = useEmailTemplate();
   const { _plantillasArray } = useEmails();
 
-  const toValue = `${_leader.name} ${_leader.lastName}`;
+  const toValue = (type) => {
+    const leaderCity = _leader.city ? ` - ${_leader.city}` : '';
+
+    if (type === 'copyValue') {
+      return `${_leader.name} ${_leader.lastName}${leaderCity} <${_leader.email}>`;
+    } else {
+      return `${_leader.name} ${_leader.lastName}${leaderCity}`;
+    }
+  };
   const ccValue = (type) => {
     const employeesList = _employees
       .map((employee) => {
@@ -35,7 +43,11 @@ export default function InputsGroup() {
 
   return (
     <StyledInputsGroup>
-      <InputGroup label="Para" value={toValue} />
+      <InputGroup
+        label="Para"
+        value={toValue()}
+        copyValue={toValue('copyValue')}
+      />
       <InputGroup
         label="CC"
         value={ccValue()}

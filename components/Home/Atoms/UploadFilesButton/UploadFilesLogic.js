@@ -8,7 +8,8 @@ import { alertUser } from '../../functions';
 export default function UploadFilesLogic() {
   const router = useRouter();
   const { _manualMode, __toggleManualMode } = useSettings();
-  const { _plantillasStack, __setPlantillasStack } = usePlantillas();
+  const { __addToPlantillasStack, _plantillasStack, __resetPlantillasStack } =
+    usePlantillas();
   const { __setEmails, __setPriority, __setCurrentEmailIndex } = useEmails();
   const { __changeSubjectType } = useEmailTemplate();
 
@@ -114,7 +115,7 @@ export default function UploadFilesLogic() {
 
     if (!allFiles.length) return;
 
-    _manualMode && __setPlantillasStack([..._plantillasStack, ...allFiles]);
+    _manualMode && __addToPlantillasStack(allFiles);
 
     !_manualMode && groupEmails(allFiles);
   }
@@ -193,7 +194,7 @@ export default function UploadFilesLogic() {
     }
 
     _manualMode && __toggleManualMode();
-    _plantillasStack.length && __setPlantillasStack([]);
+    _plantillasStack.length && __resetPlantillasStack([]);
 
     __setCurrentEmailIndex(0);
     __changeSubjectType(0);

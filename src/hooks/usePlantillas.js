@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {
   plantillasStack,
-  setPlantillasStack,
+  addToPlantillasStack,
+  resetPlantillasStack,
   deleteFromStack,
 } from '../features/plantillasSlice';
 
@@ -10,7 +11,9 @@ export default function usePlantillas() {
 
   const plantillasHook = {
     _plantillasStack: useSelector(plantillasStack),
-    __setPlantillasStack: (payload) => dispatch(setPlantillasStack(payload)),
+    __addToPlantillasStack: (payload) =>
+      dispatch(addToPlantillasStack(payload)),
+    __resetPlantillasStack: () => dispatch(resetPlantillasStack()),
     __deleteFromStack: (payload) => dispatch(deleteFromStack(payload)),
   };
 

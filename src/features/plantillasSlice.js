@@ -10,8 +10,11 @@ const plantillasSlice = createSlice({
   name: 'plantillasSlice',
   initialState,
   reducers: {
-    setPlantillasStack: (state, { payload }) => {
-      state.plantillasStack = payload;
+    addToPlantillasStack: (state, { payload }) => {
+      state.plantillasStack.push(...payload);
+    },
+    resetPlantillasStack: (state) => {
+      state.plantillasStack = [];
     },
     deleteFromStack: (state, { payload }) => {
       const indexToDelete = state.plantillasStack.findIndex(
@@ -28,7 +31,8 @@ const plantillasSlice = createSlice({
 export const plantillasStack = ({ plantillas }) => plantillas.plantillasStack;
 
 //? Actions
-export const { setPlantillasStack, deleteFromStack } = plantillasSlice.actions;
+export const { addToPlantillasStack, resetPlantillasStack, deleteFromStack } =
+  plantillasSlice.actions;
 
 //? Default
 export default plantillasSlice.reducer;

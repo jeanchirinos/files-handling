@@ -3,15 +3,28 @@ import { dark, light } from '../../src/styleGuide/themedColors';
 import GlobalStyles from '../../src/globalStyles';
 import useSettings from '@/hooks/useSettings';
 import CustomHead from '@/General/CustomHead';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getInitialTheme } from 'src/features/settingsSlice';
 
 export default function ComponentWrapper({ children }) {
+  const dispatch = useDispatch();
+
   const { _darkTheme } = useSettings();
 
+  useEffect(() => {
+    dispatch(getInitialTheme());
+  }, [dispatch]);
+
   return (
-    <ThemeProvider theme={_darkTheme ? dark : light}>
-      <GlobalStyles />
-      <CustomHead />
-      {children}
-    </ThemeProvider>
+    <>
+      {_darkTheme !== undefined && (
+        <ThemeProvider theme={_darkTheme ? dark : light}>
+          <GlobalStyles />
+          <CustomHead />
+          {children}
+        </ThemeProvider>
+      )}
+    </>
   );
 }

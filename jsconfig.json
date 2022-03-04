@@ -15,7 +15,10 @@
         "components/Fixed/*"
       ],
       "@/hooks/*": [
-        "src/hooks/*"
+        "src/features/*"
+      ],
+      "@/GlobalStyles/*": [
+        "src/GlobalStyles/*"
       ]
     }
   }

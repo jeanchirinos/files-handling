@@ -1,4 +1,4 @@
-import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import styled, { css } from 'styled-components';
 
 export default function AreaIndicator() {

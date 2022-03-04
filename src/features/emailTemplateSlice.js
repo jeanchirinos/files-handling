@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useSelector, useDispatch } from 'react-redux';
 import { db } from '../../src/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
@@ -139,15 +140,15 @@ const emailTemplateSlice = createSlice({
 
 //* EXPORTS
 //? States
-export const leader = ({ emailTemplate }) => emailTemplate.leader;
-export const employees = ({ emailTemplate }) => emailTemplate.employees;
-export const subjectType = ({ emailTemplate }) => emailTemplate.subjectType;
-export const workers_observadas = ({ emailTemplate }) =>
+const leader = ({ emailTemplate }) => emailTemplate.leader;
+const employees = ({ emailTemplate }) => emailTemplate.employees;
+const subjectType = ({ emailTemplate }) => emailTemplate.subjectType;
+const workers_observadas = ({ emailTemplate }) =>
   emailTemplate.workers_observadas;
-export const area = ({ emailTemplate }) => emailTemplate.area;
+const area = ({ emailTemplate }) => emailTemplate.area;
 
 //? Actions
-export const {
+const {
   changeSubjectType,
   resetSubjectType,
   changeWorkers,
@@ -156,5 +157,26 @@ export const {
   setWorkers_observadas,
 } = emailTemplateSlice.actions;
 
-//? Default
-export default emailTemplateSlice.reducer;
+//? Reducer
+export const emailTemplateReducer = emailTemplateSlice.reducer;
+
+//* HOOK
+export default function useEmailTemplate() {
+  const dispatch = useDispatch();
+
+  return {
+    _leader: useSelector(leader),
+    _employees: useSelector(employees),
+    _subjectType: useSelector(subjectType),
+    _area: useSelector(area),
+    _workers_observadas: useSelector(workers_observadas),
+    __changeSubjectType: () => dispatch(changeSubjectType()),
+    __resetSubjectType: () => dispatch(resetSubjectType()),
+    __changeWorkers: (payload) => dispatch(changeWorkers(payload)),
+    __changeArea: (payload) => dispatch(changeArea(payload)),
+    __setWorkers_digitacion: (payload) =>
+      dispatch(setWorkers_digitacion(payload)),
+    __setWorkers_observadas: (payload) =>
+      dispatch(setWorkers_observadas(payload)),
+  };
+}

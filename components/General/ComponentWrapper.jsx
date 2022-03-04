@@ -1,8 +1,8 @@
 import { ThemeProvider } from 'styled-components';
 import { dark, light } from '../../src/styleGuide/themedColors';
-import GlobalStyles from '../../src/globalStyles';
+import GlobalStyles from '@/GlobalStyles/index';
 import CustomHead from '@/General/CustomHead';
-import useSettings from '@/hooks/useSettings';
+import useSettings from '@/hooks/settingsSlice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getInitialTheme } from 'src/features/settingsSlice';

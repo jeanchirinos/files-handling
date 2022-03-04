@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useSelector, useDispatch } from 'react-redux';
 
 //* INITIAL STATE
 const initialState = {
@@ -29,14 +30,26 @@ const settingsSlice = createSlice({
   },
 });
 
-//* EXPORTS
+//* DATA
 //? States
-export const darkTheme = ({ settings }) => settings.darkTheme;
-export const manualMode = ({ settings }) => settings.manualMode;
+const darkTheme = ({ settings }) => settings.darkTheme;
+const manualMode = ({ settings }) => settings.manualMode;
 
 //? Actions
 export const { getInitialTheme, toggleDarkTheme, toggleManualMode } =
   settingsSlice.actions;
 
-//? Default
-export default settingsSlice.reducer;
+//? Reducer
+export const settingsReducer = settingsSlice.reducer;
+
+//* HOOK
+export default function useSettings() {
+  const dispatch = useDispatch();
+
+  return {
+    _manualMode: useSelector(manualMode),
+    _darkTheme: useSelector(darkTheme),
+    __toggleManualMode: () => dispatch(toggleManualMode()),
+    __toggleDarkTheme: () => dispatch(toggleDarkTheme()),
+  };
+}

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useEmails from '@/hooks/useEmails';
+import useEmails from '@/hooks/emailsSlice';
 import EmailBox from '../Atoms/EmailBox';
 
 export default function EmailBoxes() {

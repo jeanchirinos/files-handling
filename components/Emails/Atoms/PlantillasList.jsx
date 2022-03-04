@@ -1,4 +1,4 @@
-import useEmails from '@/hooks/useEmails';
+import useEmails from '@/hooks/emailsSlice';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 

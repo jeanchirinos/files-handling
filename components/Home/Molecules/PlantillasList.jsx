@@ -1,4 +1,4 @@
-import usePlantillas from '@/hooks/usePlantillas';
+import usePlantillas from '@/hooks/plantillasSlice';
 import Plantilla from '../Atoms/Plantilla';
 import DeleteButton from '../Atoms/DeleteButton';
 

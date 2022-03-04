@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useSelector, useDispatch } from 'react-redux';
 
 //* INITIAL STATE
 const initialState = {
@@ -26,13 +27,26 @@ const plantillasSlice = createSlice({
   },
 });
 
-//* EXPORTS
+//* DATA
 //? States
-export const plantillasStack = ({ plantillas }) => plantillas.plantillasStack;
+const plantillasStack = ({ plantillas }) => plantillas.plantillasStack;
 
 //? Actions
-export const { addToPlantillasStack, resetPlantillasStack, deleteFromStack } =
+const { addToPlantillasStack, resetPlantillasStack, deleteFromStack } =
   plantillasSlice.actions;
 
-//? Default
-export default plantillasSlice.reducer;
+//? Reducer
+export const plantillasReducer = plantillasSlice.reducer;
+
+//* HOOOK
+export default function usePlantillas() {
+  const dispatch = useDispatch();
+
+  return {
+    _plantillasStack: useSelector(plantillasStack),
+    __addToPlantillasStack: (payload) =>
+      dispatch(addToPlantillasStack(payload)),
+    __resetPlantillasStack: () => dispatch(resetPlantillasStack()),
+    __deleteFromStack: (payload) => dispatch(deleteFromStack(payload)),
+  };
+}

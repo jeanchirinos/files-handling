@@ -1,4 +1,4 @@
-import useEmails from '@/hooks/useEmails';
+import useEmails from '@/hooks/emailsSlice';
 import styled, { css } from 'styled-components';
 
 export default function PriorityIndicator() {

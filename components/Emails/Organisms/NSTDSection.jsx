@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import useEmails from '@/hooks/useEmails';
+import useEmails from '@/hooks/emailsSlice';
 import PlantillaToNSTD from '../Atoms/PlantillaToNSTD';
 import mediaQueries from 'src/styleGuide/breakpoints';
-import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useEmailTemplate from '@/hooks/emailTemplateSlice';
 
 export default function NSTDSection() {
   const { _plantillasToNSTDArray } = useEmails();

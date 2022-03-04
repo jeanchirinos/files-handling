@@ -1,4 +1,4 @@
-import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import styled from 'styled-components';
 import { copyElement } from '../functions';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { GrUpdate } from 'react-icons/gr';
 import { db } from '../../src/firebase';
 import { collection, getDocs } from 'firebase/firestore';

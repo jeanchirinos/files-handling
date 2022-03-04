@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import useSettings from '@/hooks/useSettings';
-import usePlantillas from '@/hooks/usePlantillas';
-import useEmails from '@/hooks/useEmails';
-import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useSettings from '@/hooks/settingsSlice';
+import usePlantillas from '@/hooks/plantillasSlice';
+import useEmails from '@/hooks/emailsSlice';
+import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { alertUser } from '../../functions';
 
 export default function UploadFilesLogic() {

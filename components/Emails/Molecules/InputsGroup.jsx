@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import useEmails from '@/hooks/useEmails';
-import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useEmails from '@/hooks/emailsSlice';
+import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import InputGroup from '../Atoms/InputGroup';
 
 export default function InputsGroup() {
@@ -8,12 +8,14 @@ export default function InputsGroup() {
   const { _plantillasArray } = useEmails();
 
   const toValue = (type) => {
-    const leaderCity = _leader.city ? ` - ${_leader.city}` : '';
+    const { name, lastName, email, city } = _leader;
+
+    const leaderCity = city ? ` - ${city}` : '';
 
     if (type === 'copyValue') {
-      return `${_leader.name} ${_leader.lastName}${leaderCity} <${_leader.email}>`;
+      return `${name} ${lastName}${leaderCity} <${email}>`;
     } else {
-      return `${_leader.name} ${_leader.lastName}${leaderCity}`;
+      return `${name} ${lastName}${leaderCity}`;
     }
   };
   const ccValue = (type) => {

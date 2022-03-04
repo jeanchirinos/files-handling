@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import usePlantillas from '@/hooks/usePlantillas';
+import usePlantillas from '@/hooks/plantillasSlice';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 export default function DeleteButton({ name }) {

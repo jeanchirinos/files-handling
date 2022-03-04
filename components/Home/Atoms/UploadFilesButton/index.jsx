@@ -1,4 +1,4 @@
-import { Button } from '../../../../src/globalStyles/components';
+import { Button } from '@/GlobalStyles/components';
 import UploadFilesLogic from './UploadFilesLogic';
 
 export default function UploadFilesButton() {

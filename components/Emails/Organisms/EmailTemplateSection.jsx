@@ -6,7 +6,7 @@ import {
   getObservadasWorkers,
   getWorkers,
 } from 'src/features/emailTemplateSlice';
-import useEmailTemplate from '@/hooks/useEmailTemplate';
+import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 

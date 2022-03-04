@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import UploadFilesLogic from '@/Home/Atoms/UploadFilesButton/UploadFilesLogic';
-import usePlantillas from '@/hooks/usePlantillas';
+import usePlantillas from '@/hooks/plantillasSlice';
 
 export default function NexPageButton() {
   const { groupEmails } = UploadFilesLogic();

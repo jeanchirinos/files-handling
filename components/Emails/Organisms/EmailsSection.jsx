@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import mediaQueries from 'src/styleGuide/breakpoints';
-import useEmails from '@/hooks/useEmails';
+import useEmails from '@/hooks/emailsSlice';
 import EmailsList from '../Molecules/EmailBoxes';
 import PriorityIndicator from '../Atoms/PriorityIndicator';
 

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import useSettings from '@/hooks/useSettings';
+import useSettings from '@/hooks/settingsSlice';
 import PlantillasList from '../Molecules/PlantillasList';
 import NextPageButton from '../Atoms/NextPageButton';
 

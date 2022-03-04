@@ -7,7 +7,6 @@ export default function UploadFilesButton() {
   return (
     <>
       <Button onClick={openFileExplorer}>Sube tus archivos</Button>
-
       <input
         type="file"
         id="inputFile"

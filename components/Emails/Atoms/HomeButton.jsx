@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Button } from 'src/GlobalStyles/components';
+import { Button } from '../../../src/GlobalStyles';
 import { AiFillHome } from 'react-icons/ai';
 
 export default function HomeButton() {

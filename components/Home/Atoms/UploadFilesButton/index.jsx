@@ -1,4 +1,4 @@
-import { Button } from 'src/globalStyles/components';
+import { Button } from 'src/GlobalStyles/components';
 import UploadFilesLogic from './UploadFilesLogic';
 
 export default function UploadFilesButton() {
@@ -6,7 +6,7 @@ export default function UploadFilesButton() {
 
   return (
     <>
-      <Button onClick={() => openFileExplorer()}>Sube tus archivos</Button>
+      <Button onClick={openFileExplorer}>Sube tus archivos</Button>
 
       <input
         type="file"

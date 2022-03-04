@@ -29,7 +29,7 @@ export default function EmailBox({ email, emailIndex }) {
   return (
     <StyledEmailBox
       isSelected={isSelected}
-      onClick={() => selectEmailBox()}
+      onClick={selectEmailBox}
       title={title}
     >
       <header>{emailIndex + 1}</header>

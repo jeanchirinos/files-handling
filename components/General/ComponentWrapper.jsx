@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import { dark, light } from '../../src/styleGuide/themedColors';
-import GlobalStyles from '../../src/globalStyles';
+import GlobalStyles from '../../src/GlobalStyles';
 import useSettings from '@/hooks/useSettings';
 import CustomHead from '@/General/CustomHead';
 import { useEffect } from 'react';
@@ -9,7 +9,6 @@ import { getInitialTheme } from 'src/features/settingsSlice';
 
 export default function ComponentWrapper({ children }) {
   const dispatch = useDispatch();
-
   const { _darkTheme } = useSettings();
 
   useEffect(() => {

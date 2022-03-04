@@ -8,7 +8,7 @@ export default function InputGroup({ label, value, copyValue }) {
 
   const selectedLabel =
     label === 'Asunto' ? (
-      <StyledLabel onClick={() => __changeSubjectType()}>{label}</StyledLabel>
+      <StyledLabel onClick={__changeSubjectType}>{label}</StyledLabel>
     ) : (
       <label>{label}</label>
     );

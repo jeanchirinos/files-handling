@@ -53,20 +53,19 @@ const emailTemplateSlice = createSlice({
   name: 'emailTemplateSlice',
   initialState,
   reducers: {
-    changeSubjectType: (state, { payload }) => {
-      const { subjectType } = state;
-      const { index, values } = subjectType;
+    changeSubjectType: (state) => {
+      const { index, values } = state.subjectType;
 
-      let newIndex;
-
-      if (payload === 0) {
-        newIndex = payload;
-      } else {
-        newIndex = index === values.length - 1 ? 0 : index + 1;
-      }
+      const newIndex = index === values.length - 1 ? 0 : index + 1;
 
       state.subjectType.index = newIndex;
       state.subjectType.selectedValue = values[newIndex];
+    },
+    resetSubjectType: (state) => {
+      const { values } = state.subjectType;
+
+      state.subjectType.index = 0;
+      state.subjectType.selectedValue = values[0];
     },
     changeWorkers: (state, { payload }) => {
       const newLeader = state.workers_observadas.find(
@@ -150,6 +149,7 @@ export const area = ({ emailTemplate }) => emailTemplate.area;
 //? Actions
 export const {
   changeSubjectType,
+  resetSubjectType,
   changeWorkers,
   changeArea,
   setWorkers_digitacion,

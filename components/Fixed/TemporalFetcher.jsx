@@ -35,7 +35,7 @@ export default function TemporalThemeSwitcher() {
 const StyledTemporalFetcher = styled(GrUpdate)`
   position: absolute;
   top: 25px;
-  right: calc(var(--padding) + 100px);
+  right: calc(var(--padding) + 50px);
   font-size: 1.2rem;
   cursor: pointer;
   z-index: 9;

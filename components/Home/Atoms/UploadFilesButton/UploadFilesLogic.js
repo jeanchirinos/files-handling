@@ -11,7 +11,7 @@ export default function UploadFilesLogic() {
   const { __addToPlantillasStack, _plantillasStack, __resetPlantillasStack } =
     usePlantillas();
   const { __setEmails, __setPriority, __setCurrentEmailIndex } = useEmails();
-  const { __changeSubjectType } = useEmailTemplate();
+  const { __resetSubjectType } = useEmailTemplate();
 
   function openFileExplorer() {
     document.getElementById('inputFile').click();
@@ -197,7 +197,7 @@ export default function UploadFilesLogic() {
     _plantillasStack.length && __resetPlantillasStack([]);
 
     __setCurrentEmailIndex(0);
-    __changeSubjectType(0);
+    __resetSubjectType();
 
     router.push('/emails');
   }

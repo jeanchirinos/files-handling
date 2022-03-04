@@ -11,7 +11,7 @@ import '@fontsource/nunito/600.css';
 import '@fontsource/nunito/400.css';
 import '@fontsource/nunito/300.css';
 
-const GlobalStyles = createGlobalStyle(
+export default createGlobalStyle(
   ({ theme }) => css`
     * {
       box-sizing: border-box;
@@ -34,5 +34,3 @@ const GlobalStyles = createGlobalStyle(
     ${extra}
   `
 );
-
-export default GlobalStyles;

@@ -6,6 +6,7 @@ import {
   area,
   workers_observadas,
   changeSubjectType,
+  resetSubjectType,
   changeWorkers,
   changeArea,
   setWorkers_digitacion,
@@ -21,7 +22,8 @@ export default function useEmailTemplate() {
     _subjectType: useSelector(subjectType),
     _area: useSelector(area),
     _workers_observadas: useSelector(workers_observadas),
-    __changeSubjectType: (payload) => dispatch(changeSubjectType(payload)),
+    __changeSubjectType: () => dispatch(changeSubjectType()),
+    __resetSubjectType: () => dispatch(resetSubjectType()),
     __changeWorkers: (payload) => dispatch(changeWorkers(payload)),
     __changeArea: (payload) => dispatch(changeArea(payload)),
     __setWorkers_digitacion: (payload) =>

@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <StyledHome
       isDraggingOver={isDragginOver}
-      onClick={() => closeContextMenu()}
+      onClick={closeContextMenu}
       onDragOver={(e) => handleDragOver(e)}
       onDragLeave={() => setIsDragginOver(false)}
       onDrop={(e) => handleDrop(e)}

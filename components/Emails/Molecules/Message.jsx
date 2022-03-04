@@ -2,11 +2,9 @@ import styled from 'styled-components';
 import { copyElement } from '../functions';
 import useEmailTemplate from '@/hooks/useEmailTemplate';
 import PlantillasList from '../Atoms/PlantillasList';
-import useSettings from '@/hooks/useSettings';
 
 export default function Message() {
-  const { _leader, _subjectType } = useEmailTemplate();
-  const { _area } = useSettings();
+  const { _leader, _subjectType, _area } = useEmailTemplate();
 
   return (
     <StyledMessage onClick={(e) => copyElement(e)}>

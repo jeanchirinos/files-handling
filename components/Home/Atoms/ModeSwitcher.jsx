@@ -7,7 +7,7 @@ export default function ModeSwitcher() {
   return (
     <StyledModeSwitcher
       active={_manualMode}
-      onClick={() => __toggleManualMode()}
+      onClick={__toggleManualMode}
       title="Modo manual"
     />
   );

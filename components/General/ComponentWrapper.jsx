@@ -1,9 +1,9 @@
+import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { dark, light } from '../../src/styleGuide/themedColors';
 import GlobalStyles from '@/GlobalStyles/index';
 import CustomHead from '@/General/CustomHead';
 import useSettings from '@/hooks/settingsSlice';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getInitialTheme } from 'src/features/settingsSlice';
 

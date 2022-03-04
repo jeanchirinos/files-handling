@@ -9,7 +9,7 @@
     "package.json": true,
     "README.md": true,
     "yarn.lock": true,
-    "jsconfig.json": true,
+    "jsconfig.json": false,
     "pages/api": true,
     ".env.local": true,
   }

@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import { dark, light } from '../../src/styleGuide/themedColors';
-import GlobalStyles from '../../src/GlobalStyles';
+import GlobalStyles from '../../src/globalStyles';
 import CustomHead from '@/General/CustomHead';
 import useSettings from '@/hooks/useSettings';
 import { useEffect } from 'react';

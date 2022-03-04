@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import useEmailTemplate from '@/hooks/useEmailTemplate';
 import { GrUpdate } from 'react-icons/gr';
 import { db } from '../../src/firebase';
@@ -8,34 +9,34 @@ export default function TemporalThemeSwitcher() {
     useEmailTemplate();
 
   async function handleFetch() {
-    const querySnapshot = await getDocs(collection(db, 'employees'));
-    const firebaseData = querySnapshot.docs.map((doc) => doc.data());
+    async function fetchFromFirebase(collectionName, localStorageKey) {
+      const collectionRef = collection(db, collectionName);
+      const querySnapshot = await getDocs(collectionRef);
+      const firebaseData = querySnapshot.docs.map((doc) => doc.data());
 
-    localStorage.workers = JSON.stringify(firebaseData);
+      localStorage[localStorageKey] = JSON.stringify(firebaseData);
 
-    console.log(firebaseData);
+      return firebaseData;
+    }
 
-    __setWorkers_observadas(firebaseData);
+    const digitacionData = await fetchFromFirebase('employees', 'workers');
+    const observadasData = await fetchFromFirebase(
+      'workers_observadas',
+      'observadasWorkers'
+    );
 
-    const querySnapshot2 = await getDocs(collection(db, 'workers_observadas'));
-    const firebaseData2 = querySnapshot2.docs.map((doc) => doc.data());
-
-    localStorage.observadasWorkers = JSON.stringify(firebaseData2);
-
-    __setWorkers_digitacion(firebaseData2);
+    __setWorkers_digitacion(digitacionData);
+    __setWorkers_observadas(observadasData);
   }
 
-  return (
-    <GrUpdate
-      style={{
-        position: 'absolute',
-        top: '25px',
-        right: 'calc(var(--padding) + 100px)',
-        zIndex: '9',
-        fontSize: '1.2rem',
-        cursor: 'pointer',
-      }}
-      onClick={() => handleFetch()}
-    ></GrUpdate>
-  );
+  return <StyledTemporalFetcher onClick={handleFetch} />;
 }
+
+const StyledTemporalFetcher = styled(GrUpdate)`
+  position: absolute;
+  top: 25px;
+  right: calc(var(--padding) + 100px);
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 9;
+`;

@@ -105,22 +105,32 @@ const emailTemplateSlice = createSlice({
     },
 
     setWorkers_digitacion: (state, { payload }) => {
-      state.workers_digitacion = [...payload];
+      const leader = payload.find((worker) => worker.isLeader);
+      const employees = payload.filter((worker) => !worker.isLeader);
+
+      Object.assign(state.workers_digitacion, {
+        leader,
+        employees,
+      });
     },
     setWorkers_observadas: (state, { payload }) => {
-      state.workers_observadas = [...payload];
+      state.workers_observadas = payload;
     },
   },
   extraReducers: {
     [getWorkers.fulfilled]: (state, { payload }) => {
-      const initialLeader = payload.find((worker) => worker.isLeader);
-      const initialEmployees = payload.filter((worker) => !worker.isLeader);
+      const leader = payload.find((worker) => worker.isLeader);
+      const employees = payload.filter((worker) => !worker.isLeader);
 
-      state.leader = initialLeader;
-      state.employees = initialEmployees;
+      Object.assign(state, {
+        leader,
+        employees,
+      });
 
-      state.workers_digitacion.leader = initialLeader;
-      state.workers_digitacion.employees = initialEmployees;
+      Object.assign(state.workers_digitacion, {
+        leader,
+        employees,
+      });
     },
     [getObservadasWorkers.fulfilled]: (state, { payload }) => {
       state.workers_observadas = payload;

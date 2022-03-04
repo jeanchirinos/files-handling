@@ -21,12 +21,13 @@ export default function InputsGroup() {
       .map((employee) => {
         const { name, lastName, email, city } = employee;
 
+        const employeeLastName = lastName ? ` ${lastName}` : '';
         const employeeCity = city ? ` - ${city}` : '';
 
         if (type === 'copyValue') {
-          return `${name} ${lastName}${employeeCity} <${email}>`;
+          return `${name}${employeeLastName}${employeeCity} <${email}>`;
         } else {
-          return `${name} ${lastName}${employeeCity}`;
+          return `${name}${employeeLastName}${employeeCity}`;
         }
       })
       .join('; ');

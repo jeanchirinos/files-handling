@@ -122,10 +122,13 @@ const emailTemplateSlice = createSlice({
       const leader = payload.find((worker) => worker.isLeader);
       const employees = payload.filter((worker) => !worker.isLeader);
 
-      Object.assign(state, {
-        leader,
-        employees,
-      });
+      //TODO
+      if (!state.leader || !state.employees) {
+        Object.assign(state, {
+          leader,
+          employees,
+        });
+      }
 
       Object.assign(state.workers_digitacion, {
         leader,
@@ -140,8 +143,8 @@ const emailTemplateSlice = createSlice({
 
 //* EXPORTS
 //? States
-const leader = ({ emailTemplate }) => emailTemplate.leader;
-const employees = ({ emailTemplate }) => emailTemplate.employees;
+export const leader = ({ emailTemplate }) => emailTemplate.leader;
+export const employees = ({ emailTemplate }) => emailTemplate.employees;
 const subjectType = ({ emailTemplate }) => emailTemplate.subjectType;
 const workers_observadas = ({ emailTemplate }) =>
   emailTemplate.workers_observadas;

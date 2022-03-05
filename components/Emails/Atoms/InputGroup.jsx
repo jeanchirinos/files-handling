@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import { copyElement } from '../functions';
 
 export default function InputGroup({ label, value, copyValue }) {
-  const { __changeSubjectType, _area, _workers_observadas, __changeWorkers } =
-    useEmailTemplate();
+  const {
+    __changeSubjectType,
+    _area,
+    _workers_observadas,
+    __changeWorkers,
+    _leader,
+  } = useEmailTemplate();
 
   const selectedLabel =
     label === 'Asunto' ? (
@@ -13,11 +18,23 @@ export default function InputGroup({ label, value, copyValue }) {
       <label>{label}</label>
     );
 
+  const selectedGroup = _workers_observadas.find(
+    ({ leader }) => leader.email === _leader.email
+  );
+  const options = _workers_observadas.filter(
+    ({ leader }) => leader.email !== _leader.email
+  );
+
   const selectorButton = () => {
     if (_area === 'observadas' && label === 'Para') {
       return (
         <select onChange={(e) => __changeWorkers(e.target.value)}>
-          {_workers_observadas.map(({ leader }) => (
+          <option value={selectedGroup.leader.email}>
+            {selectedGroup.leader.name} {selectedGroup.leader.lastName}
+            {selectedGroup.leader.city && ` - ${selectedGroup.leader.city}`}
+          </option>
+
+          {options.map(({ leader }) => (
             <option key={leader.email} value={leader.email}>
               {leader.name} {leader.lastName}
               {leader.city && ` - ${leader.city}`}

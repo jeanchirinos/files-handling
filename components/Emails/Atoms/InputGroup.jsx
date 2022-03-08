@@ -3,13 +3,8 @@ import styled from 'styled-components';
 import { copyElement } from '../functions';
 
 export default function InputGroup({ label, value, copyValue }) {
-  const {
-    __changeSubjectType,
-    _area,
-    _workers_observadas,
-    __changeWorkers,
-    _leader,
-  } = useEmailTemplate();
+  const { _area, _leader, __changeSubjectType, __changeWorkers } =
+    useEmailTemplate();
 
   const selectedLabel =
     label === 'Asunto' ? (
@@ -18,10 +13,14 @@ export default function InputGroup({ label, value, copyValue }) {
       <label>{label}</label>
     );
 
-  const selectedGroup = _workers_observadas.find(
+  const observadasWorkersGroups = JSON.parse(
+    localStorage.observadasWorkersGroups
+  );
+
+  const selectedGroup = observadasWorkersGroups.find(
     ({ leader }) => leader.email === _leader.email
   );
-  const options = _workers_observadas.filter(
+  const options = observadasWorkersGroups.filter(
     ({ leader }) => leader.email !== _leader.email
   );
 
@@ -30,14 +29,12 @@ export default function InputGroup({ label, value, copyValue }) {
       return (
         <select onChange={(e) => __changeWorkers(e.target.value)}>
           <option value={selectedGroup.leader.email}>
-            {selectedGroup.leader.name} {selectedGroup.leader.lastName}
-            {selectedGroup.leader.city && ` - ${selectedGroup.leader.city}`}
+            {selectedGroup.leader.fullname}
           </option>
 
           {options.map(({ leader }) => (
             <option key={leader.email} value={leader.email}>
-              {leader.name} {leader.lastName}
-              {leader.city && ` - ${leader.city}`}
+              {leader.fullname}
             </option>
           ))}
         </select>
@@ -53,7 +50,7 @@ export default function InputGroup({ label, value, copyValue }) {
         value={value}
         readOnly
         onClick={(e) => copyElement(e, copyValue)}
-        title={value}
+        title={copyValue || value}
       />
       {selectorButton()}
     </StyledInputGroup>

@@ -1,6 +1,6 @@
-import useEmails from '@/hooks/emailsSlice';
 import { Fragment } from 'react';
 import styled from 'styled-components';
+import useEmails from '@/hooks/emailsSlice';
 
 export default function PlantillasList() {
   const { _plantillasArray } = useEmails();

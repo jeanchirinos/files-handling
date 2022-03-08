@@ -5,25 +5,22 @@ export default function EmailBox({ email, emailIndex }) {
   const { _currentEmailIndex, __setCurrentEmailIndex } = useEmails();
 
   // data
-  const isSelected = _currentEmailIndex === emailIndex;
+  const isSelected = emailIndex === _currentEmailIndex;
   const emailWeight = email.reduce((acc, curr) => acc + curr.size, 0);
   const title = `Peso: ${emailWeight.toFixed(2)} mb - Cantidad: ${
     email.length
   }`;
-  const plantilla = (name) => (
+
+  const plantillas = email.map(({ name }) => (
     <p className="small light" key={name}>
       {name}
     </p>
-  );
-  const plantillas = email.map((p) => plantilla(p.name));
+  ));
 
   // functions
   function selectEmailBox() {
-    if (isSelected) {
-      return;
-    } else {
-      __setCurrentEmailIndex(emailIndex);
-    }
+    if (isSelected) return;
+    __setCurrentEmailIndex(emailIndex);
   }
 
   return (
@@ -39,16 +36,16 @@ export default function EmailBox({ email, emailIndex }) {
 }
 const StyledEmailBox = styled.div(
   ({ isSelected }) => css`
+    display: flex;
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
-    display: flex;
 
     ${isSelected &&
     css`
-      border-color: var(--primary-color);
       background-color: var(--primary-color);
       color: var(--light_100);
+      border-color: var(--primary-color);
       cursor: default;
     `}
 

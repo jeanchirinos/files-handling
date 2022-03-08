@@ -4,50 +4,33 @@ import styled, { css } from 'styled-components';
 export default function AreaIndicator() {
   const { _area, __changeArea } = useEmailTemplate();
 
-  function handleChange(area) {
-    const areaIsSelected = _area === area;
+  function changeTo(areaSelected) {
+    const areaIsAlreadySelected = areaSelected === _area;
 
-    if (areaIsSelected) {
-      return;
-    } else {
-      __changeArea(area);
-    }
+    if (areaIsAlreadySelected) return;
+    __changeArea(areaSelected);
   }
 
+  const firstArea = 'digitacion';
+  const secondArea = 'observadas';
+
   return (
-    <Wrapper>
+    <StyledWrapper>
       <StyledAreaIndicator
-        active={_area === 'digitacion'}
-        onClick={() => handleChange('digitacion')}
+        active={_area === firstArea}
+        onClick={() => changeTo(firstArea)}
       >
         Digitación
       </StyledAreaIndicator>
       <StyledAreaIndicator
-        active={_area === 'observadas'}
-        onClick={() => handleChange('observadas')}
+        active={_area === secondArea}
+        onClick={() => changeTo(secondArea)}
       >
         Observadas
       </StyledAreaIndicator>
-    </Wrapper>
+    </StyledWrapper>
   );
 }
-
-const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  user-select: none;
-  display: flex;
-
-  > span:first-child {
-    border-bottom-left-radius: 15px;
-  }
-
-  > span:last-child {
-    border-bottom-right-radius: 15px;
-  }
-`;
 
 const StyledAreaIndicator = styled.span(
   ({ active }) => css`
@@ -58,16 +41,35 @@ const StyledAreaIndicator = styled.span(
     ${active &&
     css`
       background-color: var(--primary-color);
-      border-color: var(--primary-color);
       color: var(--light_100);
+      border-color: var(--primary-color);
       cursor: default;
     `}
 
     ${!active &&
     css`
-      border-color: var(--light_700);
       color: var(--light_700);
+      border-color: var(--light_700);
       cursor: pointer;
     `}
   `
 );
+
+const StyledWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  user-select: none;
+
+  ${StyledAreaIndicator} {
+    :first-child {
+      border-bottom-left-radius: 15px;
+    }
+
+    :last-child {
+      border-bottom-right-radius: 15px;
+    }
+  }
+`;

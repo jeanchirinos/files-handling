@@ -10,7 +10,7 @@ export function copyElement(e, copyValue) {
     className: 'toast success',
     iconTheme: {
       primary: '#FCFBFB',
-      secondary: '#75d7b6',
+      secondary: '#75D7B6',
     },
   });
 }

@@ -7,11 +7,6 @@ import { collection, getDocs } from 'firebase/firestore';
 const initialState = {
   leader: undefined,
   employees: undefined,
-  workers_digitacion: {
-    leader: undefined,
-    employees: undefined,
-  },
-  workers_observadas: [],
   subjectType: {
     values: ['de campo', 'de campo PRESENCIAL', 'de OAD'],
     index: 0,
@@ -20,34 +15,34 @@ const initialState = {
   area: 'digitacion',
 };
 
-export const getWorkers = createAsyncThunk('getWorkers', async () => {
-  if (!localStorage.workers) {
-    const querySnapshot = await getDocs(collection(db, 'employees'));
-    const firebaseData = querySnapshot.docs.map((doc) => doc.data());
-
-    localStorage.workers = JSON.stringify(firebaseData);
-
-    return firebaseData;
+export const getWorkos = createAsyncThunk('getWorkos', async () => {
+  if (
+    localStorage.digitacionWorkersGroup &&
+    localStorage.observadasWorkersGroups
+  ) {
+    return JSON.parse(localStorage.digitacionWorkersGroup);
   }
 
-  return JSON.parse(localStorage.workers);
+  const querySnapshot = await getDocs(collection(db, 'workers'));
+  const firebaseData = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  const digitacionWorkersGroup = firebaseData.find(
+    (group) => group.id === 'digitacion'
+  );
+  const observadasWorkersGroups = firebaseData.filter(
+    (group) => group.id !== 'digitacion'
+  );
+
+  localStorage.digitacionWorkersGroup = JSON.stringify(digitacionWorkersGroup);
+  localStorage.observadasWorkersGroups = JSON.stringify(
+    observadasWorkersGroups
+  );
+
+  return digitacionWorkersGroup;
 });
-
-export const getObservadasWorkers = createAsyncThunk(
-  'getObservadasWorkers',
-  async () => {
-    if (!localStorage.observadasWorkers) {
-      const querySnapshot = await getDocs(collection(db, 'workers_observadas'));
-      const firebaseData = querySnapshot.docs.map((doc) => doc.data());
-
-      localStorage.observadasWorkers = JSON.stringify(firebaseData);
-
-      return firebaseData;
-    }
-
-    return JSON.parse(localStorage.observadasWorkers);
-  }
-);
 
 //* SLICE
 const emailTemplateSlice = createSlice({
@@ -69,21 +64,28 @@ const emailTemplateSlice = createSlice({
       state.subjectType.selectedValue = values[0];
     },
     changeWorkers: (state, { payload }) => {
-      const newLeader = state.workers_observadas.find(
-        (worker) => worker.leader.email === payload
+      const parsedObservadasWorkersGroups = JSON.parse(
+        localStorage.observadasWorkersGroups
       );
 
-      state.leader = newLeader.leader;
-      state.employees = newLeader.employees;
+      const newGroup = parsedObservadasWorkersGroups.find(
+        ({ leader }) => leader.email === payload
+      );
+
+      state.leader = newGroup.leader;
+      state.employees = newGroup.employees;
     },
 
     changeArea: (state, { payload }) => {
       state.area = payload;
 
       if (payload === 'observadas') {
-        state.leader = state.workers_observadas[0].leader;
-        state.employees = state.workers_observadas[0].employees;
+        const parsedGroup = JSON.parse(localStorage.observadasWorkersGroups);
+        const defaultLeader = parsedGroup[0].leader;
+        const defaultEmployees = parsedGroup[0].employees;
 
+        state.leader = defaultLeader;
+        state.employees = defaultEmployees;
         state.subjectType.values = [
           'Plantillas observadas de campo',
           'Plantillas observadas de campo PRESENCIAL',
@@ -92,8 +94,12 @@ const emailTemplateSlice = createSlice({
         state.subjectType.index = 0;
         state.subjectType.selectedValue = 'Plantillas observadas de campo';
       } else {
-        state.leader = state.workers_digitacion.leader;
-        state.employees = state.workers_digitacion.employees;
+        const parsedGroup = JSON.parse(localStorage.digitacionWorkersGroup);
+        const defaultLeader = parsedGroup.leader;
+        const defaultEmployees = parsedGroup.employees;
+
+        state.leader = defaultLeader;
+        state.employees = defaultEmployees;
         state.subjectType.values = [
           'de campo',
           'de campo PRESENCIAL',
@@ -103,62 +109,25 @@ const emailTemplateSlice = createSlice({
         state.subjectType.selectedValue = 'de campo';
       }
     },
-
-    setWorkers_digitacion: (state, { payload }) => {
-      const leader = payload.find((worker) => worker.isLeader);
-      const employees = payload.filter((worker) => !worker.isLeader);
-
-      Object.assign(state.workers_digitacion, {
-        leader,
-        employees,
-      });
-    },
-    setWorkers_observadas: (state, { payload }) => {
-      state.workers_observadas = payload;
-    },
   },
   extraReducers: {
-    [getWorkers.fulfilled]: (state, { payload }) => {
-      const leader = payload.find((worker) => worker.isLeader);
-      const employees = payload.filter((worker) => !worker.isLeader);
-
-      //TODO
-      if (!state.leader || !state.employees) {
-        Object.assign(state, {
-          leader,
-          employees,
-        });
-      }
-
-      Object.assign(state.workers_digitacion, {
-        leader,
-        employees,
-      });
-    },
-    [getObservadasWorkers.fulfilled]: (state, { payload }) => {
-      state.workers_observadas = payload;
+    [getWorkos.fulfilled]: (state, { payload }) => {
+      !state.leader && (state.leader = payload.leader);
+      !state.employees && (state.employees = payload.employees);
     },
   },
 });
 
 //* EXPORTS
 //? States
-export const leader = ({ emailTemplate }) => emailTemplate.leader;
-export const employees = ({ emailTemplate }) => emailTemplate.employees;
+const leader = ({ emailTemplate }) => emailTemplate.leader;
+const employees = ({ emailTemplate }) => emailTemplate.employees;
 const subjectType = ({ emailTemplate }) => emailTemplate.subjectType;
-const workers_observadas = ({ emailTemplate }) =>
-  emailTemplate.workers_observadas;
 const area = ({ emailTemplate }) => emailTemplate.area;
 
 //? Actions
-const {
-  changeSubjectType,
-  resetSubjectType,
-  changeWorkers,
-  changeArea,
-  setWorkers_digitacion,
-  setWorkers_observadas,
-} = emailTemplateSlice.actions;
+const { changeSubjectType, resetSubjectType, changeWorkers, changeArea } =
+  emailTemplateSlice.actions;
 
 //? Reducer
 export const emailTemplateReducer = emailTemplateSlice.reducer;
@@ -172,14 +141,9 @@ export default function useEmailTemplate() {
     _employees: useSelector(employees),
     _subjectType: useSelector(subjectType),
     _area: useSelector(area),
-    _workers_observadas: useSelector(workers_observadas),
     __changeSubjectType: () => dispatch(changeSubjectType()),
     __resetSubjectType: () => dispatch(resetSubjectType()),
     __changeWorkers: (payload) => dispatch(changeWorkers(payload)),
     __changeArea: (payload) => dispatch(changeArea(payload)),
-    __setWorkers_digitacion: (payload) =>
-      dispatch(setWorkers_digitacion(payload)),
-    __setWorkers_observadas: (payload) =>
-      dispatch(setWorkers_observadas(payload)),
   };
 }

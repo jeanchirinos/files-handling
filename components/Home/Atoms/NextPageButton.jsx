@@ -26,7 +26,17 @@ const StyledNextPageButton = styled(AiOutlineArrowRight)(
     bottom: 25px;
     right: 25px;
     font-size: 2rem;
-    color: ${$active ? 'var(--primary-color)' : 'var(--theme_700)'};
-    cursor: ${$active ? 'pointer' : 'not-allowed'};
+
+    ${$active &&
+    css`
+      color: var(--primary-color);
+      cursor: pointer;
+    `}
+
+    ${!$active &&
+    css`
+      color: var(--theme_700);
+      cursor: not-allowed;
+    `}
   `
 );

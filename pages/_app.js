@@ -23,7 +23,7 @@ export default function MyApp({ Component, pageProps }) {
         </div> */}
         <SettingsButton />
         <TemporalThemeSwitcher />
-        <TemporalFetcher />
+        {/* <TemporalFetcher /> */}
         <Toaster position="bottom-center" />
         <Component {...pageProps} />
       </ComponentWrapper>

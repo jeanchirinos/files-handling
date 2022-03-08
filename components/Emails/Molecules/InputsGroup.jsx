@@ -7,38 +7,24 @@ export default function InputsGroup() {
   const { _leader, _employees, _subjectType, _area } = useEmailTemplate();
   const { _plantillasArray } = useEmails();
 
-  const toValue = (type) => {
-    const { name, lastName, email, city } = _leader;
+  const to = (type) => {
+    const { fullname, email } = _leader;
 
-    const leaderCity = city ? ` - ${city}` : '';
-
-    if (type === 'copyValue') {
-      return `${name} ${lastName}${leaderCity} <${email}>`;
-    } else {
-      return `${name} ${lastName}${leaderCity}`;
-    }
+    return type === 'copyValue' ? email : fullname;
   };
-  const ccValue = (type) => {
+
+  const cc = (type) => {
     const employeesList = _employees
-      .map((employee) => {
-        const { name, lastName, email, city } = employee;
-
-        const employeeLastName = lastName ? ` ${lastName}` : '';
-        const employeeCity = city ? ` - ${city}` : '';
-
-        if (type === 'copyValue') {
-          return `${name}${employeeLastName}${employeeCity} <${email}>`;
-        } else {
-          return `${name}${employeeLastName}${employeeCity}`;
-        }
-      })
+      .map(({ fullname, email }) => (type === 'copyValue' ? email : fullname))
       .join('; ');
 
     return employeesList;
   };
+
   const plantillasInSubject = new Intl.ListFormat('es').format(
     _plantillasArray
   );
+
   const subjectValue =
     _area === 'digitacion'
       ? `Plantillas de ${_subjectType.selectedValue} a digitar: ${plantillasInSubject}`
@@ -46,16 +32,8 @@ export default function InputsGroup() {
 
   return (
     <StyledInputsGroup>
-      <InputGroup
-        label="Para"
-        value={toValue()}
-        copyValue={toValue('copyValue')}
-      />
-      <InputGroup
-        label="CC"
-        value={ccValue()}
-        copyValue={ccValue('copyValue')}
-      />
+      <InputGroup label="Para" value={to()} copyValue={to('copyValue')} />
+      <InputGroup label="CC" value={cc()} copyValue={cc('copyValue')} />
       <InputGroup label="Asunto" value={subjectValue} />
     </StyledInputsGroup>
   );

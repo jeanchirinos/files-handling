@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components';
 import { useState } from 'react';
-import { closeContextMenu } from '@/Home/functions';
+import styled, { css } from 'styled-components';
 import UploadFilesLogic from '@/Home/Atoms/UploadFilesButton/UploadFilesLogic';
 // Components
 import UploadFilesButton from '@/Home/Atoms/UploadFilesButton';
 import ModeSwitcher from '@/Home/Atoms/ModeSwitcher';
-import PlantillasStack from '@/Home/Organisms/PlantillasStack';
+import PlantillasStack from '@/Home/Molecules/PlantillasStack';
+import { closeContextMenu } from '@/Home/functions';
 
 export default function Home() {
   const [isDragginOver, setIsDragginOver] = useState(false);
@@ -33,7 +33,7 @@ export default function Home() {
       <UploadFilesButton />
       <p>o</p>
       <p>Arrastra y suelta</p>
-      <h3> Suelta para subir los archivos</h3>
+      <h3>Suelta para subir los archivos</h3>
 
       <ModeSwitcher />
       <PlantillasStack />
@@ -43,15 +43,15 @@ export default function Home() {
 
 const StyledHome = styled.main(
   ({ isDraggingOver }) => css`
+    height: 100vh;
+    max-height: fill-available;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    max-height: -webkit-fill-available;
+    position: relative;
     font-weight: var(--fw_light);
     overflow-y: hidden;
-    position: relative;
     transition: background-color 0.3s;
 
     h3 {

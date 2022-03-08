@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { copyElement } from '../functions';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
+import { copyElement } from '../functions';
 import PlantillasList from '../Atoms/PlantillasList';
 
 export default function Message() {
@@ -46,8 +46,7 @@ const StyledMessage = styled.div`
     pointer-events: none;
   }
 
-  :hover,
-  :focus {
+  :hover {
     box-shadow: 0px 0px 5px 2px var(--primary-color);
   }
 `;

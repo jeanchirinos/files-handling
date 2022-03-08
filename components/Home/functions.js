@@ -21,7 +21,7 @@ export function alertUser(errorMessage, plantilla) {
       className: 'toast error',
       iconTheme: {
         primary: '#FCFBFB',
-        secondary: '#ed5d75',
+        secondary: '#ED5D75',
       },
     }
   );

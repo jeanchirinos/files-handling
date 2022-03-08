@@ -2,35 +2,13 @@ import styled from 'styled-components';
 import mediaQueries from 'src/styleGuide/breakpoints';
 import InputsGroup from '../Molecules/InputsGroup';
 import Message from '../Molecules/Message';
-import {
-  getObservadasWorkers,
-  getWorkers,
-} from 'src/features/emailTemplateSlice';
-import useEmailTemplate from '@/hooks/emailTemplateSlice';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 
 export default function EmailTemplate() {
-  const dispatch = useDispatch();
-
-  const { _leader, _employees } = useEmailTemplate();
-
-  useEffect(() => {
-    dispatch(getWorkers());
-    dispatch(getObservadasWorkers());
-  }, [dispatch]);
-
   return (
-    <>
-      {!_leader || !_employees ? (
-        <></>
-      ) : (
-        <StyledEmailTemplate className="small">
-          <InputsGroup />
-          <Message />
-        </StyledEmailTemplate>
-      )}
-    </>
+    <StyledEmailTemplate className="small">
+      <InputsGroup />
+      <Message />
+    </StyledEmailTemplate>
   );
 }
 

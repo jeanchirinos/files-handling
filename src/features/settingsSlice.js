@@ -22,7 +22,7 @@ const settingsSlice = createSlice({
     },
     toggleDarkTheme: (state) => {
       state.darkTheme = !state.darkTheme;
-      localStorage.darkTheme = JSON.stringify(state.darkTheme);
+      localStorage.darkTheme = state.darkTheme;
     },
     toggleManualMode: (state) => {
       state.manualMode = !state.manualMode;

@@ -12,11 +12,23 @@ export default css`
   }
 
   input,
-  button {
+  button,
+  select {
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
+  }
+
+  input,
+  select {
+    padding: 0.1rem 0.5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--light_100);
+    cursor: pointer;
+    overflow: auto;
+    outline: none;
   }
 
   .toast {

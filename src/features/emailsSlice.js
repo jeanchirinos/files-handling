@@ -24,7 +24,7 @@ const emailsSlice = createSlice({
     setCurrentEmailIndex: (state, { payload }) => {
       state.currentEmailIndex = payload;
 
-      const currentEmail = state.emails[payload]?.map((e) => e);
+      const currentEmail = state.emails[payload];
 
       state.plantillasArray = currentEmail.map((p) => p.name);
       state.plantillasToNSTDArray = currentEmail

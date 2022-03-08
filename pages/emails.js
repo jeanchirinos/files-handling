@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import mediaQueries from '../src/styleGuide/breakpoints';
-import { getWorkos } from 'src/features/emailTemplateSlice';
+import { getWorkers } from 'src/features/emailTemplateSlice';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -17,7 +17,7 @@ export default function Emails() {
   const { _leader, _employees } = useEmailTemplate();
 
   useEffect(() => {
-    dispatch(getWorkos());
+    dispatch(getWorkers());
   }, [dispatch]);
 
   const dataIsReady = _leader && _employees;

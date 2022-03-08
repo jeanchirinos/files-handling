@@ -21,8 +21,8 @@ export default function MyApp({ Component, pageProps }) {
           }}
         >
         </div> */}
-        <SettingsButton />
-        <TemporalThemeSwitcher />
+        {/* <SettingsButton /> */}
+        {/* <TemporalThemeSwitcher /> */}
         {/* <TemporalFetcher /> */}
         <Toaster position="bottom-center" />
         <Component {...pageProps} />

@@ -197,7 +197,7 @@ export default function UploadFilesLogic() {
     _plantillasStack.length && __resetPlantillasStack([]);
 
     __setCurrentEmailIndex(0);
-    __resetSubjectType();
+    // __resetSubjectType();
 
     router.push('/emails');
   }

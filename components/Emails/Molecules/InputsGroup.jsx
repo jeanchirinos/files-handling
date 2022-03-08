@@ -25,16 +25,16 @@ export default function InputsGroup() {
     _plantillasArray
   );
 
-  const subjectValue =
+  const subject =
     _area === 'digitacion'
       ? `Plantillas de ${_subjectType.selectedValue} a digitar: ${plantillasInSubject}`
       : _subjectType.selectedValue;
 
   return (
     <StyledInputsGroup>
-      <InputGroup label="Para" value={to()} copyValue={to('copyValue')} />
-      <InputGroup label="CC" value={cc()} copyValue={cc('copyValue')} />
-      <InputGroup label="Asunto" value={subjectValue} />
+      <InputGroup.To value={to()} copyValue={to('copyValue')} />
+      <InputGroup.Cc value={cc()} copyValue={cc('copyValue')} />
+      <InputGroup.Subject value={subject} />
     </StyledInputsGroup>
   );
 }

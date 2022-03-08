@@ -5,7 +5,7 @@ export default function PriorityIndicator() {
   const { _priority } = useEmails();
 
   return (
-    <Wrapper className="small light">
+    <StyledWrapper className="small light">
       <StyledPriorityIndicator
         active={_priority === 'order'}
         title="Las plantillas están en orden"
@@ -18,7 +18,7 @@ export default function PriorityIndicator() {
       >
         Cantidad
       </StyledPriorityIndicator>
-    </Wrapper>
+    </StyledWrapper>
   );
 }
 
@@ -45,7 +45,7 @@ const StyledPriorityIndicator = styled.span(
   `
 );
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   ${StyledPriorityIndicator} {
     :first-child {
       border-top-left-radius: 15px;

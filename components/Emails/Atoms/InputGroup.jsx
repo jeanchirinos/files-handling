@@ -2,60 +2,105 @@ import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import styled from 'styled-components';
 import { copyElement } from '../functions';
 
-export default function InputGroup({ label, value, copyValue }) {
-  const { _area, _leader, __changeSubjectType, __changeWorkers } =
-    useEmailTemplate();
+// Additional Component
+function Input({ value, copyValue }) {
+  return (
+    <input
+      type="text"
+      readOnly
+      value={value}
+      onClick={(e) => copyElement(e, copyValue)}
+      title={copyValue || value}
+    />
+  );
+}
 
-  const selectedLabel =
-    label === 'Asunto' ? (
-      <StyledLabel onClick={__changeSubjectType}>{label}</StyledLabel>
-    ) : (
-      <label>{label}</label>
+// MAIN COMPONENTS
+function To({ value, copyValue }) {
+  const { _area, _leader, __changeWorkers } = useEmailTemplate();
+
+  const selector = () => {
+    const observadasWorkersGroups = JSON.parse(
+      localStorage.observadasWorkersGroups
     );
 
-  const observadasWorkersGroups = JSON.parse(
-    localStorage.observadasWorkersGroups
-  );
-
-  const selectedGroup = observadasWorkersGroups.find(
-    ({ leader }) => leader.email === _leader.email
-  );
-  const options = observadasWorkersGroups.filter(
-    ({ leader }) => leader.email !== _leader.email
-  );
-
-  const selectorButton = () => {
-    if (_area === 'observadas' && label === 'Para') {
-      return (
-        <select onChange={(e) => __changeWorkers(e.target.value)}>
-          <option value={selectedGroup.leader.email}>
-            {selectedGroup.leader.fullname}
-          </option>
-
-          {options.map(({ leader }) => (
-            <option key={leader.email} value={leader.email}>
-              {leader.fullname}
-            </option>
-          ))}
-        </select>
+    const selectedOption = () => {
+      const selectedGroup = observadasWorkersGroups.find(
+        ({ leader }) => leader.email === _leader.email
       );
-    }
+
+      const { leader } = selectedGroup;
+      const { email, fullname } = leader;
+
+      return <option value={email}>{fullname}</option>;
+    };
+
+    const options = observadasWorkersGroups
+      .filter(({ leader }) => leader.email !== _leader.email)
+      .map(({ leader }) => {
+        const { email, fullname } = leader;
+        return (
+          <option key={email} value={email}>
+            {fullname}
+          </option>
+        );
+      });
+
+    return (
+      <StyledSelector>
+        <span onClick={(e) => copyElement(e, copyValue)} />
+        <select onChange={(e) => __changeWorkers(e.target.value)}>
+          {selectedOption()}
+          {options}
+        </select>
+      </StyledSelector>
+    );
   };
+
+  const inputOrSelector =
+    _area === 'digitacion' ? (
+      <Input value={value} copyValue={copyValue} />
+    ) : (
+      selector()
+    );
 
   return (
     <StyledInputGroup>
-      {selectedLabel}
-      <input
-        type="text"
-        value={value}
-        readOnly
-        onClick={(e) => copyElement(e, copyValue)}
-        title={copyValue || value}
-      />
-      {selectorButton()}
+      <label>Para</label>
+      {inputOrSelector}
     </StyledInputGroup>
   );
 }
+
+function Cc({ value, copyValue }) {
+  return (
+    <StyledInputGroup>
+      <label>Cc</label>
+      <Input value={value} copyValue={copyValue} />
+    </StyledInputGroup>
+  );
+}
+
+function Subject({ value }) {
+  const { __changeSubjectType } = useEmailTemplate();
+
+  return (
+    <StyledInputGroup>
+      <StyledLabel onClick={__changeSubjectType}>Asunto</StyledLabel>
+      <Input value={value} />
+    </StyledInputGroup>
+  );
+}
+
+// STYLED COMPONENTS
+const StyledLabel = styled.label`
+  cursor: pointer;
+  user-select: none;
+
+  :hover {
+    color: var(--primary-color);
+  }
+`;
 
 const StyledInputGroup = styled.div`
   display: flex;
@@ -67,28 +112,39 @@ const StyledInputGroup = styled.div`
   }
 
   input {
-    padding: 0.1rem 0.5rem;
     flex-grow: 1;
-    border-radius: 8px;
-    border: none;
-    background-color: var(--light_100);
-    cursor: pointer;
-    overflow: auto;
-    outline: none;
     transition: box-shadow 0.2s;
 
-    :hover,
-    :focus {
+    :hover {
       box-shadow: 0px 0px 5px 2px var(--primary-color);
     }
   }
 `;
 
-const StyledLabel = styled.label`
-  cursor: pointer;
-  user-select: none;
+const StyledSelector = styled.div`
+  width: fit-content;
+  height: fit-content;
+  border-radius: 8px;
+  position: relative;
+  transition: box-shadow 0.2s;
 
   :hover {
-    color: var(--primary-color);
+    box-shadow: 0px 0px 5px 2px var(--primary-color);
+  }
+
+  span {
+    width: calc(100% - 24px);
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
   }
 `;
+
+// EXPORT
+const InputGroup = {
+  To,
+  Cc,
+  Subject,
+};
+
+export default InputGroup;

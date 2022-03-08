@@ -15,7 +15,7 @@ const initialState = {
   area: 'digitacion',
 };
 
-export const getWorkos = createAsyncThunk('getWorkos', async () => {
+export const getWorkers = createAsyncThunk('getWorkers', async () => {
   if (
     localStorage.digitacionWorkersGroup &&
     localStorage.observadasWorkersGroups
@@ -81,37 +81,30 @@ const emailTemplateSlice = createSlice({
 
       if (payload === 'observadas') {
         const parsedGroup = JSON.parse(localStorage.observadasWorkersGroups);
-        const defaultLeader = parsedGroup[0].leader;
-        const defaultEmployees = parsedGroup[0].employees;
 
-        state.leader = defaultLeader;
-        state.employees = defaultEmployees;
-        state.subjectType.values = [
-          'Plantillas observadas de campo',
-          'Plantillas observadas de campo PRESENCIAL',
-          'Plantillas para verificar',
-        ];
-        state.subjectType.index = 0;
-        state.subjectType.selectedValue = 'Plantillas observadas de campo';
+        state.leader = parsedGroup[0].leader;
+        state.employees = parsedGroup[0].employees;
+
+        state.subjectType = {
+          values: [
+            'Plantillas observadas de campo',
+            'Plantillas observadas de campo PRESENCIAL',
+            'Plantillas para verificar',
+          ],
+          index: 0,
+          selectedValue: 'Plantillas observadas de campo',
+        };
       } else {
         const parsedGroup = JSON.parse(localStorage.digitacionWorkersGroup);
-        const defaultLeader = parsedGroup.leader;
-        const defaultEmployees = parsedGroup.employees;
 
-        state.leader = defaultLeader;
-        state.employees = defaultEmployees;
-        state.subjectType.values = [
-          'de campo',
-          'de campo PRESENCIAL',
-          'de OAD',
-        ];
-        state.subjectType.index = 0;
-        state.subjectType.selectedValue = 'de campo';
+        state.leader = parsedGroup.leader;
+        state.employees = parsedGroup.employees;
+        state.subjectType = initialState.subjectType;
       }
     },
   },
   extraReducers: {
-    [getWorkos.fulfilled]: (state, { payload }) => {
+    [getWorkers.fulfilled]: (state, { payload }) => {
       !state.leader && (state.leader = payload.leader);
       !state.employees && (state.employees = payload.employees);
     },

@@ -1,42 +1,54 @@
 import styled from 'styled-components';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
-import { GrUpdate } from 'react-icons/gr';
+import { MdUpdate } from 'react-icons/md';
 import { db } from '../../src/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
 export default function TemporalThemeSwitcher() {
-  const { __setWorkers_observadas, __setWorkers_digitacion } =
-    useEmailTemplate();
+  const { _area, __setLeader, __setEmployees } = useEmailTemplate();
 
   async function handleFetch() {
-    async function fetchFromFirebase(collectionName, localStorageKey) {
-      const collectionRef = collection(db, collectionName);
-      const querySnapshot = await getDocs(collectionRef);
-      const firebaseData = querySnapshot.docs.map((doc) => doc.data());
+    const querySnapshot = await getDocs(collection(db, 'workers'));
+    const firebaseData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
-      localStorage[localStorageKey] = JSON.stringify(firebaseData);
-
-      return firebaseData;
-    }
-
-    const digitacionData = await fetchFromFirebase('employees', 'workers');
-    const observadasData = await fetchFromFirebase(
-      'workers_observadas',
-      'observadasWorkers'
+    const digitacionWorkersGroup = firebaseData.find(
+      (group) => group.id === 'digitacion'
+    );
+    const observadasWorkersGroups = firebaseData.filter(
+      (group) => group.id !== 'digitacion'
     );
 
-    __setWorkers_digitacion(digitacionData);
-    __setWorkers_observadas(observadasData);
+    localStorage.digitacionWorkersGroup = JSON.stringify(
+      digitacionWorkersGroup
+    );
+    localStorage.observadasWorkersGroups = JSON.stringify(
+      observadasWorkersGroups
+    );
+
+    if (_area === 'digitacion') {
+      __setLeader(digitacionWorkersGroup.leader);
+      __setEmployees(digitacionWorkersGroup.employees);
+    }
+
+    if (_area === 'observadas') {
+      __setLeader(observadasWorkersGroups[0].leader);
+      __setEmployees(observadasWorkersGroups[0].employees);
+    }
   }
 
-  return <StyledTemporalFetcher onClick={handleFetch} />;
+  return (
+    <StyledTemporalFetcher onClick={handleFetch} title="Refresca los datos" />
+  );
 }
 
-const StyledTemporalFetcher = styled(GrUpdate)`
+const StyledTemporalFetcher = styled(MdUpdate)`
   position: absolute;
   top: 25px;
-  right: calc(var(--padding) + 50px);
-  font-size: 1.2rem;
+  right: calc(var(--padding) + 75px);
+  font-size: 1.4rem;
   cursor: pointer;
   z-index: 9;
 `;

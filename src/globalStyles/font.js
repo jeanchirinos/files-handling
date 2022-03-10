@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import { fontWeight, lineHeight } from '../styleGuide/font';
 
-export const lineHeights = css`
+export const aboutFont = css`
   /* LINE HEIGHTS */
   --lh_1: ${lineHeight._1};
   --lh_2: ${lineHeight._2};

@@ -34,7 +34,8 @@ export default function AreaIndicator() {
 
 const StyledAreaIndicator = styled.span(
   ({ active }) => css`
-    padding: 0.6rem 1.4rem;
+    padding: 0.2rem 1rem;
+    padding: 0.5rem 1rem;
     border-width: 1px;
     border-style: solid;
 

@@ -2,17 +2,19 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useSelector, useDispatch } from 'react-redux';
 import { db } from '../../src/firebase';
 import { collection, getDocs } from 'firebase/firestore';
+import { digitacion, observadas } from '../../src/data';
 
 //* INITIAL STATE
 const initialState = {
   leader: undefined,
   employees: undefined,
-  subjectType: {
-    values: ['de campo', 'de campo PRESENCIAL', 'de OAD'],
+  subject: {
     index: 0,
-    selectedValue: 'de campo',
+    value: digitacion.subjects[0],
   },
+  messageAfterName: digitacion.messageAfterName[0],
   area: 'digitacion',
+  dataIsBeingFetched: false,
 };
 
 export const getWorkers = createAsyncThunk('getWorkers', async () => {
@@ -49,19 +51,39 @@ const emailTemplateSlice = createSlice({
   name: 'emailTemplateSlice',
   initialState,
   reducers: {
-    changeSubjectType: (state) => {
-      const { index, values } = state.subjectType;
+    changeSubject: (state) => {
+      const { area, subject } = state;
+      const { index } = subject;
 
-      const newIndex = index === values.length - 1 ? 0 : index + 1;
+      if (area === 'digitacion') {
+        const { subjects, messageAfterName } = digitacion;
 
-      state.subjectType.index = newIndex;
-      state.subjectType.selectedValue = values[newIndex];
+        const newIndex = index === subjects.length - 1 ? 0 : index + 1;
+
+        state.subject = {
+          index: newIndex,
+          value: subjects[newIndex],
+        };
+
+        state.messageAfterName = messageAfterName[newIndex];
+      }
+
+      if (area === 'observadas') {
+        const { subjects } = observadas;
+
+        const newIndex = index === subjects.length - 1 ? 0 : index + 1;
+
+        state.subject = {
+          index: newIndex,
+          value: subjects[newIndex],
+        };
+      }
     },
-    resetSubjectType: (state) => {
-      const { values } = state.subjectType;
-
-      state.subjectType.index = 0;
-      state.subjectType.selectedValue = values[0];
+    resetSubject: (state) => {
+      state.subject = {
+        index: 0,
+        value: digitacion.subjects[0],
+      };
     },
     changeWorkers: (state, { payload }) => {
       const parsedObservadasWorkersGroups = JSON.parse(
@@ -85,22 +107,27 @@ const emailTemplateSlice = createSlice({
         state.leader = parsedGroup[0].leader;
         state.employees = parsedGroup[0].employees;
 
-        state.subjectType = {
-          values: [
-            'Plantillas observadas de campo',
-            'Plantillas observadas de campo PRESENCIAL',
-            'Plantillas para verificar',
-          ],
+        state.subject = {
           index: 0,
-          selectedValue: 'Plantillas observadas de campo',
+          value: observadas.subjects[0],
         };
+
+        state.messageAfterName = observadas.messageAfterName;
       } else {
         const parsedGroup = JSON.parse(localStorage.digitacionWorkersGroup);
 
         state.leader = parsedGroup.leader;
         state.employees = parsedGroup.employees;
-        state.subjectType = initialState.subjectType;
+        state.subject = initialState.subject;
+
+        state.messageAfterName = initialState.messageAfterName;
       }
+    },
+    setLeader: (state, { payload }) => {
+      state.leader = payload;
+    },
+    setEmployees: (state, { payload }) => {
+      state.employees = payload;
     },
   },
   extraReducers: {
@@ -115,12 +142,21 @@ const emailTemplateSlice = createSlice({
 //? States
 const leader = ({ emailTemplate }) => emailTemplate.leader;
 const employees = ({ emailTemplate }) => emailTemplate.employees;
-const subjectType = ({ emailTemplate }) => emailTemplate.subjectType;
+const subject = ({ emailTemplate }) => emailTemplate.subject;
+const messageAfterName = ({ emailTemplate }) => emailTemplate.messageAfterName;
 const area = ({ emailTemplate }) => emailTemplate.area;
+export const dataIsBeingFetched = ({ emailTemplate }) =>
+  emailTemplate.dataIsBeingFetched;
 
 //? Actions
-const { changeSubjectType, resetSubjectType, changeWorkers, changeArea } =
-  emailTemplateSlice.actions;
+const {
+  changeSubject,
+  resetSubject,
+  changeWorkers,
+  changeArea,
+  setLeader,
+  setEmployees,
+} = emailTemplateSlice.actions;
 
 //? Reducer
 export const emailTemplateReducer = emailTemplateSlice.reducer;
@@ -132,11 +168,14 @@ export default function useEmailTemplate() {
   return {
     _leader: useSelector(leader),
     _employees: useSelector(employees),
-    _subjectType: useSelector(subjectType),
+    _subject: useSelector(subject),
+    _messageAfterName: useSelector(messageAfterName),
     _area: useSelector(area),
-    __changeSubjectType: () => dispatch(changeSubjectType()),
-    __resetSubjectType: () => dispatch(resetSubjectType()),
+    __changeSubject: () => dispatch(changeSubject()),
+    __resetSubject: () => dispatch(resetSubject()),
     __changeWorkers: (payload) => dispatch(changeWorkers(payload)),
     __changeArea: (payload) => dispatch(changeArea(payload)),
+    __setLeader: (payload) => dispatch(setLeader(payload)),
+    __setEmployees: (payload) => dispatch(setEmployees(payload)),
   };
 }

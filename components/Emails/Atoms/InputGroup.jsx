@@ -82,11 +82,11 @@ function Cc({ value, copyValue }) {
 }
 
 function Subject({ value }) {
-  const { __changeSubjectType } = useEmailTemplate();
+  const { __changeSubject } = useEmailTemplate();
 
   return (
     <StyledInputGroup>
-      <StyledLabel onClick={__changeSubjectType}>Asunto</StyledLabel>
+      <StyledLabel onClick={__changeSubject}>Asunto</StyledLabel>
       <Input value={value} />
     </StyledInputGroup>
   );

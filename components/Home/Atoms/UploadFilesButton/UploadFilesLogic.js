@@ -4,6 +4,7 @@ import usePlantillas from '@/hooks/plantillasSlice';
 import useEmails from '@/hooks/emailsSlice';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { alertUser } from '../../functions';
+import { MAX_FILE_SIZE } from 'src/data';
 
 export default function UploadFilesLogic() {
   const router = useRouter();
@@ -11,7 +12,7 @@ export default function UploadFilesLogic() {
   const { __addToPlantillasStack, _plantillasStack, __resetPlantillasStack } =
     usePlantillas();
   const { __setEmails, __setPriority, __setCurrentEmailIndex } = useEmails();
-  const { __resetSubjectType } = useEmailTemplate();
+  const { __resetSubject } = useEmailTemplate();
 
   function openFileExplorer() {
     document.getElementById('inputFile').click();
@@ -45,11 +46,11 @@ export default function UploadFilesLogic() {
         (file.size * 0.000000953674316).toFixed(2)
       );
 
-      if (fileSizeInMb >= 24.9) {
+      if (fileSizeInMb >= MAX_FILE_SIZE) {
         alertUser('el peso excede el límite', file.name);
       }
 
-      return fileSizeInMb < 24.9;
+      return fileSizeInMb < MAX_FILE_SIZE;
     });
 
     if (!fileWeightIsCorrect) {
@@ -60,7 +61,7 @@ export default function UploadFilesLogic() {
   };
 
   const renamePlantillaIfIncorrect = (plantilla) => {
-    const correctCharacters = ['P90', 'VA0', 'BO0', 'PL0'];
+    const correctCharacters = ['P90', 'VA0', 'BO0', 'BM0', 'PL0'];
 
     const threeFirstCharactersOfPlantilla =
       plantilla[0] + plantilla[1] + plantilla[2];
@@ -154,11 +155,11 @@ export default function UploadFilesLogic() {
     allFiles.forEach((file) => {
       if (!auxAllFiles.includes(file)) return;
 
-      if (acumulator + file.size < 24.9) {
+      if (acumulator + file.size < MAX_FILE_SIZE) {
         addItem(file, 'quantity');
       } else {
         auxAllFiles.forEach((file) => {
-          if (file.size + acumulator < 24.9) {
+          if (file.size + acumulator < MAX_FILE_SIZE) {
             addItem(file, 'quantity');
             removeElementFromAuxArray(file);
           }
@@ -175,7 +176,7 @@ export default function UploadFilesLogic() {
 
     // emailsWithOrderPriority
     allFiles.forEach((file) => {
-      if (acumulator2 + file.size < 24.9) {
+      if (acumulator2 + file.size < MAX_FILE_SIZE) {
         addItem(file, 'order');
       } else {
         currentIndex2++;
@@ -197,7 +198,7 @@ export default function UploadFilesLogic() {
     _plantillasStack.length && __resetPlantillasStack([]);
 
     __setCurrentEmailIndex(0);
-    // __resetSubjectType();
+    // __resetSubject();
 
     router.push('/emails');
   }

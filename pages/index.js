@@ -8,27 +8,27 @@ import PlantillasStack from '@/Home/Molecules/PlantillasStack';
 import { closeContextMenu } from '@/Home/functions';
 
 export default function Home() {
-  const [isDragginOver, setIsDragginOver] = useState(false);
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
   const { uploadFiles } = UploadFilesLogic();
 
   function handleDragOver(e) {
     e.preventDefault();
-    !isDragginOver && setIsDragginOver(true);
+    !isDraggingOver && setIsDraggingOver(true);
   }
 
   function handleDrop(e) {
     e.preventDefault();
-    setIsDragginOver(false);
+    setIsDraggingOver(false);
     uploadFiles(e);
   }
 
   return (
     <StyledHome
-      isDraggingOver={isDragginOver}
+      isDraggingOver={isDraggingOver}
       onClick={closeContextMenu}
-      onDragOver={(e) => handleDragOver(e)}
-      onDragLeave={() => setIsDragginOver(false)}
-      onDrop={(e) => handleDrop(e)}
+      onDragOver={handleDragOver}
+      onDragLeave={() => setIsDraggingOver(false)}
+      onDrop={handleDrop}
     >
       <UploadFilesButton />
       <p>o</p>

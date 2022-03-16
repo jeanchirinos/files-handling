@@ -9,16 +9,16 @@ export default function TemporalThemeSwitcher() {
 
   async function handleFetch() {
     const querySnapshot = await getDocs(collection(db, 'workers'));
-    const firebaseData = querySnapshot.docs.map((doc) => ({
+    const firebaseData = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
     }));
 
     const digitacionWorkersGroup = firebaseData.find(
-      (group) => group.id === 'digitacion'
+      group => group.id === 'digitacion'
     );
     const observadasWorkersGroups = firebaseData.filter(
-      (group) => group.id !== 'digitacion'
+      group => group.id !== 'digitacion'
     );
 
     localStorage.digitacionWorkersGroup = JSON.stringify(

@@ -8,7 +8,7 @@ export default function NSTDSection() {
   const { _plantillasToNSTDArray } = useEmails();
   const { _area } = useEmailTemplate();
 
-  const plantillas = _plantillasToNSTDArray.map((p) => (
+  const plantillas = _plantillasToNSTDArray.map(p => (
     <PlantillaToNSTD key={p} name={p} />
   ));
 

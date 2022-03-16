@@ -8,7 +8,7 @@ export default function PlantillasList() {
   // data
   const title = `Cantidad: ${_plantillasArray?.length}`;
 
-  const plantillas = _plantillasArray?.map((p) => (
+  const plantillas = _plantillasArray?.map(p => (
     <Fragment key={p}>
       <span>{p}</span>
       <br />

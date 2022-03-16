@@ -22,21 +22,18 @@ export default function Emails() {
 
   const dataIsReady = _leader && _employees;
 
-  return (
-    <>
-      {dataIsReady ? (
-        <StyledEmails>
-          <HomeButton />
-          <AreaIndicator />
-          <EmailsSection />
-          <EmailTemplateSection />
-          <NSTDSection />
-        </StyledEmails>
-      ) : (
-        <SpinnerLoader />
-      )}
-    </>
-  );
+  if (dataIsReady)
+    return (
+      <StyledEmails>
+        <HomeButton />
+        <AreaIndicator />
+        <EmailsSection />
+        <EmailTemplateSection />
+        <NSTDSection />
+      </StyledEmails>
+    );
+
+  return <SpinnerLoader />;
 }
 
 const StyledEmails = styled.main`

@@ -8,7 +8,7 @@ export default function Message() {
   const { _leader, _messageAfterName } = useEmailTemplate();
 
   return (
-    <StyledMessage onClick={(e) => copyElement(e)}>
+    <StyledMessage onClick={copyElement}>
       <span>{_leader.name},</span>
       <br />
       {_messageAfterName}

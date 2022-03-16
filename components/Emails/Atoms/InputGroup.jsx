@@ -9,7 +9,7 @@ function Input({ value, copyValue }) {
       type="text"
       readOnly
       value={value}
-      onClick={(e) => copyElement(e, copyValue)}
+      onClick={e => copyElement(e, copyValue)}
       title={copyValue || value}
     />
   );
@@ -17,8 +17,9 @@ function Input({ value, copyValue }) {
 
 // MAIN COMPONENTS
 function To({ value, copyValue }) {
-  const { _area, _leader, __changeWorkers } = useEmailTemplate();
+  const { _area, _leader, __changeObservadasWorkers } = useEmailTemplate();
 
+  // SELECTOR
   const selector = () => {
     const observadasWorkersGroups = JSON.parse(
       localStorage.observadasWorkersGroups
@@ -48,8 +49,8 @@ function To({ value, copyValue }) {
 
     return (
       <StyledSelector>
-        <span onClick={(e) => copyElement(e, copyValue)} />
-        <select onChange={(e) => __changeWorkers(e.target.value)}>
+        <span onClick={e => copyElement(e, copyValue)} />
+        <select onChange={e => __changeObservadasWorkers(e.target.value)}>
           {selectedOption()}
           {options}
         </select>

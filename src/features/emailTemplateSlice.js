@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { db } from '../../src/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { digitacion, observadas } from '../../src/data';
+import {
+  digitacionWorkersGroupBackUp,
+  observadasWorkersGroupsBackUp,
+} from 'src/backupData';
 
 //* INITIAL STATE
 const initialState = {
@@ -25,17 +29,18 @@ export const getWorkers = createAsyncThunk('getWorkers', async () => {
     return JSON.parse(localStorage.digitacionWorkersGroup);
   }
 
-  const querySnapshot = await getDocs(collection(db, 'workers'));
-  const firebaseData = querySnapshot.docs.map((doc) => ({
+  const collectionRef = collection(db, 'workers');
+  const querySnapshot = await getDocs(collectionRef);
+  const firebaseData = querySnapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data(),
   }));
 
   const digitacionWorkersGroup = firebaseData.find(
-    (group) => group.id === 'digitacion'
+    group => group.id === 'digitacion'
   );
   const observadasWorkersGroups = firebaseData.filter(
-    (group) => group.id !== 'digitacion'
+    group => group.id !== 'digitacion'
   );
 
   localStorage.digitacionWorkersGroup = JSON.stringify(digitacionWorkersGroup);
@@ -51,8 +56,8 @@ const emailTemplateSlice = createSlice({
   name: 'emailTemplateSlice',
   initialState,
   reducers: {
-    changeSubject: (state) => {
-      const { area, subject } = state;
+    changeSubject: s => {
+      const { area, subject } = s;
       const { index } = subject;
 
       if (area === 'digitacion') {
@@ -60,12 +65,12 @@ const emailTemplateSlice = createSlice({
 
         const newIndex = index === subjects.length - 1 ? 0 : index + 1;
 
-        state.subject = {
+        s.subject = {
           index: newIndex,
           value: subjects[newIndex],
         };
 
-        state.messageAfterName = messageAfterName[newIndex];
+        s.messageAfterName = messageAfterName[newIndex];
       }
 
       if (area === 'observadas') {
@@ -73,86 +78,93 @@ const emailTemplateSlice = createSlice({
 
         const newIndex = index === subjects.length - 1 ? 0 : index + 1;
 
-        state.subject = {
+        s.subject = {
           index: newIndex,
           value: subjects[newIndex],
         };
       }
     },
-    resetSubject: (state) => {
-      state.subject = {
-        index: 0,
-        value: digitacion.subjects[0],
-      };
+    resetSubject: s => {
+      s.subject = initialState.subject;
     },
-    changeWorkers: (state, { payload }) => {
+    changeObservadasWorkers: (s, { payload }) => {
       const parsedObservadasWorkersGroups = JSON.parse(
         localStorage.observadasWorkersGroups
       );
 
       const newGroup = parsedObservadasWorkersGroups.find(
-        ({ leader }) => leader.email === payload
+        group => group.leader.email === payload
       );
 
-      state.leader = newGroup.leader;
-      state.employees = newGroup.employees;
+      s.leader = newGroup.leader;
+      s.employees = newGroup.employees;
     },
 
-    changeArea: (state, { payload }) => {
-      state.area = payload;
+    changeArea: (s, { payload }) => {
+      s.area = payload;
 
       if (payload === 'observadas') {
         const parsedGroup = JSON.parse(localStorage.observadasWorkersGroups);
 
-        state.leader = parsedGroup[0].leader;
-        state.employees = parsedGroup[0].employees;
+        s.leader = parsedGroup[0].leader;
+        s.employees = parsedGroup[0].employees;
 
-        state.subject = {
-          index: 0,
-          value: observadas.subjects[0],
-        };
+        s.subject = initialState.subject;
 
-        state.messageAfterName = observadas.messageAfterName;
+        s.messageAfterName = observadas.messageAfterName;
       } else {
         const parsedGroup = JSON.parse(localStorage.digitacionWorkersGroup);
 
-        state.leader = parsedGroup.leader;
-        state.employees = parsedGroup.employees;
-        state.subject = initialState.subject;
+        s.leader = parsedGroup.leader;
+        s.employees = parsedGroup.employees;
+        s.subject = initialState.subject;
 
-        state.messageAfterName = initialState.messageAfterName;
+        s.messageAfterName = initialState.messageAfterName;
       }
     },
-    setLeader: (state, { payload }) => {
-      state.leader = payload;
+    setLeader: (s, { payload }) => {
+      s.leader = payload;
     },
-    setEmployees: (state, { payload }) => {
-      state.employees = payload;
+    setEmployees: (s, { payload }) => {
+      s.employees = payload;
     },
   },
   extraReducers: {
-    [getWorkers.fulfilled]: (state, { payload }) => {
-      !state.leader && (state.leader = payload.leader);
-      !state.employees && (state.employees = payload.employees);
+    [getWorkers.fulfilled]: (s, { payload }) => {
+      const { leader, employees } = payload;
+
+      !s.leader && (s.leader = leader);
+      !s.employees && (s.employees = employees);
+    },
+    [getWorkers.rejected]: s => {
+      const { leader, employees } = digitacionWorkersGroupBackUp;
+
+      s.leader = leader;
+      s.employees = employees;
+
+      localStorage.digitacionWorkersGroup = JSON.stringify(
+        digitacionWorkersGroupBackUp
+      );
+      localStorage.observadasWorkersGroups = JSON.stringify(
+        observadasWorkersGroupsBackUp
+      );
     },
   },
 });
 
 //* EXPORTS
 //? States
-const leader = ({ emailTemplate }) => emailTemplate.leader;
-const employees = ({ emailTemplate }) => emailTemplate.employees;
-const subject = ({ emailTemplate }) => emailTemplate.subject;
-const messageAfterName = ({ emailTemplate }) => emailTemplate.messageAfterName;
-const area = ({ emailTemplate }) => emailTemplate.area;
-export const dataIsBeingFetched = ({ emailTemplate }) =>
-  emailTemplate.dataIsBeingFetched;
+const leader = s => s.emailTemplate.leader;
+const employees = s => s.emailTemplate.employees;
+const subject = s => s.emailTemplate.subject;
+const messageAfterName = s => s.emailTemplate.messageAfterName;
+const area = s => s.emailTemplate.area;
 
 //? Actions
 const {
   changeSubject,
   resetSubject,
-  changeWorkers,
+  changeObservadasWorkers,
   changeArea,
   setLeader,
   setEmployees,
@@ -173,9 +185,10 @@ export default function useEmailTemplate() {
     _area: useSelector(area),
     __changeSubject: () => dispatch(changeSubject()),
     __resetSubject: () => dispatch(resetSubject()),
-    __changeWorkers: (payload) => dispatch(changeWorkers(payload)),
-    __changeArea: (payload) => dispatch(changeArea(payload)),
-    __setLeader: (payload) => dispatch(setLeader(payload)),
-    __setEmployees: (payload) => dispatch(setEmployees(payload)),
+    __changeObservadasWorkers: payload =>
+      dispatch(changeObservadasWorkers(payload)),
+    __changeArea: payload => dispatch(changeArea(payload)),
+    __setLeader: payload => dispatch(setLeader(payload)),
+    __setEmployees: payload => dispatch(setEmployees(payload)),
   };
 }

@@ -16,14 +16,12 @@ export default function ComponentWrapper({ children }) {
   }, [dispatch]);
 
   return (
-    <>
-      {_darkTheme !== undefined && (
-        <ThemeProvider theme={_darkTheme ? dark : light}>
-          <GlobalStyles />
-          <CustomHead />
-          {children}
-        </ThemeProvider>
-      )}
-    </>
+    _darkTheme !== undefined && (
+      <ThemeProvider theme={_darkTheme ? dark : light}>
+        <GlobalStyles />
+        <CustomHead />
+        {children}
+      </ThemeProvider>
+    )
   );
 }

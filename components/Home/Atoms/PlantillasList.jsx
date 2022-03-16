@@ -10,28 +10,21 @@ export default function PlantillasList() {
     e.preventDefault();
     closeContextMenu();
 
-    const plantillaSelected = document.getElementById(name);
-    plantillaSelected.classList.toggle('selected');
+    const deleteButtonSelected = document.getElementById(name);
+    deleteButtonSelected.classList.toggle('selected');
   }
 
-  return (
-    <>
-      {_plantillasStack.map(({ name }) => (
-        <StyledPlantilla key={name}>
-          <p
-            className="small light"
-            onContextMenu={(e) => toggleContextMenu(e, name)}
-          >
-            {name}
-          </p>
-          <StyledDeleteButton
-            id={name}
-            onClick={() => __deleteFromStack(name)}
-          />
-        </StyledPlantilla>
-      ))}
-    </>
-  );
+  return _plantillasStack.map(({ name }) => (
+    <StyledPlantilla key={name}>
+      <p
+        className="small light"
+        onContextMenu={e => toggleContextMenu(e, name)}
+      >
+        {name}
+      </p>
+      <StyledDeleteButton id={name} onClick={() => __deleteFromStack(name)} />
+    </StyledPlantilla>
+  ));
 }
 
 const StyledPlantilla = styled.div`

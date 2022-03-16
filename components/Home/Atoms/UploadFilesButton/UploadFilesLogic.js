@@ -18,57 +18,44 @@ export default function UploadFilesLogic() {
     document.getElementById('inputFile').click();
   }
 
-  const validationsToUpload = (selectedFiles) => {
-    if (!selectedFiles.length) {
-      // console.log('No se ha seleccionado ningun archivo');
+  const validationsToUpload = selectedFiles => {
+    if (!selectedFiles.length) return;
+
+    const isAPdf = selectedFiles.every(file => {
+      const { name, type } = file;
+
+      if (type === 'application/pdf') return true;
+
+      alertUser('no es un pdf', name);
       return;
-    }
-
-    const isAPdf = selectedFiles.every((file) => {
-      const fileExtension = file.name.substring(
-        file.name.length - 4,
-        file.name.length
-      );
-
-      if (fileExtension.toUpperCase() !== '.PDF') {
-        alertUser('no es un pdf', file.name);
-      }
-
-      return fileExtension.toUpperCase() === '.PDF';
     });
 
-    if (!isAPdf) {
-      return;
-    }
+    if (!isAPdf) return;
 
-    const fileWeightIsCorrect = selectedFiles.every((file) => {
+    const fileWeightIsCorrect = selectedFiles.every(file => {
       const fileSizeInMb = parseFloat(
         (file.size * 0.000000953674316).toFixed(2)
       );
 
-      if (fileSizeInMb >= MAX_FILE_SIZE) {
+      if (fileSizeInMb >= MAX_FILE_SIZE)
         alertUser('el peso excede el límite', file.name);
-      }
 
       return fileSizeInMb < MAX_FILE_SIZE;
     });
 
-    if (!fileWeightIsCorrect) {
-      return;
-    }
+    if (!fileWeightIsCorrect) return;
 
     return true;
   };
 
-  const renamePlantillaIfIncorrect = (plantilla) => {
+  const renamePlantillaIfIncorrect = plantilla => {
     const correctCharacters = ['P90', 'VA0', 'BO0', 'BM0', 'PL0'];
 
     const threeFirstCharactersOfPlantilla =
       plantilla[0] + plantilla[1] + plantilla[2];
 
-    if (correctCharacters.includes(threeFirstCharactersOfPlantilla)) {
+    if (correctCharacters.includes(threeFirstCharactersOfPlantilla))
       return plantilla.substring(0, 11);
-    }
 
     for (let i = 0; i < plantilla.length; i++) {
       const threeCharacters =
@@ -91,11 +78,11 @@ export default function UploadFilesLogic() {
     const validations = validationsToUpload(selectedFiles);
     if (!validations) return;
 
-    const filteredFiles = selectedFiles.filter((file) =>
+    const filteredFiles = selectedFiles.filter(file =>
       renamePlantillaIfIncorrect(file.name)
     );
 
-    const allFiles = filteredFiles.map((file) => {
+    const allFiles = filteredFiles.map(file => {
       const fileName = renamePlantillaIfIncorrect(file.name);
 
       const fileSizeInMb = parseFloat(
@@ -105,12 +92,17 @@ export default function UploadFilesLogic() {
       let NSTDNumber;
       if (fileName[0] !== 'B' && fileName[10] !== 'A') {
         NSTDNumber = fileName.substring(3, 11);
+
+        return {
+          name: fileName,
+          size: fileSizeInMb,
+          NSTDNumber,
+        };
       }
 
       return {
         name: fileName,
         size: fileSizeInMb,
-        NSTDNumber,
       };
     });
 
@@ -126,15 +118,15 @@ export default function UploadFilesLogic() {
     // emailsWQP = emailsWithQuantityPriority
     const emailsWQP = [[]];
     const currentIndex = 0;
-    let acumulator = 0;
+    let accumulator = 0;
     const auxAllFiles = [...allFiles];
 
     // emailsWOP = emailsWithOrderPriority
     const emailsWOP = [[]];
     const currentIndex2 = 0;
-    let acumulator2 = 0;
+    let accumulator2 = 0;
 
-    const removeElementFromAuxArray = (file) => {
+    const removeElementFromAuxArray = file => {
       const indexToRemove = auxAllFiles.indexOf(file);
       auxAllFiles.splice(indexToRemove, 1);
     };
@@ -142,24 +134,24 @@ export default function UploadFilesLogic() {
     const addItem = (file, priority) => {
       if (priority === 'quantity') {
         emailsWQP[currentIndex].push(file);
-        acumulator += file.size;
+        accumulator += file.size;
       }
 
       if (priority === 'order') {
         emailsWOP[currentIndex2].push(file);
-        acumulator2 += file.size;
+        accumulator2 += file.size;
       }
     };
 
     // emailsWithQuantityPriority
-    allFiles.forEach((file) => {
+    allFiles.forEach(file => {
       if (!auxAllFiles.includes(file)) return;
 
-      if (acumulator + file.size < MAX_FILE_SIZE) {
+      if (accumulator + file.size < MAX_FILE_SIZE) {
         addItem(file, 'quantity');
       } else {
-        auxAllFiles.forEach((file) => {
-          if (file.size + acumulator < MAX_FILE_SIZE) {
+        auxAllFiles.forEach(file => {
+          if (file.size + accumulator < MAX_FILE_SIZE) {
             addItem(file, 'quantity');
             removeElementFromAuxArray(file);
           }
@@ -167,7 +159,7 @@ export default function UploadFilesLogic() {
 
         currentIndex++;
         emailsWQP[currentIndex] = [];
-        acumulator = 0;
+        accumulator = 0;
         addItem(file, 'quantity');
       }
 
@@ -175,13 +167,13 @@ export default function UploadFilesLogic() {
     });
 
     // emailsWithOrderPriority
-    allFiles.forEach((file) => {
-      if (acumulator2 + file.size < MAX_FILE_SIZE) {
+    allFiles.forEach(file => {
+      if (accumulator2 + file.size < MAX_FILE_SIZE) {
         addItem(file, 'order');
       } else {
         currentIndex2++;
         emailsWOP[currentIndex2] = [];
-        acumulator2 = 0;
+        accumulator2 = 0;
         addItem(file, 'order');
       }
     });

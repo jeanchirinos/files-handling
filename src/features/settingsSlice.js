@@ -12,28 +12,29 @@ const settingsSlice = createSlice({
   name: 'settingsSlice',
   initialState,
   reducers: {
-    getInitialTheme: (state) => {
-      if (localStorage.darkTheme) {
-        state.darkTheme = JSON.parse(localStorage.darkTheme);
-      } else {
-        state.darkTheme = true;
+    getInitialTheme: s => {
+      if (!localStorage.darkTheme) {
+        s.darkTheme = true;
         localStorage.darkTheme = true;
+        return;
       }
+
+      s.darkTheme = JSON.parse(localStorage.darkTheme);
     },
-    toggleDarkTheme: (state) => {
-      state.darkTheme = !state.darkTheme;
-      localStorage.darkTheme = state.darkTheme;
+    toggleDarkTheme: s => {
+      s.darkTheme = !s.darkTheme;
+      localStorage.darkTheme = s.darkTheme;
     },
-    toggleManualMode: (state) => {
-      state.manualMode = !state.manualMode;
+    toggleManualMode: s => {
+      s.manualMode = !s.manualMode;
     },
   },
 });
 
 //* DATA
 //? States
-const darkTheme = ({ settings }) => settings.darkTheme;
-const manualMode = ({ settings }) => settings.manualMode;
+const darkTheme = s => s.settings.darkTheme;
+const manualMode = s => s.settings.manualMode;
 
 //? Actions
 export const { getInitialTheme, toggleDarkTheme, toggleManualMode } =

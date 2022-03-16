@@ -5,13 +5,11 @@ import EmailBox from '../Atoms/EmailBox';
 export default function EmailBoxes() {
   const { _emails } = useEmails();
 
-  return (
-    <StyledEmailBoxes>
-      {_emails.map((email, index) => (
-        <EmailBox key={index} email={email} emailIndex={index} />
-      ))}
-    </StyledEmailBoxes>
-  );
+  const emailBoxes = _emails.map((email, index) => (
+    <EmailBox key={index} email={email} emailIndex={index} />
+  ));
+
+  return <StyledEmailBoxes>{emailBoxes}</StyledEmailBoxes>;
 }
 
 const StyledEmailBoxes = styled.div`

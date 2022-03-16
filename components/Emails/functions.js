@@ -5,12 +5,18 @@ export function copyElement(e, copyValue) {
   const textToCopy = copyValue || e.target.innerText || e.target.value;
   navigator.clipboard.writeText(textToCopy);
 
-  toast.success((t) => <ToastContent id={t.id}>Copiado !</ToastContent>, {
+  const toastContent = toastId => (
+    <ToastContent id={toastId}>Copiado !</ToastContent>
+  );
+
+  const toastProps = {
     duration: 1000,
     className: 'toast success',
     iconTheme: {
       primary: '#FCFBFB',
       secondary: '#75D7B6',
     },
-  });
+  };
+
+  toast.success(t => toastContent(t.id), toastProps);
 }

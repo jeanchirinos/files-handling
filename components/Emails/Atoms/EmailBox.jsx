@@ -11,9 +11,9 @@ export default function EmailBox({ email, emailIndex }) {
     email.length
   }`;
 
-  const plantillas = email.map(({ name }) => (
-    <p className="small light" key={name}>
-      {name}
+  const plantillas = email.map(p => (
+    <p className="small light" key={p.name}>
+      {p.name}
     </p>
   ));
 

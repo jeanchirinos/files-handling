@@ -12,7 +12,8 @@ export default function UploadFilesButton() {
         id="inputFile"
         hidden
         multiple
-        onChange={(e) => uploadFiles(e)}
+        accept="application/pdf"
+        onChange={uploadFiles}
       />
     </>
   );

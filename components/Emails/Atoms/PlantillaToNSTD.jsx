@@ -11,7 +11,7 @@ export default function PlantillaToNSTD({ name }) {
   }
 
   return (
-    <StyledPlantillaToNSTD isCopied={isCopied} onClick={(e) => markAsCopied(e)}>
+    <StyledPlantillaToNSTD isCopied={isCopied} onClick={markAsCopied}>
       {name}
     </StyledPlantillaToNSTD>
   );

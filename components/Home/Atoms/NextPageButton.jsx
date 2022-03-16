@@ -7,17 +7,13 @@ export default function NexPageButton() {
   const { groupEmails } = UploadFilesLogic();
   const { _plantillasStack } = usePlantillas();
 
-  return (
-    <>
-      {_plantillasStack.length ? (
-        <StyledNextPageButton
-          $active
-          onClick={() => groupEmails(_plantillasStack)}
-        />
-      ) : (
-        <StyledNextPageButton title="Añade un archivo!" />
-      )}
-    </>
+  return _plantillasStack.length ? (
+    <StyledNextPageButton
+      $active
+      onClick={() => groupEmails(_plantillasStack)}
+    />
+  ) : (
+    <StyledNextPageButton title="Añade un archivo!" />
   );
 }
 const StyledNextPageButton = styled(AiOutlineArrowRight)(

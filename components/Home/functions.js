@@ -2,27 +2,26 @@ import ToastContent from '@/General/ToastContent';
 import toast from 'react-hot-toast';
 
 export function closeContextMenu() {
-  const plantillaPreviouslySelected = document.querySelector('.selected');
-  plantillaPreviouslySelected?.classList.toggle('selected');
+  const buttonPreviouslySelected = document.querySelector('.selected');
+  buttonPreviouslySelected?.classList.remove('selected');
 }
 
-export function alertUser(errorMessage, plantilla) {
-  const fileWithoutExtension = plantilla.slice(0, -4);
-
-  toast.error(
-    (t) => (
-      <ToastContent id={t.id}>
-        <span>Se excluyó el siguiente archivo, ya que {errorMessage} : </span>
-        <strong>{fileWithoutExtension}</strong>
-      </ToastContent>
-    ),
-    {
-      duration: 30000,
-      className: 'toast error',
-      iconTheme: {
-        primary: '#FCFBFB',
-        secondary: '#ED5D75',
-      },
-    }
+export function alertUser(errorMessage, fileName) {
+  const toastContent = toastId => (
+    <ToastContent id={toastId}>
+      <span>Se excluyó el siguiente archivo, ya que {errorMessage} : </span>
+      <strong>{fileName}</strong>
+    </ToastContent>
   );
+
+  const toastProps = {
+    duration: 30000,
+    className: 'toast error',
+    iconTheme: {
+      primary: '#FCFBFB',
+      secondary: '#ED5D75',
+    },
+  };
+
+  toast.error(t => toastContent(t.id), toastProps);
 }

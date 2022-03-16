@@ -15,32 +15,32 @@ const emailsSlice = createSlice({
   name: 'emailsSlice',
   initialState,
   reducers: {
-    setEmails: (state, { payload }) => {
-      state.emails = payload;
+    setEmails: (s, { payload }) => {
+      s.emails = payload;
     },
-    setPriority: (state, { payload }) => {
-      state.priority = payload;
+    setPriority: (s, { payload }) => {
+      s.priority = payload;
     },
-    setCurrentEmailIndex: (state, { payload }) => {
-      state.currentEmailIndex = payload;
+    setCurrentEmailIndex: (s, { payload }) => {
+      s.currentEmailIndex = payload;
 
-      const currentEmail = state.emails[payload];
+      const currentEmail = s.emails[payload];
 
-      state.plantillasArray = currentEmail.map((p) => p.name);
-      state.plantillasToNSTDArray = currentEmail
-        .filter((p) => p.NSTDNumber)
-        .map((p) => p.NSTDNumber);
+      s.plantillasArray = currentEmail.map(p => p.name);
+      s.plantillasToNSTDArray = currentEmail
+        .filter(p => p.NSTDNumber)
+        .map(p => p.NSTDNumber);
     },
   },
 });
 
 //* DATA
 //? States
-const emails = ({ emails }) => emails.emails;
-const priority = ({ emails }) => emails.priority;
-const currentEmailIndex = ({ emails }) => emails.currentEmailIndex;
-const plantillasToNSTDArray = ({ emails }) => emails.plantillasToNSTDArray;
-const plantillasArray = ({ emails }) => emails.plantillasArray;
+const emails = s => s.emails.emails;
+const priority = s => s.emails.priority;
+const currentEmailIndex = s => s.emails.currentEmailIndex;
+const plantillasToNSTDArray = s => s.emails.plantillasToNSTDArray;
+const plantillasArray = s => s.emails.plantillasArray;
 
 //? Actions
 const { setEmails, setPriority, setCurrentEmailIndex } = emailsSlice.actions;
@@ -58,9 +58,8 @@ export default function useEmails() {
     _currentEmailIndex: useSelector(currentEmailIndex),
     _plantillasToNSTDArray: useSelector(plantillasToNSTDArray),
     _plantillasArray: useSelector(plantillasArray),
-    __setEmails: (payload) => dispatch(setEmails(payload)),
-    __setPriority: (payload) => dispatch(setPriority(payload)),
-    __setCurrentEmailIndex: (payload) =>
-      dispatch(setCurrentEmailIndex(payload)),
+    __setEmails: payload => dispatch(setEmails(payload)),
+    __setPriority: payload => dispatch(setPriority(payload)),
+    __setCurrentEmailIndex: payload => dispatch(setCurrentEmailIndex(payload)),
   };
 }

@@ -9,20 +9,26 @@ export default function InputsGroup() {
   const { _leader, _employees, _subject, _area } = useEmailTemplate();
   const { _plantillasArray } = useEmails();
 
-  // TO
-  const to = (type) => {
-    const { fullname, email } = _leader;
-
+  function emailOrFullname(type, email, fullname) {
     return type === 'copyValue' ? email : fullname;
+  }
+
+  // TO
+  const to = type => {
+    const { email, fullname } = _leader;
+
+    return emailOrFullname(type, email, fullname);
   };
 
   // CC
-  const cc = (type) => {
-    const employeesList = _employees
-      .map(({ fullname, email }) => (type === 'copyValue' ? email : fullname))
-      .join('; ');
+  const cc = type => {
+    const employeesList = _employees.map(e =>
+      emailOrFullname(type, e.email, e.fullname)
+    );
 
-    return employeesList;
+    const listWithSemicolon = employeesList.join('; ');
+
+    return listWithSemicolon;
   };
 
   // SUBJECT

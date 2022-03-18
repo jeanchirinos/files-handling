@@ -40,20 +40,12 @@ export const digitacionWorkersGroupBackUp = {
       email: 'MCANALES@onp.gob.pe',
     },
     {
-      fullname: 'Daniel Camarena',
-      email: 'DCAMARENA@onp.gob.pe',
-    },
-    {
       fullname: 'Jesus Peña',
       email: 'JPENA@onp.gob.pe',
     },
     {
       fullname: 'Maria Echevarria',
       email: 'MECHEVARRIA@onp.gob.pe',
-    },
-    {
-      fullname: 'Maria Valda',
-      email: 'MVALDA@onp.gob.pe',
     },
   ],
 };
@@ -62,9 +54,9 @@ export const observadasWorkersGroupsBackUp = [
   {
     id: 'analisis',
     leader: {
-      fullname: 'Maria Navarrete',
-      name: 'Maria',
-      email: 'mnavarrete@onp.gob.pe',
+      fullname: 'Marta Filomeno',
+      name: 'Marta',
+      email: 'mfilomeno@onp.gob.pe',
     },
     employees: [
       {

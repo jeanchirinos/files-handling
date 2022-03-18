@@ -2,14 +2,14 @@ export const MAX_FILE_SIZE = 24.9;
 
 export const digitacion = {
   subjects: [
-    'Plantillas de de campo a digitar:',
-    'Plantillas de de campo PRESENCIAL a digitar:',
-    'Plantillas de de OAD a digitar:',
+    'Plantillas de campo a digitar:',
+    'Plantillas de campo PRESENCIAL a digitar:',
+    'Plantillas de OAD a digitar:',
   ],
   messageAfterName: [
     'te reasigno las siguientes plantillas de campo para su digitación:',
     'te reasigno las siguientes plantillas de campo PRESENCIAL para su digitación:',
-    'te reasigno las siguientes plantillas de campo OAD para su digitación:',
+    'te reasigno las siguientes plantillas de OAD para su digitación:',
   ],
 };
 

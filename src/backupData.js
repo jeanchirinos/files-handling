@@ -4,28 +4,28 @@ export const digitacionWorkersGroupBackUp = {
   leader: {
     name: 'Ana',
     fullname: 'Ana Huerta',
-    email: 'AHUERTA@onp.gob.pe',
+    email: 'ahuerta@onp.gob.pe',
   },
   employees: [
     {
-      fullname: 'Edwin Paredes',
-      email: 'EPAREDESC@onp.gob.pe',
+      fullname: 'Miguel Yauri',
+      email: 'myauri@onp.gob.pe',
     },
     {
       fullname: 'Bryan Quispe',
-      email: 'BQUISPE@onp.gob.pe',
+      email: 'bquispe@onp.gob.pe',
     },
     {
       fullname: 'Teresa Aznaran',
-      email: 'TAZNARAN@onp.gob.pe',
+      email: 'taznaran@onp.gob.pe',
     },
     {
       fullname: 'Karla Leon',
-      email: 'KLEON@onp.gob.pe',
+      email: 'kleon@onp.gob.pe',
     },
     {
       fullname: 'Rocio Hurtado',
-      email: 'RHURTADO@onp.gob.pe',
+      email: 'rhurtado@onp.gob.pe',
     },
     {
       fullname: 'DPR.GA_018',
@@ -37,15 +37,15 @@ export const digitacionWorkersGroupBackUp = {
     },
     {
       fullname: 'Merly Canales',
-      email: 'MCANALES@onp.gob.pe',
+      email: 'mcanales@onp.gob.pe',
     },
     {
       fullname: 'Jesus Peña',
-      email: 'JPENA@onp.gob.pe',
+      email: 'jpena@onp.gob.pe',
     },
     {
-      fullname: 'Maria Echevarria',
-      email: 'MECHEVARRIA@onp.gob.pe',
+      fullname: 'DPR.GA_064',
+      email: 'dpr.ga_064@onp.gob.pe',
     },
   ],
 };
@@ -60,8 +60,8 @@ export const observadasWorkersGroupsBackUp = [
     },
     employees: [
       {
-        fullname: 'Edwin Paredes',
-        email: 'eparedesc@onp.gob.pe',
+        fullname: 'Miguel Yauri',
+        email: 'myauri@onp.gob.pe',
       },
       {
         fullname: 'Daniel Camarena',
@@ -100,8 +100,8 @@ export const observadasWorkersGroupsBackUp = [
         email: 'rriva@onp.gob.pe',
       },
       {
-        fullname: 'Edwin Paredes',
-        email: 'eparedesc@onp.gob.pe',
+        fullname: 'Miguel Yauri',
+        email: 'myauri@onp.gob.pe',
       },
     ],
   },
@@ -146,8 +146,8 @@ export const observadasWorkersGroupsBackUp = [
     },
     employees: [
       {
-        fullname: 'Edwin Paredes',
-        email: 'eparedesc@onp.gob.pe',
+        fullname: 'Miguel Yauri',
+        email: 'myauri@onp.gob.pe',
       },
     ],
   },
@@ -160,8 +160,8 @@ export const observadasWorkersGroupsBackUp = [
     },
     employees: [
       {
-        fullname: 'Edwin Paredes',
-        email: 'eparedesc@onp.gob.pe',
+        fullname: 'Miguel Yauri',
+        email: 'myauri@onp.gob.pe',
       },
     ],
   },
@@ -188,8 +188,8 @@ export const observadasWorkersGroupsBackUp = [
     },
     employees: [
       {
-        fullname: 'Edwin Paredes',
-        email: 'eparedesc@onp.gob.pe',
+        fullname: 'Miguel Yauri',
+        email: 'myauri@onp.gob.pe',
       },
     ],
   },
@@ -202,8 +202,8 @@ export const observadasWorkersGroupsBackUp = [
     },
     employees: [
       {
-        fullname: 'Edwin Paredes',
-        email: 'eparedesc@onp.gob.pe',
+        fullname: 'Miguel Yauri',
+        email: 'myauri@onp.gob.pe',
       },
     ],
   },

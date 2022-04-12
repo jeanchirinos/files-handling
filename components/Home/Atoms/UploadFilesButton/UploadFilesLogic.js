@@ -48,27 +48,13 @@ export default function UploadFilesLogic() {
     return true;
   };
 
-  const renamePlantillaIfIncorrect = plantilla => {
-    const correctCharacters = ['P90', 'VA0', 'BO0', 'BM0', 'PL0'];
+  const match = text => {
+    const pattern =
+      /(?<code>(?<firstChars>P90|VA0|BO0|PL0)(?<nstdCode>\d{7}(?<lastChar>A|\d))).*\.pdf$/i;
 
-    const threeFirstCharactersOfPlantilla =
-      plantilla[0] + plantilla[1] + plantilla[2];
+    const matched = text.match(pattern);
 
-    if (correctCharacters.includes(threeFirstCharactersOfPlantilla))
-      return plantilla.substring(0, 11);
-
-    for (let i = 0; i < plantilla.length; i++) {
-      const threeCharacters =
-        plantilla[i] + plantilla[i + 1] + plantilla[i + 2];
-
-      if (correctCharacters.includes(threeCharacters)) {
-        const correctNameOfPlantilla = plantilla.substring(i, i + 11);
-
-        return correctNameOfPlantilla;
-      }
-    }
-
-    alertUser('el nombre no es correcto', plantilla);
+    return matched;
   };
 
   function uploadFiles(e) {
@@ -78,33 +64,28 @@ export default function UploadFilesLogic() {
     const validations = validationsToUpload(selectedFiles);
     if (!validations) return;
 
-    const filteredFiles = selectedFiles.filter(file =>
-      renamePlantillaIfIncorrect(file.name)
-    );
+    const allFiles = selectedFiles
+      .filter(file => {
+        const fileMatchedPattern = match(file.name);
 
-    const allFiles = filteredFiles.map(file => {
-      const fileName = renamePlantillaIfIncorrect(file.name);
+        if (!fileMatchedPattern)
+          alertUser('el nombre no es correcto', file.name);
 
-      const fileSizeInMb = parseFloat(
-        (file.size * 0.000000953674316).toFixed(2)
-      );
+        return fileMatchedPattern;
+      })
+      .map(file => {
+        const fileSizeInMb = parseFloat(
+          (file.size * 0.000000953674316).toFixed(2)
+        );
 
-      let NSTDNumber;
-      if (fileName[0] !== 'B' && fileName[10] !== 'A') {
-        NSTDNumber = fileName.substring(3, 11);
+        const { groups } = match(file.name);
+        const { code, firstChars, nstdCode, lastChar } = groups;
 
-        return {
-          name: fileName,
-          size: fileSizeInMb,
-          NSTDNumber,
-        };
-      }
+        if (firstChars !== 'BO0' && lastChar !== 'A')
+          return { name: code, size: fileSizeInMb, NSTDNumber: nstdCode };
 
-      return {
-        name: fileName,
-        size: fileSizeInMb,
-      };
-    });
+        return { name: code, size: fileSizeInMb };
+      });
 
     if (!allFiles.length) return;
 

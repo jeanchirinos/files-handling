@@ -57,10 +57,7 @@ const StyledAreaIndicator = styled.span(
 
 const StyledWrapper = styled.div`
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  align-self: start;
   user-select: none;
 
   ${StyledAreaIndicator} {

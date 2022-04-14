@@ -14,10 +14,11 @@ import '@fontsource/nunito/300.css';
 export default createGlobalStyle(
   ({ theme }) => css`
     /* RESET */
-    * {
+    *,
+    ::after,
+    ::before {
       box-sizing: border-box;
       margin: 0;
-      padding: 0;
     }
 
     /* CSS VARS */

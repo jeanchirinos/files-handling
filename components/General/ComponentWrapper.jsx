@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { ThemeProvider } from 'styled-components';
 import { dark, light } from '../../src/styleGuide/themedColors';
 import GlobalStyles from 'src/globalStyles';
 import CustomHead from '@/General/CustomHead';
@@ -16,12 +15,10 @@ export default function ComponentWrapper({ children }) {
   }, [dispatch]);
 
   return (
-    _darkTheme !== undefined && (
-      <ThemeProvider theme={_darkTheme ? dark : light}>
-        <GlobalStyles />
-        <CustomHead />
-        {children}
-      </ThemeProvider>
-    )
+    <>
+      <GlobalStyles theme={_darkTheme ? dark : light} />
+      <CustomHead />
+      {children}
+    </>
   );
 }

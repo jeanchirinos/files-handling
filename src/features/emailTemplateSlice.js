@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useSelector, useDispatch } from 'react-redux';
-import { db } from '../../src/firebase';
+import { db } from '../db/firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import { digitacion, observadas } from '../../src/data';
+import { digitacion, observadas } from '../data/data';
 import {
   digitacionWorkersGroupBackUp,
   observadasWorkersGroupsBackUp,
-} from 'src/backupData';
+} from 'src/data/backupData';
 
 //* INITIAL STATE
 const initialState = {

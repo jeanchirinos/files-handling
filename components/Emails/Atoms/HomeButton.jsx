@@ -1,23 +1,12 @@
-import styled from 'styled-components';
 import Link from 'next/link';
 import { AiFillHome } from 'react-icons/ai';
-import { Button } from 'src/globalStyles/components';
 
 export default function HomeButton() {
   return (
-    <StyledHomeButton>
-      <Link href="/">
-        <a>
-          <Button inverted>
-            <AiFillHome />
-          </Button>
-        </a>
-      </Link>
-    </StyledHomeButton>
+    <Link href="/">
+      <a className="button-link">
+        <AiFillHome />
+      </a>
+    </Link>
   );
 }
-
-const StyledHomeButton = styled.div`
-  position: absolute;
-  top: 25px;
-`;

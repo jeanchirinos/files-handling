@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import mediaQueries from '../src/styleGuide/breakpoints';
+import media from '../src/styleGuide/breakpoints';
 import { getWorkers } from 'src/features/emailTemplateSlice';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ import EmailsSection from '@/Emails/Organisms/EmailsSection';
 import EmailTemplateSection from '@/Emails/Organisms/EmailTemplateSection';
 import NSTDSection from '@/Emails/Organisms/NSTDSection';
 import AreaIndicator from '@/Emails/Atoms/AreaIndicator';
+import Header from '@/Emails/Organisms/Header';
 
 export default function Emails() {
   const dispatch = useDispatch();
@@ -25,8 +26,9 @@ export default function Emails() {
   if (dataIsReady)
     return (
       <StyledEmails>
-        <HomeButton />
-        <AreaIndicator />
+        {/* <HomeButton />
+        <AreaIndicator /> */}
+        <Header />
         <EmailsSection />
         <EmailTemplateSection />
         <NSTDSection />
@@ -37,16 +39,18 @@ export default function Emails() {
 }
 
 const StyledEmails = styled.main`
-  padding: 8rem var(--padding) 0 var(--padding);
+  /* padding: 8rem var(--padding) 0 var(--padding); */
+  padding: 0 var(--padding) 0 var(--padding);
   display: grid;
+  row-gap: 4rem;
 
-  ${mediaQueries.xs} {
-    grid: auto / 75% 25%;
-    grid-row-gap: 5rem;
+  ${media.xs} {
+    grid: 5rem auto / 75% 25%;
+    /* grid-row-gap: 5rem; */
   }
 
-  ${mediaQueries.md} {
-    grid: auto / 25% 50% 25%;
-    grid-row-gap: 0;
+  ${media.md} {
+    grid: 5rem auto / 25% 50% 25%;
+    /* grid-row-gap: 0; */
   }
 `;

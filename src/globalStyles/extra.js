@@ -3,12 +3,6 @@ import { css } from 'styled-components';
 export default css`
   body {
     background-color: var(--theme_500);
-    color: var(--oppositeTheme_500);
-    font-family: 'Nunito';
-    font-size: var(--fs_6);
-    line-height: var(--lh_3);
-    font-weight: var(--fw_regular);
-    overflow-x: hidden;
   }
 
   input,
@@ -29,6 +23,20 @@ export default css`
     cursor: pointer;
     overflow: auto;
     outline: none;
+  }
+
+  a.button-link {
+    color: var(--primary-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    border: 0.5px solid var(--primary-color);
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    :hover {
+      background-color: var(--primary-color);
+      color: var(--light);
+    }
   }
 
   .toast {

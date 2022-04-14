@@ -23,4 +23,4 @@ export const observadas = {
     'te transfiero la(s) siguiente(s) plantilla(s) según lo indicado',
 };
 
-export const username = 'Alfredo Chirinos';
+export const USER_NAME = 'Alfredo Chirinos';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import mediaQueries from 'src/styleGuide/breakpoints';
+import media from 'src/styleGuide/breakpoints';
 import InputsGroup from '../Molecules/InputsGroup';
 import Message from '../Molecules/Message';
 
@@ -23,12 +23,12 @@ export const StyledEmailTemplate = styled.section`
   background-color: var(--emailTemplate);
   box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px;
 
-  ${mediaQueries.xs} {
+  ${media.xs} {
     grid-column-start: 1;
     margin: 0 0.3rem;
   }
 
-  ${mediaQueries.md} {
+  ${media.md} {
     grid-column-start: 2;
     margin: 0 2.5rem;
   }

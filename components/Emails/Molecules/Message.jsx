@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { copyElement } from '../functions';
 import PlantillasList from '../Atoms/PlantillasList';
-import { username } from 'src/data';
+import { USER_NAME } from 'src/data/data';
 
 export default function Message() {
   const { _leader, _messageAfterName } = useEmailTemplate();
@@ -18,7 +18,7 @@ export default function Message() {
       <br />
       <span>Saludos,</span>
       <br />
-      <span>{username}</span>
+      <span>{USER_NAME}</span>
     </StyledMessage>
   );
 }

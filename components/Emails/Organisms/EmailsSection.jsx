@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import mediaQueries from 'src/styleGuide/breakpoints';
+import media from 'src/styleGuide/breakpoints';
 import useEmails from '@/hooks/emailsSlice';
 import EmailsList from '../Molecules/EmailBoxes';
 import PriorityIndicator from '../Atoms/PriorityIndicator';
@@ -29,11 +29,11 @@ export const StyledEmailsSection = styled.section`
   flex-direction: column;
   gap: 2rem;
 
-  ${mediaQueries.xs} {
+  ${media.xs} {
     grid-column: 1 / span 2;
   }
 
-  ${mediaQueries.md} {
+  ${media.md} {
     grid-column: 1 / span 1;
   }
 

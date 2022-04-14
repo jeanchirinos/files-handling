@@ -15,9 +15,9 @@ export default function TemporalThemeSwitcher() {
 
 const StyledTemporalThemeSwitcher = styled(BsMoon)`
   position: absolute;
-  top: 25px;
-  right: calc(var(--padding) + 25px);
-  z-index: 9;
+  top: 30px;
+  right: var(--padding);
+  z-index: 1;
   font-size: 1.2rem;
   cursor: pointer;
 `;

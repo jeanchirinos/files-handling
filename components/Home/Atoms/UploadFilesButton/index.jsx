@@ -1,5 +1,5 @@
 import UploadFilesLogic from './UploadFilesLogic';
-import { Button } from 'src/globalStyles/components';
+import { Button } from 'components/StyledComponents';
 
 export default function UploadFilesButton() {
   const { openFileExplorer, uploadFiles } = UploadFilesLogic();

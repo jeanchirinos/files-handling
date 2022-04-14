@@ -1,20 +1,28 @@
 import { css } from 'styled-components';
-import { fontWeight, lineHeight } from '../styleGuide/font';
 
 export const aboutFont = css`
   /* LINE HEIGHTS */
-  --lh_1: ${lineHeight._1};
-  --lh_2: ${lineHeight._2};
-  --lh_3: ${lineHeight._3};
+  --lh_1: 130%;
+  --lh_2: 150%;
+  --lh_3: 170%;
   /* FONT WEIGHTS */
-  --fw_black: ${fontWeight.black};
-  --fw_extrabold: ${fontWeight.extrabold};
-  --fw_bold: ${fontWeight.bold};
-  --fw_regular: ${fontWeight.regular};
-  --fw_light: ${fontWeight.light};
+  --fw_black: 900;
+  --fw_extrabold: 800;
+  --fw_bold: 700;
+  --fw_regular: 400;
+  --fw_light: 300;
 `;
 
 export default css`
+  //* DEFAULT  */
+  body {
+    font-family: 'Nunito';
+    color: var(--oppositeTheme_500);
+    font-size: var(--fs_6);
+    line-height: var(--lh_3);
+    font-weight: var(--fw_regular);
+  }
+
   /* HEADINGS */
   h1,
   h2,

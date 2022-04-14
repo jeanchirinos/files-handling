@@ -1,10 +1,10 @@
 import { css } from 'styled-components';
-import mediaQueries from '../styleGuide/breakpoints';
-import { fontSize } from '../styleGuide/font';
+import media from '../styleGuide/breakpoints';
+import { fontSize } from '../styleGuide/fontSize';
 
 export default css`
   /* XS */
-  ${mediaQueries.xs} {
+  ${media.xs} {
     --padding: 0.5rem;
     /* FONT SIZE */
     --fs_1: ${fontSize._2};
@@ -17,17 +17,17 @@ export default css`
   }
 
   /* SM */
-  ${mediaQueries.sm} {
+  ${media.sm} {
     --padding: 1rem;
   }
 
   /* MD */
-  ${mediaQueries.md} {
+  ${media.md} {
     --padding: 2rem;
   }
 
   /* LG */
-  ${mediaQueries.lg} {
+  ${media.lg} {
     --padding: 3rem;
     --fs_1: ${fontSize._1};
     --fs_2: ${fontSize._2};
@@ -39,7 +39,7 @@ export default css`
   }
 
   /* XL */
-  ${mediaQueries.xl} {
+  ${media.xl} {
     --padding: 4rem;
   }
 `;

@@ -4,7 +4,7 @@ import usePlantillas from '@/hooks/plantillasSlice';
 import useEmails from '@/hooks/emailsSlice';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { alertUser } from '../../functions';
-import { MAX_FILE_SIZE } from 'src/data';
+import { MAX_FILE_SIZE } from 'src/data/data';
 
 export default function UploadFilesLogic() {
   const router = useRouter();

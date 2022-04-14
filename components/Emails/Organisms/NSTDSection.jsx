@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import useEmails from '@/hooks/emailsSlice';
 import PlantillaToNSTD from '../Atoms/PlantillaToNSTD';
-import mediaQueries from 'src/styleGuide/breakpoints';
+import media from 'src/styleGuide/breakpoints';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
 
 export default function NSTDSection() {
@@ -27,11 +27,11 @@ const StyledNSTDSection = styled.section(
     align-items: center;
     gap: 2rem;
 
-    ${mediaQueries.xs} {
+    ${media.xs} {
       grid-column-start: 2;
     }
 
-    ${mediaQueries.md} {
+    ${media.md} {
       grid-column-start: 3;
     }
 

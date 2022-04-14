@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import useEmailTemplate from '@/hooks/emailTemplateSlice';
 import { MdUpdate } from 'react-icons/md';
-import { db } from '../../src/firebase';
+import { db } from '../../src/db/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
-export default function TemporalThemeSwitcher() {
+export default function TemporalFetcher() {
   const { _area, __setLeader, __setEmployees } = useEmailTemplate();
 
   async function handleFetch() {
@@ -46,9 +46,7 @@ export default function TemporalThemeSwitcher() {
 
 const StyledTemporalFetcher = styled(MdUpdate)`
   position: absolute;
-  top: 25px;
-  right: calc(var(--padding) + 75px);
+  right: 60px;
   font-size: 1.4rem;
   cursor: pointer;
-  z-index: 9;
 `;

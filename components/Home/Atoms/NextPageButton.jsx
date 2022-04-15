@@ -8,15 +8,12 @@ export default function NexPageButton() {
   const { _plantillasStack } = usePlantillas();
 
   return _plantillasStack.length ? (
-    <StyledNextPageButton
-      $active
-      onClick={() => groupEmails(_plantillasStack)}
-    />
+    <S_NextPageButton $active onClick={() => groupEmails(_plantillasStack)} />
   ) : (
-    <StyledNextPageButton title="Añade un archivo!" />
+    <S_NextPageButton title="Añade un archivo!" />
   );
 }
-const StyledNextPageButton = styled(AiOutlineArrowRight)(
+const S_NextPageButton = styled(AiOutlineArrowRight)(
   ({ $active }) => css`
     position: absolute;
     bottom: 25px;

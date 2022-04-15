@@ -7,15 +7,16 @@ export default function PlantillasStack() {
   const { _manualMode } = useSettings();
 
   return (
-    <StyledPlantillasStack active={_manualMode}>
+    <S_PlantillasStack active={_manualMode}>
       <PlantillasList />
       <NextPageButton />
-    </StyledPlantillasStack>
+    </S_PlantillasStack>
   );
 }
 
-const StyledPlantillasStack = styled.div(
+const S_PlantillasStack = styled.div(
   ({ active }) => css`
+    background-color: var(--theme_400);
     width: 100%;
     height: fit-content;
     min-height: 5rem;
@@ -24,10 +25,9 @@ const StyledPlantillasStack = styled.div(
     align-items: center;
     gap: 0.8rem;
     flex-wrap: wrap;
-    background-color: var(--theme_400);
     position: absolute;
     bottom: 0;
-    transform: ${active ? 'translateY(0%)' : 'translateY(100%)'};
+    transform: ${!active && 'translateY(100%)'};
     transition: transform 0.5s;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   `

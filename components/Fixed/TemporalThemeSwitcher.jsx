@@ -6,14 +6,14 @@ export default function TemporalThemeSwitcher() {
   const { __toggleDarkTheme } = useSettings();
 
   return (
-    <StyledTemporalThemeSwitcher
+    <S_TemporalThemeSwitcher
       onClick={__toggleDarkTheme}
       title="Cambia el tema"
     />
   );
 }
 
-const StyledTemporalThemeSwitcher = styled(BsMoon)`
+const S_TemporalThemeSwitcher = styled(BsMoon)`
   position: absolute;
   top: 30px;
   right: var(--padding);

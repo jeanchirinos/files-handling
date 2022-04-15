@@ -3,12 +3,12 @@ import toast from 'react-hot-toast';
 
 export default function ToastContent({ id, children }) {
   return (
-    <StyledToastContent onClick={() => toast.dismiss(id)}>
+    <S_ToastContent onClick={() => toast.dismiss(id)}>
       {children}
-    </StyledToastContent>
+    </S_ToastContent>
   );
 }
 
-const StyledToastContent = styled.span`
+const S_ToastContent = styled.span`
   padding: 0.8rem 0;
 `;

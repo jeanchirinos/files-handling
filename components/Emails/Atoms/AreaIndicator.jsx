@@ -15,24 +15,24 @@ export default function AreaIndicator() {
   const secondArea = 'observadas';
 
   return (
-    <StyledWrapper>
-      <StyledAreaIndicator
+    <S_Wrapper>
+      <S_AreaIndicator
         active={_area === firstArea}
         onClick={() => changeTo(firstArea)}
       >
         Digitación
-      </StyledAreaIndicator>
-      <StyledAreaIndicator
+      </S_AreaIndicator>
+      <S_AreaIndicator
         active={_area === secondArea}
         onClick={() => changeTo(secondArea)}
       >
         Observadas
-      </StyledAreaIndicator>
-    </StyledWrapper>
+      </S_AreaIndicator>
+    </S_Wrapper>
   );
 }
 
-const StyledAreaIndicator = styled.span(
+const S_AreaIndicator = styled.span(
   ({ active }) => css`
     padding: 0.5rem 1rem;
     border-width: 1px;
@@ -55,12 +55,12 @@ const StyledAreaIndicator = styled.span(
   `
 );
 
-const StyledWrapper = styled.div`
+const S_Wrapper = styled.div`
   display: flex;
   align-self: start;
   user-select: none;
 
-  ${StyledAreaIndicator} {
+  ${S_AreaIndicator} {
     :first-child {
       border-bottom-left-radius: 15px;
     }

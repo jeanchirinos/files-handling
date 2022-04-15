@@ -11,13 +11,13 @@ export default function PlantillaToNSTD({ name }) {
   }
 
   return (
-    <StyledPlantillaToNSTD isCopied={isCopied} onClick={markAsCopied}>
+    <S_PlantillaToNSTD isCopied={isCopied} onClick={markAsCopied}>
       {name}
-    </StyledPlantillaToNSTD>
+    </S_PlantillaToNSTD>
   );
 }
 
-const StyledPlantillaToNSTD = styled.p(
+const S_PlantillaToNSTD = styled.p(
   ({ isCopied }) => css`
     cursor: pointer;
 

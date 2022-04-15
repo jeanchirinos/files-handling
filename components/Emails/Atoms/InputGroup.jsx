@@ -48,13 +48,13 @@ function To({ value, copyValue }) {
       });
 
     return (
-      <StyledSelector>
+      <S_Selector>
         <span onClick={e => copyElement(e, copyValue)} />
         <select onChange={e => __changeObservadasWorkers(e.target.value)}>
           {selectedOption()}
           {options}
         </select>
-      </StyledSelector>
+      </S_Selector>
     );
   };
 
@@ -66,19 +66,19 @@ function To({ value, copyValue }) {
     );
 
   return (
-    <StyledInputGroup>
+    <S_InputGroup>
       <label>Para</label>
       {inputOrSelector}
-    </StyledInputGroup>
+    </S_InputGroup>
   );
 }
 
 function Cc({ value, copyValue }) {
   return (
-    <StyledInputGroup>
+    <S_InputGroup>
       <label>Cc</label>
       <Input value={value} copyValue={copyValue} />
-    </StyledInputGroup>
+    </S_InputGroup>
   );
 }
 
@@ -86,15 +86,15 @@ function Subject({ value }) {
   const { __changeSubject } = useEmailTemplate();
 
   return (
-    <StyledInputGroup>
-      <StyledLabel onClick={__changeSubject}>Asunto</StyledLabel>
+    <S_InputGroup>
+      <S_Label onClick={__changeSubject}>Asunto</S_Label>
       <Input value={value} />
-    </StyledInputGroup>
+    </S_InputGroup>
   );
 }
 
 // STYLED COMPONENTS
-const StyledLabel = styled.label`
+const S_Label = styled.label`
   cursor: pointer;
   user-select: none;
 
@@ -103,7 +103,7 @@ const StyledLabel = styled.label`
   }
 `;
 
-const StyledInputGroup = styled.div`
+const S_InputGroup = styled.div`
   display: flex;
   align-items: center;
 
@@ -122,7 +122,7 @@ const StyledInputGroup = styled.div`
   }
 `;
 
-const StyledSelector = styled.div`
+const S_Selector = styled.div`
   width: fit-content;
   height: fit-content;
   border-radius: 8px;

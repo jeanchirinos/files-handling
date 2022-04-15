@@ -8,7 +8,7 @@ export default function Message() {
   const { _leader, _messageAfterName } = useEmailTemplate();
 
   return (
-    <StyledMessage onClick={copyElement}>
+    <S_Message onClick={copyElement}>
       <span>{_leader.name},</span>
       <br />
       {_messageAfterName}
@@ -19,11 +19,11 @@ export default function Message() {
       <span>Saludos,</span>
       <br />
       <span>{USER_NAME}</span>
-    </StyledMessage>
+    </S_Message>
   );
 }
 
-const StyledMessage = styled.div`
+const S_Message = styled.div`
   padding: 1rem 0.8rem;
   border-radius: 12px;
   flex-grow: 1;

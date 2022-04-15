@@ -3,6 +3,7 @@ import media from 'src/styleGuide/breakpoints';
 import useEmails from '@/hooks/emailsSlice';
 import EmailsList from '../Molecules/EmailBoxes';
 import PriorityIndicator from '../Atoms/PriorityIndicator';
+import { Flex } from 'components/StyledComponents';
 
 export default function EmailsSection() {
   const { _emails } = useEmails();
@@ -14,32 +15,26 @@ export default function EmailsSection() {
   };
 
   return (
-    <StyledEmailsSection>
-      <header>
+    <S_EmailsSection>
+      <Flex as="header" $wrap justify="space-between">
         <p className="big bold">{header()}</p>
         <PriorityIndicator />
-      </header>
+      </Flex>
       <EmailsList />
-    </StyledEmailsSection>
+    </S_EmailsSection>
   );
 }
 
-export const StyledEmailsSection = styled.section`
+export const S_EmailsSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
   ${media.xs} {
-    grid-column: 1 / span 2;
+    grid-column: span 2;
   }
 
   ${media.md} {
-    grid-column: 1 / span 1;
-  }
-
-  > header {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    grid-column: span 1;
   }
 `;

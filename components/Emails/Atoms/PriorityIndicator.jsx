@@ -5,24 +5,24 @@ export default function PriorityIndicator() {
   const { _priority } = useEmails();
 
   return (
-    <StyledWrapper className="small light">
-      <StyledPriorityIndicator
+    <S_Wrapper className="small light">
+      <S_PriorityIndicator
         active={_priority === 'order'}
         title="Las plantillas están en orden"
       >
         Orden
-      </StyledPriorityIndicator>
-      <StyledPriorityIndicator
+      </S_PriorityIndicator>
+      <S_PriorityIndicator
         active={_priority === 'quantity'}
         title="Las plantillas están en desorden, pero se ha reducido la cantidad de correos"
       >
         Cantidad
-      </StyledPriorityIndicator>
-    </StyledWrapper>
+      </S_PriorityIndicator>
+    </S_Wrapper>
   );
 }
 
-const StyledPriorityIndicator = styled.span(
+const S_PriorityIndicator = styled.span(
   ({ active }) => css`
     padding: 0.3rem 0.8rem;
     border-width: 1px;
@@ -45,8 +45,8 @@ const StyledPriorityIndicator = styled.span(
   `
 );
 
-const StyledWrapper = styled.div`
-  ${StyledPriorityIndicator} {
+const S_Wrapper = styled.div`
+  ${S_PriorityIndicator} {
     :first-child {
       border-top-left-radius: 15px;
       border-bottom-left-radius: 15px;

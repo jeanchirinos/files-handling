@@ -39,12 +39,10 @@ export default function TemporalFetcher() {
     }
   }
 
-  return (
-    <StyledTemporalFetcher onClick={handleFetch} title="Refresca los datos" />
-  );
+  return <S_TemporalFetcher onClick={handleFetch} title="Refresca los datos" />;
 }
 
-const StyledTemporalFetcher = styled(MdUpdate)`
+const S_TemporalFetcher = styled(MdUpdate)`
   position: absolute;
   right: 60px;
   font-size: 1.4rem;

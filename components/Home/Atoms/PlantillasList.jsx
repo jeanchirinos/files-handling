@@ -15,23 +15,23 @@ export default function PlantillasList() {
   }
 
   return _plantillasStack.map(({ name }) => (
-    <StyledPlantilla key={name}>
+    <S_Plantilla key={name}>
       <p
         className="small light"
         onContextMenu={e => toggleContextMenu(e, name)}
       >
         {name}
       </p>
-      <StyledDeleteButton id={name} onClick={() => __deleteFromStack(name)} />
-    </StyledPlantilla>
+      <S_DeleteButton id={name} onClick={() => __deleteFromStack(name)} />
+    </S_Plantilla>
   ));
 }
 
-const StyledPlantilla = styled.div`
+const S_Plantilla = styled.div`
   position: relative;
 `;
 
-const StyledDeleteButton = styled(AiOutlineDelete)`
+const S_DeleteButton = styled(AiOutlineDelete)`
   border-radius: 4px;
   background-color: var(--light_700);
   color: var(--theme_300);

@@ -24,17 +24,13 @@ export default function EmailBox({ email, emailIndex }) {
   }
 
   return (
-    <StyledEmailBox
-      isSelected={isSelected}
-      onClick={selectEmailBox}
-      title={title}
-    >
+    <S_EmailBox isSelected={isSelected} onClick={selectEmailBox} title={title}>
       <header>{emailIndex + 1}</header>
       <div>{plantillas}</div>
-    </StyledEmailBox>
+    </S_EmailBox>
   );
 }
-const StyledEmailBox = styled.div(
+const S_EmailBox = styled.div(
   ({ isSelected }) => css`
     display: flex;
     border-width: 1px;

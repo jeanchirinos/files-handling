@@ -5,7 +5,7 @@ export default function ModeSwitcher() {
   const { _manualMode, __toggleManualMode } = useSettings();
 
   return (
-    <StyledModeSwitcher
+    <S_ModeSwitcher
       active={_manualMode}
       onClick={__toggleManualMode}
       title="Modo manual"
@@ -13,7 +13,7 @@ export default function ModeSwitcher() {
   );
 }
 
-const StyledModeSwitcher = styled.div(
+const S_ModeSwitcher = styled.div(
   ({ active }) => css`
     width: 48px;
     height: 28px;
@@ -29,10 +29,10 @@ const StyledModeSwitcher = styled.div(
 
     :after {
       content: '';
+      background-color: var(--theme_500);
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background-color: var(--theme_500);
       position: absolute;
       left: 3px;
       transform: ${active && 'translateX(24px)'};

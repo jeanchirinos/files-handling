@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import useEmails from '@/hooks/emailsSlice';
 import EmailBox from '../Atoms/EmailBox';
+import { Flex } from 'components/StyledComponents';
 
 export default function EmailBoxes() {
   const { _emails } = useEmails();
@@ -9,11 +10,9 @@ export default function EmailBoxes() {
     <EmailBox key={index} email={email} emailIndex={index} />
   ));
 
-  return <StyledEmailBoxes>{emailBoxes}</StyledEmailBoxes>;
+  return (
+    <Flex $wrap gap={1}>
+      {emailBoxes}
+    </Flex>
+  );
 }
-
-const StyledEmailBoxes = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-`;

@@ -13,14 +13,14 @@ export default function NSTDSection() {
   ));
 
   return (
-    <StyledNSTDSection area={_area}>
+    <S_NSTDSection area={_area}>
       <p className="big bold">💻 NSTD</p>
       <div>{plantillas}</div>
-    </StyledNSTDSection>
+    </S_NSTDSection>
   );
 }
 
-const StyledNSTDSection = styled.section(
+const S_NSTDSection = styled.section(
   ({ area }) => css`
     display: ${area === 'digitacion' ? 'flex' : 'none'};
     flex-direction: column;

@@ -42,15 +42,15 @@ export default function InputsGroup() {
       : _subject.value;
 
   return (
-    <StyledInputsGroup>
+    <S_InputsGroup>
       <InputGroup.To value={to()} copyValue={to('copyValue')} />
       <InputGroup.Cc value={cc()} copyValue={cc('copyValue')} />
       <InputGroup.Subject value={subject} />
-    </StyledInputsGroup>
+    </S_InputsGroup>
   );
 }
 
-const StyledInputsGroup = styled.div`
+const S_InputsGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;

@@ -5,14 +5,14 @@ import Message from '../Molecules/Message';
 
 export default function EmailTemplate() {
   return (
-    <StyledEmailTemplate className="small">
+    <S_EmailTemplate className="small">
       <InputsGroup />
       <Message />
-    </StyledEmailTemplate>
+    </S_EmailTemplate>
   );
 }
 
-export const StyledEmailTemplate = styled.section`
+export const S_EmailTemplate = styled.section`
   height: fit-content;
   max-height: 75vh;
   border-radius: 12px;

@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   return (
-    <StyledHome
+    <S_Home
       isDraggingOver={isDraggingOver}
       onClick={closeContextMenu}
       onDragOver={handleDragOver}
@@ -37,11 +37,11 @@ export default function Home() {
 
       <ModeSwitcher />
       <PlantillasStack />
-    </StyledHome>
+    </S_Home>
   );
 }
 
-const StyledHome = styled.main(
+const S_Home = styled.main(
   ({ isDraggingOver }) => css`
     height: 100vh;
     max-height: fill-available;

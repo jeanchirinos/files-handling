@@ -25,20 +25,20 @@ export default function Emails() {
 
   if (dataIsReady)
     return (
-      <StyledEmails>
+      <S_Emails>
         {/* <HomeButton />
         <AreaIndicator /> */}
         <Header />
         <EmailsSection />
         <EmailTemplateSection />
         <NSTDSection />
-      </StyledEmails>
+      </S_Emails>
     );
 
   return <SpinnerLoader />;
 }
 
-const StyledEmails = styled.main`
+const S_Emails = styled.main`
   /* padding: 8rem var(--padding) 0 var(--padding); */
   padding: 0 var(--padding) 0 var(--padding);
   display: grid;

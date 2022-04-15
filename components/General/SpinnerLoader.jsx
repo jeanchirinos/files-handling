@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export default function SpinnerLoader() {
   return (
-    <StyledContainer>
-      <StyledSpinner />
-    </StyledContainer>
+    <S_Container>
+      <S_Spinner />
+    </S_Container>
   );
 }
 
-const StyledContainer = styled.div`
+const S_Container = styled.div`
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -17,7 +17,7 @@ const StyledContainer = styled.div`
   align-items: center;
 `;
 
-const StyledSpinner = styled.span`
+const S_Spinner = styled.span`
   border: 4px solid var(--theme_500);
   width: 36px;
   height: 36px;

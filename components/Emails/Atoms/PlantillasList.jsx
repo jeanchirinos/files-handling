@@ -15,12 +15,10 @@ export default function PlantillasList() {
     </Fragment>
   ));
 
-  return (
-    <StyledPlantillasList title={title}>{plantillas}</StyledPlantillasList>
-  );
+  return <S_PlantillasList title={title}>{plantillas}</S_PlantillasList>;
 }
 
-const StyledPlantillasList = styled.div`
+const S_PlantillasList = styled.div`
   width: fit-content;
   margin-top: 1rem;
   font-weight: var(--fw_bold);

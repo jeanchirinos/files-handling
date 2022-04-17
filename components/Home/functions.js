@@ -1,4 +1,4 @@
-import ToastContent from '@/General/ToastContent';
+import ToastContent from 'components/General/ToastContent';
 import toast from 'react-hot-toast';
 
 export function closeContextMenu() {

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import useSettings from '@/hooks/settingsSlice';
+import useSettings from 'src/features/settingsSlice';
 
 export default function ModeSwitcher() {
   const { _manualMode, __toggleManualMode } = useSettings();

@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import ToastContent from '@/General/ToastContent';
+import ToastContent from 'components/General/ToastContent';
 
 export function copyElement(e, copyValue) {
   const textToCopy = copyValue || e.target.innerText || e.target.value;

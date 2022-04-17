@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useEmailTemplate from '@/hooks/emailTemplateSlice';
+import useEmailTemplate from 'src/features/emailTemplateSlice';
 import { MdUpdate } from 'react-icons/md';
 import { db } from '../../src/db/firebase';
 import { collection, getDocs } from 'firebase/firestore';

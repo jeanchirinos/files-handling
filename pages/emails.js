@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import media from '../src/styleGuide/breakpoints';
 import { getWorkers } from 'src/features/emailTemplateSlice';
-import useEmailTemplate from '@/hooks/emailTemplateSlice';
+import useEmailTemplate from 'src/features/emailTemplateSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import SpinnerLoader from '@/General/SpinnerLoader';
+import SpinnerLoader from 'components/General/SpinnerLoader';
 // Components
-import HomeButton from '@/Emails/Atoms/HomeButton';
-import EmailsSection from '@/Emails/Organisms/EmailsSection';
-import EmailTemplateSection from '@/Emails/Organisms/EmailTemplateSection';
-import NSTDSection from '@/Emails/Organisms/NSTDSection';
-import AreaIndicator from '@/Emails/Atoms/AreaIndicator';
-import Header from '@/Emails/Organisms/Header';
+import HomeButton from 'components/Emails/Atoms/HomeButton';
+import EmailsSection from 'components/Emails/Organisms/EmailsSection';
+import EmailTemplateSection from 'components/Emails/Organisms/EmailTemplateSection';
+import NSTDSection from 'components/Emails/Organisms/NSTDSection';
+import AreaIndicator from 'components/Emails/Atoms/AreaIndicator';
+import Header from 'components/Emails/Organisms/Header';
 
 export default function Emails() {
   const dispatch = useDispatch();

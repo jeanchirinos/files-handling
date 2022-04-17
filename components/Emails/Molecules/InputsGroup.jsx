@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import useEmails from '@/hooks/emailsSlice';
+import useEmails from 'src/features/emailsSlice';
 import useEmailTemplate, {
   dataIsBeingFetched,
-} from '@/hooks/emailTemplateSlice';
+} from 'src/features/emailTemplateSlice';
 import InputGroup from '../Atoms/InputGroup';
 
 export default function InputsGroup() {

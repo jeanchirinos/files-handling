@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
-import UploadFilesLogic from '@/Home/Atoms/UploadFilesButton/UploadFilesLogic';
+import UploadFilesLogic from 'components/Home/Atoms/UploadFilesButton/UploadFilesLogic';
 // Components
-import UploadFilesButton from '@/Home/Atoms/UploadFilesButton';
-import ModeSwitcher from '@/Home/Atoms/ModeSwitcher';
-import PlantillasStack from '@/Home/Molecules/PlantillasStack';
-import { closeContextMenu } from '@/Home/functions';
+import UploadFilesButton from 'components/Home/Atoms/UploadFilesButton';
+import ModeSwitcher from 'components/Home/Atoms/ModeSwitcher';
+import PlantillasStack from 'components/Home/Molecules/PlantillasStack';
+import { closeContextMenu } from 'components/Home/functions';
 
 export default function Home() {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
@@ -13,7 +13,9 @@ export default function Home() {
 
   function handleDragOver(e) {
     e.preventDefault();
-    !isDraggingOver && setIsDraggingOver(true);
+    if (e.dataTransfer.types[0] === 'Files') {
+      !isDraggingOver && setIsDraggingOver(true);
+    }
   }
 
   function handleDrop(e) {
@@ -56,19 +58,20 @@ const S_Home = styled.main(
 
     h3 {
       display: none;
+      pointer-events: none;
+      color: var(--light_100);
     }
 
     ${isDraggingOver &&
     css`
-      background-color: var(--primary-color);
+      background-color: var(--primary-color_700);
+
       * {
-        pointer-events: none;
         display: none;
       }
 
       h3 {
-        display: block;
-        color: var(--light_100);
+        display: initial;
       }
     `}
   `

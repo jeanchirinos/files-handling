@@ -2,8 +2,8 @@ import { Provider } from 'react-redux';
 import store from '../src/app/store';
 import { Toaster } from 'react-hot-toast';
 // Components
-import ComponentWrapper from '@/General/ComponentWrapper';
-import TemporalThemeSwitcher from '@/Fixed/TemporalThemeSwitcher';
+import ComponentWrapper from 'components/General/ComponentWrapper';
+import TemporalThemeSwitcher from 'components/Fixed/TemporalThemeSwitcher';
 
 export default function MyApp({ Component, pageProps }) {
   return (

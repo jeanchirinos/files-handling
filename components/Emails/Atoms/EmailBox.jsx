@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import useEmails from '@/hooks/emailsSlice';
+import useEmails from 'src/features/emailsSlice';
 
 export default function EmailBox({ email, emailIndex }) {
   const { _currentEmailIndex, __setCurrentEmailIndex } = useEmails();

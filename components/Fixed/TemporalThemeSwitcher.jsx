@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useSettings from '@/hooks/settingsSlice';
+import useSettings from 'src/features/settingsSlice';
 import { BsMoon } from 'react-icons/bs';
 
 export default function TemporalThemeSwitcher() {

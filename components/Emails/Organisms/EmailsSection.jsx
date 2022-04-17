@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import media from 'src/styleGuide/breakpoints';
-import useEmails from '@/hooks/emailsSlice';
+import useEmails from 'src/features/emailsSlice';
 import EmailsList from '../Molecules/EmailBoxes';
 import PriorityIndicator from '../Atoms/PriorityIndicator';
 import { Flex } from 'components/StyledComponents';

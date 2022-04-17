@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useEmailTemplate from '@/hooks/emailTemplateSlice';
+import useEmailTemplate from 'src/features/emailTemplateSlice';
 import { copyElement } from '../functions';
 import PlantillasList from '../Atoms/PlantillasList';
 import { USER_NAME } from 'src/data/data';

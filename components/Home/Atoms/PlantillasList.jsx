@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import usePlantillas from '@/hooks/plantillasSlice';
+import usePlantillas from 'src/features/plantillasSlice';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { closeContextMenu } from '@/Home/functions';
+import { closeContextMenu } from 'components/Home/functions';
 
 export default function PlantillasList() {
   const { _plantillasStack, __deleteFromStack } = usePlantillas();

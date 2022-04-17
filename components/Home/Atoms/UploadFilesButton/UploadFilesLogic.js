@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import useSettings from '@/hooks/settingsSlice';
-import usePlantillas from '@/hooks/plantillasSlice';
-import useEmails from '@/hooks/emailsSlice';
-import useEmailTemplate from '@/hooks/emailTemplateSlice';
+import useSettings from 'src/features/settingsSlice';
+import usePlantillas from 'src/features/plantillasSlice';
+import useEmails from 'src/features/emailsSlice';
+import useEmailTemplate from 'src/features/emailTemplateSlice';
 import { alertUser } from '../../functions';
 import { MAX_FILE_SIZE } from 'src/data/data';
 
@@ -48,7 +48,7 @@ export default function UploadFilesLogic() {
     return true;
   };
 
-  const match = text => {
+  const matchRegex = text => {
     const pattern =
       /(?<code>(?<firstChars>P90|VA0|BO0|PL0)(?<nstdCode>\d{7}(?<lastChar>A|\d))).*\.pdf$/i;
 
@@ -66,7 +66,7 @@ export default function UploadFilesLogic() {
 
     const allFiles = selectedFiles
       .filter(file => {
-        const fileMatchedPattern = match(file.name);
+        const fileMatchedPattern = matchRegex(file.name);
 
         if (!fileMatchedPattern)
           alertUser('el nombre no es correcto', file.name);
@@ -78,7 +78,7 @@ export default function UploadFilesLogic() {
           (file.size * 0.000000953674316).toFixed(2)
         );
 
-        const { groups } = match(file.name);
+        const { groups } = matchRegex(file.name);
         const { code, firstChars, nstdCode, lastChar } = groups;
 
         if (firstChars !== 'BO0' && lastChar !== 'A')

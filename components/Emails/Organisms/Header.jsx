@@ -1,4 +1,4 @@
-import TemporalFetcher from '@/Fixed/TemporalFetcher';
+import TemporalFetcher from 'components/Fixed/TemporalFetcher';
 import styled from 'styled-components';
 import AreaIndicator from '../Atoms/AreaIndicator';
 import HomeButton from '../Atoms/HomeButton';

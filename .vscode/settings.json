@@ -1,12 +1,12 @@
 {
   "files.exclude": {
-    ".next": false,
+    ".next": true,
     "node_modules": true,
     "public": true,
     ".eslintrc.json": true,
     ".gitignore": true,
-    "next.config.js": false,
-    "package.json": false,
+    "next.config.js": true,
+    "package.json": true,
     "README.md": true,
     "yarn.lock": true,
     "jsconfig.json": true,

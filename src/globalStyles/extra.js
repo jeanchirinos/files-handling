@@ -39,7 +39,7 @@ export default css`
     }
   }
 
-  .toast {
+  div.toast {
     padding: 0 0.8rem;
     max-width: 650px;
     color: var(--light_100);

@@ -28,24 +28,12 @@ export const digitacionWorkersGroupBackUp = {
       email: 'rhurtado@onp.gob.pe',
     },
     {
-      fullname: 'DPR.GA_018',
-      email: 'dpr.ga_018@onp.gob.pe',
-    },
-    {
-      fullname: 'DPR.GA_019',
-      email: 'dpr.ga_019@onp.gob.pe',
-    },
-    {
       fullname: 'Merly Canales',
       email: 'mcanales@onp.gob.pe',
     },
     {
       fullname: 'Jesus Peña',
       email: 'jpena@onp.gob.pe',
-    },
-    {
-      fullname: 'DPR.GA_064',
-      email: 'dpr.ga_064@onp.gob.pe',
     },
   ],
 };

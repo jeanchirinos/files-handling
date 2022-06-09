@@ -1,5 +1,16 @@
 {
   "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**.exe": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true,
     ".next": true,
     "node_modules": true,
     "public": true,
@@ -10,7 +21,7 @@
     "README.md": true,
     "yarn.lock": true,
     "jsconfig.json": true,
-    ".env.local": true,
+    ".env.local": true
   },
   "cSpell.words": [
     "analisis",
@@ -40,5 +51,6 @@
     "Valda",
     "Yauri",
     "Zavalla"
-  ]
+  ],
+  "hide-files.files": []
 }

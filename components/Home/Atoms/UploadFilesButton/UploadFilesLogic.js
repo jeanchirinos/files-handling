@@ -52,9 +52,7 @@ export default function UploadFilesLogic() {
     const pattern =
       /(?<code>(?<firstChars>P90|VA0|BO0|PL0)(?<nstdCode>\d{7}(?<lastChar>A|\d))).*\.pdf$/i;
 
-    const matched = text.match(pattern);
-
-    return matched;
+    return text.match(pattern);
   };
 
   function uploadFiles(e) {
